@@ -88,12 +88,11 @@
 											"raw": "{\r\n  \"Name\": \"{{categories_post_name}}\"\r\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}/api/Categories",
+											"raw": "{{SiteURL}}api/Categories",
 											"host": [
-												"{{SiteURL}}"
+												"{{SiteURL}}api"
 											],
 											"path": [
-												"api",
 												"Categories"
 											]
 										},
@@ -152,12 +151,11 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{SiteURL}}/api/Categories({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/Categories({{categories_get_id}})",
 											"host": [
-												"{{SiteURL}}"
+												"{{SiteURL}}api"
 											],
 											"path": [
-												"api",
 												"Categories({{categories_get_id}})"
 											]
 										}
@@ -223,12 +221,11 @@
 											"raw": "{\r\n  \"Name\": \"{{categories_patch_name}}\"\r\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}/api/Categories({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/Categories({{categories_get_id}})",
 											"host": [
-												"{{SiteURL}}"
+												"{{SiteURL}}api"
 											],
 											"path": [
-												"api",
 												"Categories({{categories_get_id}})"
 											]
 										}
@@ -294,12 +291,11 @@
 											"raw": "{\r\n\t\"Id\": {{categories_get_id}},\r\n\t\"Name\": \"{{categories_put_name}}\"\r\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}/api/Categories({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/Categories({{categories_get_id}})",
 											"host": [
-												"{{SiteURL}}"
+												"{{SiteURL}}api"
 											],
 											"path": [
-												"api",
 												"Categories({{categories_get_id}})"
 											]
 										}
@@ -360,12 +356,11 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{SiteURL}}/api/Categories",
+											"raw": "{{SiteURL}}api/Categories",
 											"host": [
-												"{{SiteURL}}"
+												"{{SiteURL}}api"
 											],
 											"path": [
-												"api",
 												"Categories"
 											]
 										},
@@ -469,12 +464,11 @@
 											"raw": "{\n            \"IsDisabled\": false,\n            \"Name\": \"{{organizations_post_name}}\",\n            \"Address1\": \"50 Valley Stream Parkway (HQ)1\",\n            \"Address2\": \"\",\n            \"Address3\": \"\",\n            \"City\": \"Malvern\",\n            \"State\": \"PA\",\n            \"PostalCode\": \"19355\",\n            \"Country\": \"USA\",\n            \"PrimaryContact\": \"Support\",\n            \"ContactNumber1\": \"484.323.1360\",\n            \"ContactNumber2\": null,\n            \"CreatedById\": 1000000,\n            \"CreatedDate\": \"2019-03-01T07:32:17.88-05:00\",\n            \"ModifiedById\": 1000000,\n            \"ModifiedDate\": \"2019-03-01T08:59:21.67-05:00\"\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}/api/Organizations",
+											"raw": "{{SiteURL}}api/Organizations",
 											"host": [
-												"{{SiteURL}}"
+												"{{SiteURL}}api"
 											],
 											"path": [
-												"api",
 												"Organizations"
 											]
 										}
@@ -546,12 +540,11 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{SiteURL}}/api/Organizations({{organizations_get_id}})",
+											"raw": "{{SiteURL}}api/Organizations({{organizations_get_id}})",
 											"host": [
-												"{{SiteURL}}"
+												"{{SiteURL}}api"
 											],
 											"path": [
-												"api",
 												"Organizations({{organizations_get_id}})"
 											]
 										}
@@ -616,12 +609,11 @@
 											"raw": "{\n    \"Name\": \"{{organizations_patch_name}}\"\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}/api/Organizations({{organizations_get_id}})",
+											"raw": "{{SiteURL}}api/Organizations({{organizations_get_id}})",
 											"host": [
-												"{{SiteURL}}"
+												"{{SiteURL}}api"
 											],
 											"path": [
-												"api",
 												"Organizations({{organizations_get_id}})"
 											]
 										}
@@ -686,12 +678,11 @@
 											"raw": "{\n\t\"IsDisabled\": false,\n    \"Id\": {{organizations_get_id}},\n    \"Name\": \"{{organizations_put_name}}\",\n    \"Address1\": \"50 Valley Stream Parkway (HQ)1\",\n    \"Address2\": \"\",\n    \"Address3\": \"\",\n    \"City\": \"Malvern\",\n    \"State\": \"PA\",\n    \"PostalCode\": \"19355\",\n    \"Country\": \"USA\",\n    \"PrimaryContact\": \"Support\",\n    \"ContactNumber1\": \"484.323.1360\",\n    \"ContactNumber2\": null,\n    \"CreatedById\": 1000000,\n    \"CreatedDate\": \"2019-03-01T09:51:29.45-05:00\",\n    \"ModifiedById\": 1000000,\n    \"ModifiedDate\": \"2019-03-01T11:14:35.94-05:00\"\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}/api/Organizations({{organizations_get_id}})",
+											"raw": "{{SiteURL}}api/Organizations({{organizations_get_id}})",
 											"host": [
-												"{{SiteURL}}"
+												"{{SiteURL}}api"
 											],
 											"path": [
-												"api",
 												"Organizations({{organizations_get_id}})"
 											]
 										}
@@ -850,12 +841,11 @@
 											"raw": " {\n            \"Name\": \"{{SC_post_name}}\",\n            \"Certificate\": \"UEsDBBQABgAIAAAAIQDfpNJsWgEAACAFAAATAAgCW0NvbnRlbnRfVHlwZXNdLnhtbCCiBAIooAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC0lMtuwjAQRfeV+g+Rt1Vi6KKqKgKLPpYtUukHGHsCVv2Sx7z+vhMCUVUBkQpsIiUz994zVsaD0dqabAkRtXcl6xc9loGTXmk3K9nX5C1/ZBkm4ZQw3kHJNoBsNLy9GUw2ATAjtcOSzVMKT5yjnIMVWPgAjiqVj1Ykeo0zHoT8FjPg973eA5feJXApT7UHGw5eoBILk7LXNX1uSCIYZNlz01hnlUyEYLQUiep86dSflHyXUJBy24NzHfCOGhg/mFBXjgfsdB90NFEryMYipndhqYuvfFRcebmwpCxO2xzg9FWlJbT62i1ELwGRztyaoq1Yod2e/ygHpo0BvDxF49sdDymR4BoAO+dOhBVMP69G8cu8E6Si3ImYGrg8RmvdCZFoA6F59s/m2NqciqTOcfQBaaPjP8ber2ytzmngADHp039dm0jWZ88H9W2gQB3I5tv7bfgDAAD//wMAUEsDBBQABgAIAAAAIQAekRq37wAAAE4CAAALAAgCX3JlbHMvLnJlbHMgogQCKKAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==\",\n            \"IsEnabled\": true,\n            \"CreatedById\": 1,\n            \"CreatedDate\": \"2019-02-13T14:40:05.957-05:00\",\n            \"ModifiedById\": 1,\n            \"ModifiedDate\": \"2019-02-13T15:05:30.757-05:00\"\n        }"
 										},
 										"url": {
-											"raw": "{{SiteURL}}/api/SecurityCertificates",
+											"raw": "{{SiteURL}}api/SecurityCertificates",
 											"host": [
-												"{{SiteURL}}"
+												"{{SiteURL}}api"
 											],
 											"path": [
-												"api",
 												"SecurityCertificates"
 											]
 										}
@@ -913,12 +903,11 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{SiteURL}}/api/SecurityCertificates({{SC_get_id}})",
+											"raw": "{{SiteURL}}api/SecurityCertificates({{SC_get_id}})",
 											"host": [
-												"{{SiteURL}}"
+												"{{SiteURL}}api"
 											],
 											"path": [
-												"api",
 												"SecurityCertificates({{SC_get_id}})"
 											]
 										}
@@ -983,12 +972,11 @@
 											"raw": "{\n    \"Name\": \"{{SC_patch_name}}\"\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}/api/Organizations({{SC_get_id}})",
+											"raw": "{{SiteURL}}api/Organizations({{SC_get_id}})",
 											"host": [
-												"{{SiteURL}}"
+												"{{SiteURL}}api"
 											],
 											"path": [
-												"api",
 												"Organizations({{SC_get_id}})"
 											]
 										}
@@ -1049,12 +1037,11 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{SiteURL}}/api/Organizations",
+											"raw": "{{SiteURL}}api/Organizations",
 											"host": [
-												"{{SiteURL}}"
+												"{{SiteURL}}api"
 											],
 											"path": [
-												"api",
 												"Organizations"
 											]
 										}
@@ -2219,6 +2206,125 @@
 								}
 							],
 							"description": "Happy Path",
+							"_postman_isSubFolder": true
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "User Management",
+					"item": [
+						{
+							"name": "Test-Happy Path",
+							"item": [
+								{
+									"name": "User Management",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": ""
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Put User Management",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											},
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Prefer",
+												"value": "return=representation"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"Id\": 1000008,\n\t\"MustChangePwd\": true,\n\t\"PwdNeverExpires\": false,\n\t\"UPwd\": \"ThisIsPwd454#\",\n\t\"SendWelcomeMessage\": false\n}\n"
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/UserManagement(1000008)",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"UserManagement(1000008)"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Patch Users Management",
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											},
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Prefer",
+												"value": "return=representation"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"Id\": 1000012,\n\t\"MustChangePwd\": false,\n\t\"PwdNeverExpires\": false,\n\t\"SendWelcomeMessage\": false,\n\t\"InvalidLoginCount\": 20,\n    \"PwdLastChanged\": \"2047-09-01T00:00:00-04:00\",\n    \"UPwd\": \"ThisIsNewPwd12#\"\n}\n"
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/UserManagement(1000012)",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"UserManagement(1000012)"
+											]
+										}
+									},
+									"response": []
+								}
+							],
 							"_postman_isSubFolder": true
 						}
 					],
@@ -3914,15 +4020,16 @@
 													"});",
 													"",
 													"pm.test('Response has Name values', function() {",
-													"  pm.expect(jsonData).to.have.property('Description');",
-													"  pm.expect(jsonData).to.have.property('Name');",
+													"  ",
 													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('ConditionalMacros_post_name'));",
 													"});",
 													"",
 													"",
 													"pm.test('Response has other fields present', function () {",
 													"  pm.expect(jsonData).to.have.property('Condition');",
-													"  pm.expect(jsonData).to.have.property('CreatedById');",
+													"  pm.expect(jsonData).to.have.property('Description');",
+													"  pm.expect(jsonData).to.have.property('Name');",
+													" ",
 													" ",
 													"});"
 												],
@@ -3971,7 +4078,7 @@
 									"response": []
 								},
 								{
-									"name": "Get All ConditionalMacros with key",
+									"name": "Get ConditionalMacros with key",
 									"event": [
 										{
 											"listen": "test",
@@ -4091,45 +4198,6 @@
 									"response": []
 								},
 								{
-									"name": "Get All ConditionalMacros",
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/ConditionalMacros",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"ConditionalMacros"
-											]
-										},
-										"description": "Retrieves all doc table records"
-									},
-									"response": []
-								},
-								{
 									"name": "Put ConditionalMacros",
 									"event": [
 										{
@@ -4196,6 +4264,67 @@
 									"response": []
 								},
 								{
+									"name": "Get All ConditionalMacros",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "8c724e71-8e1d-486b-9a7d-132de2e241d3",
+												"exec": [
+													"const jsonData = pm.response.json();",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"pm.test(\"Verify category values are listed\", function () {",
+													"    ",
+													"    pm.expect(jsonData).to.have.property('value');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Id');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Description');",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/ConditionalMacros",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"ConditionalMacros"
+											]
+										},
+										"description": "Retrieves all doc table records"
+									},
+									"response": []
+								},
+								{
 									"name": "Delete ConditionalMacros",
 									"event": [
 										{
@@ -4239,6 +4368,421 @@
 											],
 											"path": [
 												"ConditionalMacros('{{ConditionalMacros_post_name}}')"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Configurations",
+					"item": [
+						{
+							"name": "Test - Happy path",
+							"item": [
+								{
+									"name": "Post Configurations with Children",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "d7dfbf89-2cd6-4614-b0a8-c5e647686866",
+												"exec": [
+													"pm.test(\"Set dynamic value for Name\", function () {",
+													"   var name = \"CONFIG_NAME_\"+Date.now()",
+													"   pm.globals.set(\"ParamName_post_paramname\", name);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "7edf5950-8e0d-4918-af58-5c2eaaf5bca2",
+												"exec": [
+													"const jsonData = pm.response.json();",
+													"",
+													"pm.test(\"Status code is 201\", function () {",
+													"   pm.response.to.have.status(201);",
+													"});",
+													"",
+													"pm.test('Response has Param Name values', function() {",
+													"   pm.expect(jsonData).to.have.property('ParamName');",
+													"   pm.expect(jsonData.ParamName).to.eql(pm.variables.get('ParamName_post_paramname'));",
+													"});",
+													"",
+													"pm.test('Response has other fields present', function () {",
+													"   pm.expect(jsonData).to.have.property('ParamType');",
+													"   pm.expect(jsonData).to.have.property('Value');",
+													"   pm.expect(jsonData).to.have.property('Description');",
+													"   pm.expect(jsonData).to.have.property('Category');",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
+												"type": "text"
+											},
+											{
+												"key": "OData-Version",
+												"value": "4.0",
+												"type": "text"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"ParamName\": \"{{ParamName_post_paramname}}\",\r\n  \"Value\": \"Test Value\",\r\n  \"Description\": \"Add new configuration\",\r\n  \"ParamType\": 0,\r\n  \"Category\": \"Cat A\"\r\n}"
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/Configurations",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"Configurations"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Configurations with Children",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a7a2a0cc-e374-49b8-bba0-2467a65ffed3",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"   pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test('Response has Param Name values', function() {\r",
+													"   pm.expect(jsonData).to.have.property('ParamName');\r",
+													"   pm.expect(jsonData.ParamName).to.eql(pm.variables.get('ParamName_post_paramname'));\r",
+													"});\r",
+													"\r",
+													"pm.test('Response has other fields present', function () {\r",
+													"   pm.expect(jsonData).to.have.property('ParamType');\r",
+													"   pm.expect(jsonData).to.have.property('Value');\r",
+													"   pm.expect(jsonData).to.have.property('Description');\r",
+													"   pm.expect(jsonData).to.have.property('Category');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0",
+												"type": "text"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/Configurations('{{ParamName_post_paramname}}')",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"Configurations('{{ParamName_post_paramname}}')"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Patch Configurations",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "3ecf7341-eb71-41b2-ba18-27a32873a28e",
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"   pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0",
+												"type": "text"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"Description\": \"Postman patch test\"\n}"
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/Configurations('{{ParamName_post_paramname}}')",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"Configurations('{{ParamName_post_paramname}}')"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Put Configurations",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "68ef4683-d5ef-4a07-bb6e-f3be053b6832",
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0",
+												"type": "text"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"ParamName\": \"{{ParamName_post_paramname}}\",\r\n  \"Value\": \"Test Value\",\r\n  \"Description\": \"Postman Put Test\",\r\n  \"ParamType\": 0,\r\n  \"Category\": \"Cat A\"\r\n}"
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/Configurations('{{ParamName_post_paramname}}')",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"Configurations('{{ParamName_post_paramname}}')"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get All Configurations",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "53e09b29-22d0-45c5-b6da-dd86cef340c9",
+												"exec": [
+													"const jsonData = pm.response.json();",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"   pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test('Response has values as non empty collection', function() {",
+													" pm.expect(jsonData).to.have.property('value');",
+													" pm.expect(jsonData.value).to.have.lengthOf.above(0)",
+													"});",
+													"",
+													"pm.test('Verify all keys are present in first item of list', function () {",
+													" pm.expect(jsonData.value[0]).to.have.property('ParamName');",
+													" pm.expect(jsonData.value[0]).to.have.property('ParamType');",
+													" pm.expect(jsonData.value[0]).to.have.property('Value');",
+													" pm.expect(jsonData.value[0]).to.have.property('Description');",
+													" pm.expect(jsonData.value[0]).to.have.property('Category');",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
+												"type": "text"
+											},
+											{
+												"key": "OData-Version",
+												"value": "4.0",
+												"type": "text"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/Configurations",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"Configurations"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete Configurations",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "b83682b9-7ae9-4917-88af-286c3d7d60b2",
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0",
+												"type": "text"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/Configurations('{{ParamName_post_paramname}}')",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"Configurations('{{ParamName_post_paramname}}')"
 											]
 										}
 									},
@@ -4627,7 +5171,253 @@
 				},
 				{
 					"name": "EmailNotifications",
-					"item": [],
+					"item": [
+						{
+							"name": "Test-Happy Path",
+							"item": [
+								{
+									"name": "Post EmailNotifications",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											},
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"EmailType\": \"PostmanPost\",\n  \"From\": \"@CURUSEREMAIL\",\n  \"ReplyTo\": \"@CURUSEREMAIL\",\n  \"ReturnReceiptTo\": \"@CURUSEREMAIL\",\n  \"To\": \"@CustVar|ProductSupportEmail@\",\n  \"Subject\": \"[EPM - Desktop-Integrator] Error - @MyComputerName@ - @CURUSERNAME\",\n  \"Body\": \"Message:\",\n  \"BodyFormat\": 0,\n  \"Priority\": 2,\n  \"DeferredDelivery\": \"@CURUSEREMAIL\",\n  \"SendAllbcc\": 0,\n  \"IsDisabled\": true,\n  \"CreatedById\": 1,\n  \"CreatedDate\": \"2010-05-05T15:57:43.087-04:00\",\n  \"ModifiedById\": 1,\n  \"ModifiedDate\": \"2010-05-05T15:57:43.087-04:00\"\n}"
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/EmailNotifications",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"EmailNotifications"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get All EmailNotifications with key",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/EmailNotifications('DsktpIntgtrException')",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"EmailNotifications('DsktpIntgtrException')"
+											]
+										},
+										"description": "Retrieves all doc table records"
+									},
+									"response": []
+								},
+								{
+									"name": "Patch EmailNotifications",
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											},
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"Body\": \"Message: Postman Patch\"\n}"
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/EmailNotifications('PostmanPost')",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"EmailNotifications('PostmanPost')"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Put EmailNotifications",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											},
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"IsDisabled\": true,\n  \"EmailType\": \"PostmanPost\",\n  \"From\": \"@CURUSEREMAIL\",\n  \"ReplyTo\": \"@CURUSEREMAIL\",\n  \"ReturnReceiptTo\": \"@CURUSEREMAIL\",\n  \"To\": \"@CustVar|ProductSupportEmail@\",\n  \"Subject\": \"[EPM - Desktop-Integrator] Error - @MyComputerName@ - @CURUSERNAME\",\n  \"Body\": \"Message: Postman Put update\",\n  \"BodyFormat\": 0,\n  \"Priority\": 2,\n  \"DeferredDelivery\": \"@CURUSEREMAIL\",\n  \"SendAllbcc\": 0,\n  \"CreatedById\": 1,\n  \"CreatedDate\": \"2017-05-08T10:28:55.923-04:00\",\n  \"ModifiedById\": 1,\n  \"ModifiedDate\": \"2017-05-08T10:29:09.207-04:00\"\n}"
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/EmailNotifications('PostmanPost')",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"EmailNotifications('PostmanPost')"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get All EmailNotifications",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/EmailNotifications",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"EmailNotifications"
+											]
+										},
+										"description": "Retrieves all doc table records"
+									},
+									"response": []
+								},
+								{
+									"name": "Delete EmailNotifications",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											}
+										],
+										"body": {},
+										"url": {
+											"raw": "{{SiteURL}}api/EmailNotifications('PostmanPost')",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"EmailNotifications('PostmanPost')"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						}
+					],
 					"_postman_isSubFolder": true
 				},
 				{
@@ -4886,15 +5676,15 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n\t   \"Id\":{{Globalvariable_id}},\n      \"Name\": \"{{Globalvariable_name_post}}\",\n      \"Description\": \"string\",\n      \"Value\": \"string\",\n      \"Type\": 0,\n      \"Accessibility\": \"Public\",\n      \"CreatedById\": 0,\n      \"CreatedDate\": \"2019-04-15T09:03:41.749Z\",\n      \"ModifiedById\": 0,\n      \"ModifiedDate\": \"2019-04-15T09:03:41.749Z\"\n}"
+											"raw": "{\n\t   \"Id\":{{Globalvariable_id}},\n      \"Name\": \"Hybridfield\",\n      \"Description\": \"string\",\n      \"Value\": \"string\",\n      \"Type\": 0,\n      \"Accessibility\": \"Public\",\n      \"CreatedById\": 0,\n      \"CreatedDate\": \"2019-04-15T09:03:41.749Z\",\n      \"ModifiedById\": 0,\n      \"ModifiedDate\": \"2019-04-15T09:03:41.749Z\"\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/GlobalVariables({{Globalvariable_id}})",
+											"raw": "{{SiteURL}}api/GlobalVariables('{{Globalvariable_id}}')",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"GlobalVariables({{Globalvariable_id}})"
+												"GlobalVariables('{{Globalvariable_id}}')"
 											]
 										}
 									},
@@ -4985,6 +5775,56 @@
 							"item": [
 								{
 									"name": "Post HybridFields with Children",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "f584075b-a76b-4e0d-b576-e6ff114c7672",
+												"exec": [
+													"pm.test(\"Set dynamic value for Hybridfields\", function () {\r",
+													"\r",
+													"  var Name = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 9);\r",
+													"  pm.globals.set(\"Hybridfield_name_post\", Name);\r",
+													"    \r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "5b5d681a-6e87-4b2b-bb5a-e4c1c79cbdba",
+												"exec": [
+													"const jsonData = pm.response.json();",
+													"",
+													"pm.test(\"Status code is 201\", function () {",
+													"    pm.response.to.have.status(201);",
+													"});",
+													"",
+													"pm.test('Response has Name values', function() {",
+													"",
+													"  pm.expect(jsonData).to.have.property('Name');",
+													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('Hybridfield_name_post'));",
+													" ",
+													"});",
+													"",
+													"pm.test(\"Store HybridfieldId\", function () {",
+													"    var Id = jsonData.Id;",
+													"    pm.globals.set(\"Hybridfield_id\", Id);",
+													"});",
+													"",
+													"pm.test('Response has other fields present', function () {",
+													"  pm.expect(jsonData).to.have.property('ViewText');",
+													"  pm.expect(jsonData).to.have.property('ViewHelpText');",
+													"",
+													" ",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
 									"request": {
 										"method": "POST",
 										"header": [
@@ -5011,7 +5851,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \n  \"Name\": \"Postman\",\n  \"ViewText\": \"Postman Post Test\",\n  \"ViewHelpText\": \"\",\n  \"TableName\": \"eidmadm.users\",\n  \"WhereText\": \"where userid = @CURUSERID\",\n  \"ReturnRows\": 0,\n  \"SeparateBy\": \",\"\n}"
+											"raw": "\n  \n {\n \n  \"Name\": \"{{Hybridfield_name_post}}\",\n  \"ViewText\": \"string\",\n  \"ViewHelpText\": \"string\",\n  \"TableName\": \"string\",\n  \"WhereText\": \"string\",\n  \"ReturnRows\": 0,\n  \"SeparateBy\": \"string\"\n \n \n}\n"
 										},
 										"url": {
 											"raw": "{{SiteURL}}api/HybridFields",
@@ -5020,6 +5860,209 @@
 											],
 											"path": [
 												"HybridFields"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get HybridFields with children",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "b39372f6-1280-4be7-8b08-9777059d6d40",
+												"exec": [
+													"var jsonData = pm.response.json();",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/HybridFields('{{Hybridfield_name_post}}')",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"HybridFields('{{Hybridfield_name_post}}')"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Patch HybridFields Class",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "184cd1a0-0b78-408d-b33e-ad5daf725217",
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											},
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"ViewText\":  \"Postman Post Patch Test\"\n}"
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/HybridFields('{{Hybridfield_name_post}}')",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"HybridFields('{{Hybridfield_name_post}}')"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Put HybridFields Class",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "6dc8496a-169d-48b5-b0ef-f977023e9abe",
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{ \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\" }"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"Id\": {{Hybridfield_id}},\r\n  \"Name\": \"{{Hybridfield_name_post}}\",\r\n  \"ViewText\": \"View Text\",\r\n  \"ViewHelpText\": \"string\",\r\n  \"TableName\": \"string\",\r\n  \"WhereText\": \"string\",\r\n  \"ReturnRows\": 0,\r\n  \"SeparateBy\": \"string\"\r\n  \r\n}"
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/HybridFields('{{Hybridfield_name_post}}')",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"HybridFields('{{Hybridfield_name_post}}')"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete HybridField",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/HybridFields('Postman')",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"HybridFields('Postman')"
 											]
 										}
 									},
@@ -5061,166 +6104,6 @@
 											]
 										},
 										"description": "Retrieves all doc table records"
-									},
-									"response": []
-								},
-								{
-									"name": "Get HybridFields with children",
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/HybridFields('Users')",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"HybridFields('Users')"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Patch HybridFields Class",
-									"request": {
-										"method": "PATCH",
-										"header": [
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											},
-											{
-												"key": "OData-Version",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json"
-											},
-											{
-												"key": "Accept",
-												"value": "application/json"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n  \"ViewText\":  \"Postman Post Patch Test\"\n}"
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/HybridFields('Postman')",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"HybridFields('Postman')"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Put HybridFields Class",
-									"request": {
-										"method": "PUT",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json"
-											},
-											{
-												"key": "Accept",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{ \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\" }"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n  \"Id\": 100001,\n  \"Name\": \"Postman\",\n  \"ViewText\": \"Postman Post Patch Put Test\",\n  \"ViewHelpText\": \"\",\n  \"TableName\": \"eidmadm.users\",\n  \"WhereText\": \"where userid = @CURUSERID\",\n  \"ReturnRows\": 0,\n  \"SeparateBy\": \",\"\n}"
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/HybridFields('Postman')",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"HybridFields('Postman')"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Delete HybridField",
-									"request": {
-										"method": "DELETE",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/HybridFields('Postman')",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"HybridFields('Postman')"
-											]
-										}
 									},
 									"response": []
 								}
@@ -5394,12 +6277,12 @@
 											"raw": "{\n  \"Description\": \"{{menu_put_description}}\",\n  \"Url\": \"http://www.savanainc.com\"\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/Menus(104)",
+											"raw": "{{SiteURL}}api/Menus(105)",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"Menus(104)"
+												"Menus(105)"
 											]
 										}
 									},
@@ -10429,7 +11312,7 @@
 							"name": "Test-Happy Path",
 							"item": [
 								{
-									"name": "1. Create new category",
+									"name": "1. Create new ObjectTypes",
 									"event": [
 										{
 											"listen": "test",
@@ -10444,6 +11327,10 @@
 													"",
 													"pm.test('Response has Id and Name values', function() {",
 													"  pm.expect(jsonData).to.have.property('Id');",
+													"  pm.expect(jsonData).to.have.property('Description');",
+													"  pm.expect(jsonData).to.have.property('MimeType');",
+													"  pm.expect(jsonData).to.have.property('CreatedById');",
+													"  ",
 													"  parseInt(pm.expect(jsonData.Id), 10)==(parseInt(pm.variables.get('categories_post_name'), 10));",
 													"});",
 													"",
@@ -10512,7 +11399,7 @@
 									"response": []
 								},
 								{
-									"name": "2. Get Category (Key)",
+									"name": "2. Get ObjectTypes(Key)",
 									"event": [
 										{
 											"listen": "test",
@@ -10573,7 +11460,7 @@
 									"response": []
 								},
 								{
-									"name": "3. Patch Category",
+									"name": "3. Patch ObjectTypes",
 									"event": [
 										{
 											"listen": "test",
@@ -10643,68 +11530,7 @@
 									"response": []
 								},
 								{
-									"name": "4. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after patch operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Description).to.eql(pm.variables.get('categories_patch_name'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/ObjectTypes('{{categories_post_name}}{{categories_post_name}}')",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"ObjectTypes('{{categories_post_name}}{{categories_post_name}}')"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "5. Put Category",
+									"name": "5. Put ObjectTypes",
 									"event": [
 										{
 											"listen": "test",
@@ -10774,69 +11600,7 @@
 									"response": []
 								},
 								{
-									"name": "6. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after put operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Description).to.eql(pm.variables.get('categories_patch_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/ObjectTypes('{{categories_get_id}}')",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"ObjectTypes('{{categories_get_id}}')"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "7. Get All Categories",
+									"name": "7. Get All ObjectTypes",
 									"event": [
 										{
 											"listen": "test",
@@ -10914,7 +11678,7 @@
 							"name": "Test-Happt Path",
 							"item": [
 								{
-									"name": "1. Create new category",
+									"name": "1. Create new StorageServers",
 									"event": [
 										{
 											"listen": "test",
@@ -10929,7 +11693,16 @@
 													"",
 													"pm.test('Response has Id and Name values', function() {",
 													"  pm.expect(jsonData).to.have.property('Id');",
+													"  pm.expect(jsonData).to.have.property('ReplicationPollingInterval');",
+													"  pm.expect(jsonData).to.have.property('ReplicationLastPurge');",
+													"  pm.expect(jsonData).to.have.property('Status');",
+													"  pm.expect(jsonData).to.have.property('Type');",
+													"  pm.expect(jsonData).to.have.property('ServiceAddress');",
+													"  pm.expect(jsonData).to.have.property('Protocol');",
+													"  pm.expect(jsonData).to.have.property('Port');",
+													"  pm.expect(jsonData).to.have.property('PhysicalServer');",
 													"  pm.expect(jsonData).to.have.property('ServerName');",
+													"  ",
 													"  pm.expect(jsonData.ServerName).to.eql(pm.variables.get('categories_post_name'));",
 													"});",
 													"",
@@ -10998,7 +11771,7 @@
 									"response": []
 								},
 								{
-									"name": "2. Get Category (Key)",
+									"name": "2. Get StorageServers(Key)",
 									"event": [
 										{
 											"listen": "test",
@@ -11013,6 +11786,19 @@
 													"    var jsonData = pm.response.json();",
 													"    pm.expect(jsonData.ServerName).to.eql(pm.variables.get('categories_post_name'));",
 													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
+													"    ",
+													"    ",
+													"  pm.expect(jsonData).to.have.property('Id');",
+													"  pm.expect(jsonData).to.have.property('ReplicationPollingInterval');",
+													"  pm.expect(jsonData).to.have.property('ReplicationLastPurge');",
+													"  pm.expect(jsonData).to.have.property('Status');",
+													"  pm.expect(jsonData).to.have.property('Type');",
+													"  pm.expect(jsonData).to.have.property('ServiceAddress');",
+													"  pm.expect(jsonData).to.have.property('Protocol');",
+													"  pm.expect(jsonData).to.have.property('Port');",
+													"  pm.expect(jsonData).to.have.property('PhysicalServer');",
+													"  pm.expect(jsonData).to.have.property('ServerName');",
+													"  ",
 													"});"
 												],
 												"type": "text/javascript"
@@ -11060,7 +11846,7 @@
 									"response": []
 								},
 								{
-									"name": "3. Patch Category",
+									"name": "3. Patch StorageServers",
 									"event": [
 										{
 											"listen": "test",
@@ -11130,69 +11916,7 @@
 									"response": []
 								},
 								{
-									"name": "4. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after patch operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.ServerName).to.eql(pm.variables.get('categories_patch_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/StorageServers({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"StorageServers({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "5. Put Category",
+									"name": "5. Put StorageServers",
 									"event": [
 										{
 											"listen": "test",
@@ -11262,69 +11986,7 @@
 									"response": []
 								},
 								{
-									"name": "6. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after put operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.ServerName).to.eql(pm.variables.get('categories_put_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/StorageServers({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"StorageServers({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "7. Get All Categories",
+									"name": "7. Get All StorageServers",
 									"event": [
 										{
 											"listen": "test",
@@ -11913,7 +12575,7 @@
 							"name": "Test-Happy path",
 							"item": [
 								{
-									"name": "1. Create new category",
+									"name": "1. Create new EmailSynchCategorizations",
 									"event": [
 										{
 											"listen": "test",
@@ -11929,11 +12591,13 @@
 													"pm.test('Response has Id and Name values', function() {",
 													"  pm.expect(jsonData).to.have.property('Id');",
 													"  pm.expect(jsonData).to.have.property('Name');",
+													"  pm.expect(jsonData).to.have.property('Description');",
+													"  pm.expect(jsonData).to.have.property('Configuration');",
+													"  ",
 													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
 													"});",
 													"",
-													"",
-													"pm.test(\"Store category Id\", function () {",
+													"pm.test(\"Store Response Id\", function () {",
 													"    var id = jsonData.Id;",
 													"    pm.globals.set(\"categories_get_id\", id);",
 													"});"
@@ -11998,7 +12662,7 @@
 									"response": []
 								},
 								{
-									"name": "2. Get Category (Key)",
+									"name": "2. Get EmailSynchCategorizations(Key)",
 									"event": [
 										{
 											"listen": "test",
@@ -12013,6 +12677,12 @@
 													"    var jsonData = pm.response.json();",
 													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
 													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
+													"    ",
+													"  pm.expect(jsonData).to.have.property('Id');",
+													"  pm.expect(jsonData).to.have.property('Name');",
+													"  pm.expect(jsonData).to.have.property('Description');",
+													"  pm.expect(jsonData).to.have.property('Configuration');",
+													"  ",
 													"});"
 												],
 												"type": "text/javascript"
@@ -12060,7 +12730,7 @@
 									"response": []
 								},
 								{
-									"name": "3. Patch Category",
+									"name": "3. Patch EmailSynchCategorizations",
 									"event": [
 										{
 											"listen": "test",
@@ -12130,69 +12800,7 @@
 									"response": []
 								},
 								{
-									"name": "4. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after patch operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_patch_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/EmailSynchCategorizations({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"EmailSynchCategorizations({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "5. Put Category",
+									"name": "5. Put EmailSynchCategorizations",
 									"event": [
 										{
 											"listen": "test",
@@ -12262,69 +12870,7 @@
 									"response": []
 								},
 								{
-									"name": "6. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after put operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_put_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/EmailSynchCategorizations({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"EmailSynchCategorizations({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "7. Get All Categories",
+									"name": "7. Get All EmailSynchCategorizations",
 									"event": [
 										{
 											"listen": "test",
@@ -12403,7 +12949,7 @@
 							"name": "Test-Happy Path",
 							"item": [
 								{
-									"name": "1. Create new category",
+									"name": "1. Create new EmailSynchEngines",
 									"event": [
 										{
 											"listen": "test",
@@ -12419,11 +12965,18 @@
 													"pm.test('Response has Id and Name values', function() {",
 													"  pm.expect(jsonData).to.have.property('Id');",
 													"  pm.expect(jsonData).to.have.property('Name');",
+													"  pm.expect(jsonData).to.have.property('Description');",
+													"  pm.expect(jsonData).to.have.property('PhysicalServer');",
+													"  pm.expect(jsonData).to.have.property('ThreadPool');",
+													"  pm.expect(jsonData).to.have.property('CycleTime');",
+													"  pm.expect(jsonData).to.have.property('TempFolderPath');",
+													"  pm.expect(jsonData).to.have.property('Lastactivitydate');",
+													"  pm.expect(jsonData).to.have.property('ServiceName');",
 													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
 													"});",
 													"",
 													"",
-													"pm.test(\"Store category Id\", function () {",
+													"pm.test(\"Store response Id\", function () {",
 													"    var id = jsonData.Id;",
 													"    pm.globals.set(\"categories_get_id\", id);",
 													"});"
@@ -12488,7 +13041,7 @@
 									"response": []
 								},
 								{
-									"name": "2. Get Category (Key)",
+									"name": "2. Get EmailSynchEngines(Key)",
 									"event": [
 										{
 											"listen": "test",
@@ -12500,9 +13053,19 @@
 													"});",
 													"",
 													"pm.test(\"Verify Name and ID of the category\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
+													"  var jsonData = pm.response.json();",
+													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
+													"  pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
+													"    ",
+													"  pm.expect(jsonData).to.have.property('Id');",
+													"  pm.expect(jsonData).to.have.property('Name');",
+													"  pm.expect(jsonData).to.have.property('Description');",
+													"  pm.expect(jsonData).to.have.property('PhysicalServer');",
+													"  pm.expect(jsonData).to.have.property('ThreadPool');",
+													"  pm.expect(jsonData).to.have.property('CycleTime');",
+													"  pm.expect(jsonData).to.have.property('TempFolderPath');",
+													"  pm.expect(jsonData).to.have.property('Lastactivitydate');",
+													"  pm.expect(jsonData).to.have.property('ServiceName');",
 													"});"
 												],
 												"type": "text/javascript"
@@ -12550,7 +13113,7 @@
 									"response": []
 								},
 								{
-									"name": "3. Patch Category",
+									"name": "3. Patch EmailSynchEngines",
 									"event": [
 										{
 											"listen": "test",
@@ -12620,69 +13183,7 @@
 									"response": []
 								},
 								{
-									"name": "4. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after patch operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_patch_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/EmailSynchEngines({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"EmailSynchEngines({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "5. Put Category",
+									"name": "5. Put EmailSynchEngines",
 									"event": [
 										{
 											"listen": "test",
@@ -12752,69 +13253,7 @@
 									"response": []
 								},
 								{
-									"name": "6. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after put operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_put_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/EmailSynchEngines({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"EmailSynchEngines({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "7. Get All Categories",
+									"name": "7. Get All EmailSynchEngines",
 									"event": [
 										{
 											"listen": "test",
@@ -12930,7 +13369,7 @@
 							"name": "Happy Path Testing",
 							"item": [
 								{
-									"name": "1. Create new category",
+									"name": "1. Create new ReportCategories",
 									"event": [
 										{
 											"listen": "test",
@@ -12946,9 +13385,15 @@
 													"pm.test('Response has Id and Name values', function() {",
 													"  pm.expect(jsonData).to.have.property('Id');",
 													"  pm.expect(jsonData).to.have.property('Name');",
+													"  pm.expect(jsonData).to.have.property('GroupId');",
+													"  pm.expect(jsonData).to.have.property('ReportView');",
+													"  pm.expect(jsonData).to.have.property('GroupId');",
+													"  pm.expect(jsonData).to.have.property('Sequence');",
+													"  pm.expect(jsonData).to.have.property('Status');",
+													"  pm.expect(jsonData).to.have.property('Description');",
+													"  ",
 													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
 													"});",
-													"",
 													"",
 													"pm.test(\"Store category Id\", function () {",
 													"    var id = jsonData.Id;",
@@ -13015,7 +13460,7 @@
 									"response": []
 								},
 								{
-									"name": "2. Get Category (Key)",
+									"name": "2. Get ReportCategories(Key)",
 									"event": [
 										{
 											"listen": "test",
@@ -13026,10 +13471,16 @@
 													"    pm.response.to.have.status(200);",
 													"});",
 													"",
-													"pm.test(\"Verify Name and ID of the category\", function () {",
+													"pm.test(\"Verify Name and ID of the Reportcategory\", function () {",
 													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
+													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
+													"  pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
+													"  pm.expect(jsonData).to.have.property('GroupId');",
+													"  pm.expect(jsonData).to.have.property('ReportView');",
+													"  pm.expect(jsonData).to.have.property('GroupId');",
+													"  pm.expect(jsonData).to.have.property('Sequence');",
+													"  pm.expect(jsonData).to.have.property('Status');",
+													"  pm.expect(jsonData).to.have.property('Description');",
 													"});"
 												],
 												"type": "text/javascript"
@@ -13077,7 +13528,7 @@
 									"response": []
 								},
 								{
-									"name": "3. Patch Category",
+									"name": "3. Patch ReportCategories",
 									"event": [
 										{
 											"listen": "test",
@@ -13147,69 +13598,7 @@
 									"response": []
 								},
 								{
-									"name": "4. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after patch operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_patch_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/ReportCategories({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"ReportCategories({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "5. Put Category",
+									"name": "5. Put ReportCategories",
 									"event": [
 										{
 											"listen": "test",
@@ -13279,69 +13668,7 @@
 									"response": []
 								},
 								{
-									"name": "6. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after put operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_put_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/ReportCategories({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"ReportCategories({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "7. Get All Categories",
+									"name": "7. Get All ReportCategories",
 									"event": [
 										{
 											"listen": "test",
