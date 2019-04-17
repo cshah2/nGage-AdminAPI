@@ -2323,6 +2323,76 @@
 										}
 									},
 									"response": []
+								},
+								{
+									"name": "{{SiteURL}}api/DocTypes(501)",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "1e85a5bf-40d8-4fdc-8ece-33f91981efba",
+												"exec": [
+													"pm.test(\"Set dynamic value for Name\", function () {",
+													"    var Name = \"PUT_\"+Date.now()",
+													"    pm.globals.set(\"DocTypes_put_name\", Name);",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "1d42369e-39ec-40e4-87c2-2a8db84de5b3",
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{ \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\" }"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"AutoTitleFlag\": true,\n  \"UseDefaultWmiConfig\": false,\n  \"ContentMode\": 2,\n  \"AllowDeleteAllPages\": false,\n  \"Disabled\": false,\n  \"Id\": 501,\n  \"Name\": \"{{DocTypes_put_name}}\",\n  \"CustomFlags\": \"\",\n  \"DocClassId\": 101,\n  \"AutoTitle\": \"%DT% - %-1000% - %DCD%\",\n  \"AssemblyName\": \"\",\n  \"AssemblyClassName\": \"\",\n  \"AdminAssemblyName\": \"WMI/DefaultWMI/Admin/WMIAdminMenu.aspx\",\n  \"AdminAssemblyClassName\": \"\",\n  \"Url\": \"\",\n  \"PropInterfaceId\": 1,\n  \"WmConfigData\": \"\",\n  \"WmiInterfaceId\": 1000,\n  \"IndexContent\": 0,\n  \"LibraryId\": 0,\n  \"AuditControlType\": 0\n}"
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/DocTypes(501)",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"DocTypes(501)"
+											]
+										}
+									},
+									"response": []
 								}
 							],
 							"_postman_isSubFolder": true
@@ -6031,45 +6101,29 @@
 									"response": []
 								},
 								{
-									"name": "Delete HybridField",
-									"request": {
-										"method": "DELETE",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/HybridFields('Postman')",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"HybridFields('Postman')"
-											]
-										}
-									},
-									"response": []
-								},
-								{
 									"name": "Get All HybridFields",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "106862c8-2a43-476e-b869-ec5d8e254598",
+												"exec": [
+													"const jsonData = pm.response.json();",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"pm.test(\"Verify Hybrid fields values are listed\", function () {",
+													"    ",
+													"    pm.expect(jsonData).to.have.property('value');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Id');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Name');",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
 									"request": {
 										"method": "GET",
 										"header": [
@@ -6104,6 +6158,60 @@
 											]
 										},
 										"description": "Retrieves all doc table records"
+									},
+									"response": []
+								},
+								{
+									"name": "Delete HybridField",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "f215491f-7b97-4b83-8d0a-0ec5373d2e8b",
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/HybridFields('{{Hybridfield_name_post}}')",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"HybridFields('{{Hybridfield_name_post}}')"
+											]
+										}
 									},
 									"response": []
 								}
@@ -6366,12 +6474,504 @@
 				},
 				{
 					"name": "Stamps",
-					"item": [],
+					"item": [
+						{
+							"name": "Test- Happy path",
+							"item": [
+								{
+									"name": "Post Stamps",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "b8fb29d0-22d3-4647-a892-0700b652bf0f",
+												"exec": [
+													"pm.test(\"Set dynamic value for Name\", function () {",
+													"   var name = \"POST_\"+Date.now()",
+													"   pm.globals.set(\"StampsName_post\", name);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "ec23010e-83a5-456f-b449-73bd5bbf5f2b",
+												"exec": [
+													"const jsonData = pm.response.json();",
+													"",
+													"pm.test(\"Status code is 201\", function () {",
+													"   pm.response.to.have.status(201);",
+													"});",
+													"",
+													"pm.test('Response has Stamp Names', function() {",
+													"   pm.expect(jsonData).to.have.property('Name');",
+													"   pm.expect(jsonData.Name).to.eql(pm.variables.get('StampsName_post'));",
+													"});",
+													"",
+													"pm.test(\"Store StampId\", function () {",
+													"    var Id = jsonData.Id;",
+													"    pm.globals.set(\"Stamp_id\", Id);",
+													"});",
+													"",
+													"pm.test('Response has other fields present', function () {",
+													"   pm.expect(jsonData).to.have.property('IsBold');",
+													"   pm.expect(jsonData).to.have.property('IsItalic');",
+													"   pm.expect(jsonData).to.have.property('IsUnderline');",
+													"   pm.expect(jsonData).to.have.property('Type');",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											},
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\"IsBold\": true,\n      \"IsItalic\": true,\n      \"IsUnderline\": false,\n      \"IsStrikeOut\": false,\n       \"Name\": \"{{StampsName_post}}\",\n      \"Type\": 1,\n      \"Text\": \"Postman test\",\n      \"Image\": null,\n      \"Width\": 250,\n      \"Height\": 100,\n      \"FontName\": \"Times New Roman\",\n      \"FontSize\": 10,\n      \"Topleft\": 1,\n      \"Topmiddle\": 1,\n      \"Topright\": 1,\n      \"Centerleft\": 1,\n      \"Center\": 1,\n      \"CenterRight\": 1,\n      \"BottomLeft\": 1,\n      \"BottomMiddle\": 1,\n      \"FillColor\": 0,\n      \"BottomRight\": 1,\n      \"IsTransParentFillColor\": 1,\n      \"AllowCustom\": 0,\n      \"CustomMenuLabel\": \"\",\n      \"CustomTop\": 0,\n      \"CustomLeft\": 0,\n      \"BrushColor\": 52224,\n      \"BrushSize\": 0\n}"
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/Stamps",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"Stamps"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Stamps with key",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "36067806-aa64-4a54-940d-5d43db8cd7c8",
+												"exec": [
+													"var jsonData = pm.response.json();",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/Stamps({{Stamp_id}})",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"Stamps({{Stamp_id}})"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Patch Stamps",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "04d3a14b-7ddf-43e1-b92f-43d348be839b",
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											},
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\"Text\":\"Postman test patch update\"\n}"
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/Stamps({{Stamp_id}})",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"Stamps({{Stamp_id}})"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Put Stamps",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "bed2fe91-d137-4803-8182-5412329a2f92",
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{ \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\" }"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\"IsBold\": true,\n  \"IsItalic\": true,\n  \"IsUnderline\": false,\n  \"IsStrikeOut\": false,\n  \"Id\": {{Stamp_id}},\n  \"Name\": \"{{StampsName_post}}\",\n  \"Type\": 1,\n  \"Text\": \"Postman test put update\",\n  \"Image\": null,\n  \"Width\": 250,\n  \"Height\": 100,\n  \"FontName\": \"Times New Roman\",\n  \"FontSize\": 10,\n  \"Topleft\": 1,\n  \"Topmiddle\": 1,\n  \"Topright\": 1,\n  \"Centerleft\": 1,\n  \"Center\": 1,\n  \"CenterRight\": 1,\n  \"BottomLeft\": 1,\n  \"BottomMiddle\": 1,\n  \"FillColor\": 0,\n  \"BottomRight\": 1,\n  \"IsTransParentFillColor\": 1,\n  \"AllowCustom\": 0,\n  \"CustomMenuLabel\": \"\",\n  \"CustomTop\": 0,\n  \"CustomLeft\": 0,\n  \"BrushColor\": 52224,\n  \"BrushSize\": 0\n}"
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/Stamps({{Stamp_id}})",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"Stamps({{Stamp_id}})"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get All Stamps",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "7c8e7e1c-a517-4019-985a-01485d628fa9",
+												"exec": [
+													"const jsonData = pm.response.json();",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"pm.test(\"Verify Stamps values are listed\", function () {",
+													"    ",
+													"    pm.expect(jsonData).to.have.property('value');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Id');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Name');",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/Stamps",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"Stamps"
+											]
+										},
+										"description": "Retrieves all DocType Property Interfaces records"
+									},
+									"response": []
+								},
+								{
+									"name": "Delete Stamps",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "1e454e13-8703-4af8-aaa3-81523c65ea92",
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											}
+										],
+										"body": {},
+										"url": {
+											"raw": "{{SiteURL}}api/Stamps({{Stamp_id}})",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"Stamps({{Stamp_id}})"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						}
+					],
 					"_postman_isSubFolder": true
 				},
 				{
 					"name": "System Registrations",
-					"item": [],
+					"item": [
+						{
+							"name": "Test- Happy path",
+							"item": [
+								{
+									"name": "Get SystemRegistrations with children",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "9186e521-b616-43b0-8e34-8eae31de05ca",
+												"exec": [
+													"var jsonData = pm.response.json();",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/SystemRegistrations('abc')",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"SystemRegistrations('abc')"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get All SystemRegistrations",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "504c6c9f-c353-4884-8b82-4b47034aa72b",
+												"exec": [
+													"const jsonData = pm.response.json();",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"pm.test(\"Verify Hybrid fields values are listed\", function () {",
+													"    ",
+													"    pm.expect(jsonData).to.have.property('value');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Division');",
+													"    pm.expect(jsonData.value[0]).to.have.property('City');",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/SystemRegistrations",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"SystemRegistrations"
+											]
+										},
+										"description": "Retrieves all doc table records"
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						}
+					],
 					"_postman_isSubFolder": true
 				},
 				{
@@ -7209,7 +7809,295 @@
 				},
 				{
 					"name": "Doc Classes",
-					"item": [],
+					"item": [
+						{
+							"name": "Test-Happy Path",
+							"item": [
+								{
+									"name": "Get All Doc Classes",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "9fdba49a-e304-436a-b538-469fb53e6ba2",
+												"exec": [
+													"const jsonData = pm.response.json();",
+													"",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"pm.test(\"Verify Users values are listed\", function () {",
+													"    ",
+													"    pm.expect(jsonData).to.have.property('value');",
+													"    pm.expect(jsonData.value[0]).to.have.property('IsSearchEnabled');",
+													"    pm.expect(jsonData.value[0]).to.have.property('IsManaged');",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/DocClasses",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"DocClasses"
+											]
+										},
+										"description": "Retrieves all doc table records"
+									},
+									"response": []
+								},
+								{
+									"name": "Post Doc Classes with Children",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											},
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"IsSearchEnabled\": true,\n  \"IsManaged\": true,\n  \"DocClassName\": \"PostmanDocClass33\",\n  \"DocClassDescription\": \"Postman Doc class desc33\",\n  \"CustomFlags\": null,\n  \"DocTableId\": 1134,\n  \"DocClassView\": null,\n  \"SearchInterfaceId\": 1,\n  \"DocumentInterfaceId\": 0,\n  \"RecordsManagementId\": 1,\n  \"StoragePathId\": 1,\n  \"StorageServerId\": 1,\n  \"InterfaceConfig\": null\n}"
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/DocClasses",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"DocClasses"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Doc Classes with children",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/DocClasses(2)",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"DocClasses(2)"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Patch Doc Classes",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "6616889d-bc72-4aec-ba6c-5ae57815fce9",
+												"exec": [
+													"pm.test(\"Set dynamic value for Name\", function () {",
+													"    var DocClassDescription = \"PATCH_\"+Date.now()",
+													"    pm.globals.set(\"DocClassDescription\", DocClassDescription);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "77bfc4c4-bac7-4e6d-a790-b045e624deb3",
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											},
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"DocClassDescription\": \"{{DocClassDescription}}\"\n}"
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/DocClasses(2)",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"DocClasses(2)"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Put Doc Classes",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "be0af77f-e1e6-418f-a93f-4e2a0dc6deb7",
+												"exec": [
+													"pm.test(\"Set dynamic value for Name\", function () {",
+													"    var Name = \"PUT_\"+Date.now()",
+													"    pm.globals.set(\"DocClasses_put_name\", Name);",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "a3ee1185-d38a-4056-8f73-6835b4233e0a",
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{ \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\" }"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"IsSearchEnabled\": true,\n  \"IsManaged\": true,\n  \"DocClassId\": 100,\n  \"DocClassName\": \"Test123\",\n  \"DocClassDescription\": \"{{DocClasses_put_name}}\",\n  \"CustomFlags\": null,\n  \"DocTableId\": 100,\n  \"DocClassView\": null,\n  \"SearchInterfaceId\": 1,\n  \"DocumentInterfaceId\": 0,\n  \"RecordsManagementId\": 1,\n  \"StoragePathId\": 1,\n  \"StorageServerId\": 1,\n  \"InterfaceConfig\": null\n}"
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/DocClasses(100)",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"DocClasses(100)"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						}
+					],
 					"_postman_isSubFolder": true
 				},
 				{
@@ -7224,7 +8112,320 @@
 				},
 				{
 					"name": "Doc Types",
-					"item": [],
+					"item": [
+						{
+							"name": "Test-Happy Path",
+							"item": [
+								{
+									"name": "Get All DocTypes",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/DocTypes",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"DocTypes"
+											]
+										},
+										"description": "Retrieves all DocType Property Interfaces records"
+									},
+									"response": []
+								},
+								{
+									"name": "Get DocType with key",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "d47b0274-c3da-4497-8aba-6664cd09bfdf",
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"Verify Name and ID of the Doc Type\", function () {",
+													"    var jsonData = pm.response.json();",
+													"  pm.expect(jsonData).to.have.property('AutoTitleFlag');",
+													"  pm.expect(jsonData).to.have.property('UseDefaultWmiConfig');",
+													"  pm.expect(jsonData).to.have.property('ContentMode');",
+													"  pm.expect(jsonData).to.have.property('AllowDeleteAllPages');",
+													"  pm.expect(jsonData).to.have.property('Disabled');",
+													"  pm.expect(jsonData).to.have.property('Id');",
+													"  pm.expect(jsonData).to.have.property('Name');",
+													"  pm.expect(jsonData).to.have.property('CustomFlags');",
+													"  pm.expect(jsonData).to.have.property('DocClassId');",
+													"  pm.expect(jsonData).to.have.property('AutoTitle');",
+													"  pm.expect(jsonData).to.have.property('AssemblyName');",
+													"  pm.expect(jsonData).to.have.property('AssemblyClassName');",
+													"  pm.expect(jsonData).to.have.property('AdminAssemblyName');",
+													"  pm.expect(jsonData).to.have.property('AdminAssemblyClassName');",
+													"  pm.expect(jsonData).to.have.property('Url');",
+													"  pm.expect(jsonData).to.have.property('PropInterfaceId');",
+													"  pm.expect(jsonData).to.have.property('WmConfigData');",
+													"  pm.expect(jsonData).to.have.property('WmiInterfaceId');",
+													"  pm.expect(jsonData).to.have.property('IndexContent');",
+													"  pm.expect(jsonData).to.have.property('LibraryId');",
+													"  pm.expect(jsonData).to.have.property('AuditControlType');",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/DocTypes(500)",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"DocTypes(500)"
+											]
+										},
+										"description": "Get DocType with key =500"
+									},
+									"response": []
+								},
+								{
+									"name": "Get DocType  with children",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/DocTypes?key=500&$expand=WmInterface",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"DocTypes"
+											],
+											"query": [
+												{
+													"key": "key",
+													"value": "500"
+												},
+												{
+													"key": "$expand",
+													"value": "WmInterface"
+												}
+											]
+										},
+										"description": "Get doctype property interface (key =1) with doctypes using it."
+									},
+									"response": []
+								},
+								{
+									"name": "Patch DocType",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "b96cbcc9-c3b1-4e1e-813a-55e6fd60bf11",
+												"exec": [
+													"pm.test(\"Set dynamic value for Name\", function () {",
+													"    var Name = \"PATCH_\"+Date.now()",
+													"    pm.globals.set(\"DocType_patch_name\", Name);",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "a1d414a9-fc2a-45ea-9238-bcc7f851ad4f",
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											},
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"Name\": \"{{DocType_patch_name}}\"\n}"
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/DocTypes(501)",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"DocTypes(501)"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Put DocTypes",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "1e85a5bf-40d8-4fdc-8ece-33f91981efba",
+												"exec": [
+													"pm.test(\"Set dynamic value for Name\", function () {",
+													"    var Name = \"PUT_\"+Date.now()",
+													"    pm.globals.set(\"DocTypes_put_name\", Name);",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "1d42369e-39ec-40e4-87c2-2a8db84de5b3",
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{ \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\" }"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"AutoTitleFlag\": true,\n  \"UseDefaultWmiConfig\": false,\n  \"ContentMode\": 2,\n  \"AllowDeleteAllPages\": false,\n  \"Disabled\": false,\n  \"Id\": 501,\n  \"Name\": \"{{DocTypes_put_name}}\",\n  \"CustomFlags\": \"\",\n  \"DocClassId\": 101,\n  \"AutoTitle\": \"%DT% - %-1000% - %DCD%\",\n  \"AssemblyName\": \"\",\n  \"AssemblyClassName\": \"\",\n  \"AdminAssemblyName\": \"WMI/DefaultWMI/Admin/WMIAdminMenu.aspx\",\n  \"AdminAssemblyClassName\": \"\",\n  \"Url\": \"\",\n  \"PropInterfaceId\": 1,\n  \"WmConfigData\": \"\",\n  \"WmiInterfaceId\": 1000,\n  \"IndexContent\": 0,\n  \"LibraryId\": 0,\n  \"AuditControlType\": 0\n}"
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/DocTypes(501)",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"DocTypes(501)"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						}
+					],
 					"_postman_isSubFolder": true
 				},
 				{
