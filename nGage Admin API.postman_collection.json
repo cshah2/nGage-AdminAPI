@@ -1693,423 +1693,7 @@
 					"item": [
 						{
 							"name": "Test-Happy path",
-							"item": [
-								{
-									"name": "1. Create new category Copy",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "5afbdc04-199e-4580-a104-d5a227375144",
-												"exec": [
-													"const jsonData = pm.response.json();",
-													"",
-													"pm.test(\"Status code is 201\", function () {",
-													"    pm.response.to.have.status(201);",
-													"});",
-													"",
-													"pm.test('Response has Id and Name values', function() {",
-													"  pm.expect(jsonData).to.have.property('GroupId');",
-													"  pm.expect(jsonData).to.have.property('Name');",
-													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
-													"});",
-													"",
-													"pm.test(\"Store category Id\", function () {",
-													"    var id = jsonData.GroupId;",
-													"    pm.globals.set(\"groups_get_id\", id);",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"id": "d2550643-333d-465a-bec2-9c7e68f819dd",
-												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"POST_\"+Date.now()",
-													"    pm.globals.set(\"categories_post_name\", Name);",
-													"});",
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n  \"Name\": \"{{categories_post_name}}\",\r\n  \"Description\": null,\r\n  \"Acl\": \"\"\r\n}"
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/UserGroups",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"UserGroups"
-											]
-										},
-										"description": "Verify POST Request for categories work with status code 201"
-									},
-									"response": []
-								},
-								{
-									"name": "1. Create new category",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "5afbdc04-199e-4580-a104-d5a227375144",
-												"exec": [
-													"const jsonData = pm.response.json();",
-													"",
-													"pm.test(\"Status code is 201\", function () {",
-													"    pm.response.to.have.status(201);",
-													"});",
-													"",
-													"pm.test('Response has Id and Name values', function() {",
-													"  pm.expect(jsonData).to.have.property('Id');",
-													"});",
-													"",
-													"pm.test(\"Store category Id\", function () {",
-													"    var id = jsonData.GroupId;",
-													"    pm.globals.set(\"categories_get_id\", id);",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"id": "d2550643-333d-465a-bec2-9c7e68f819dd",
-												"exec": [
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n  \"UserId\": 1,\r\n  \"GroupId\": {{groups_get_id}},\r\n  \"CreatedById\": 1,\r\n  \"CreatedDate\": \"2007-08-20T13:22:52.353-04:00\",\r\n  \"ModifiedById\": 1,\r\n  \"ModifiedDate\": \"2007-08-20T13:22:52.353-04:00\"\r\n}"
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/UserUserGroups",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"UserUserGroups"
-											]
-										},
-										"description": "Verify POST Request for categories work with status code 201"
-									},
-									"response": []
-								},
-								{
-									"name": "2. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.GroupId).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/UserUserGroups(UserId=1,GroupId={{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"UserUserGroups(UserId=1,GroupId={{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "3. Patch Category",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "5fa86f5f-87de-4186-b047-0bc4e162a445",
-												"exec": [
-													"pm.test(\"Status code is 204\", function () {",
-													"    pm.response.to.have.status(204);",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"id": "23066b1a-1d3c-433c-b214-36722c297f57",
-												"exec": [
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "PATCH",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n  \"ModifiedById\": 2\r\n}"
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/UserUserGroups(UserId=1,GroupId={{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"UserUserGroups(UserId=1,GroupId={{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "4. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after patch operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.ModifiedById).to.eql(2);",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/UserUserGroups(UserId=1,GroupId={{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"UserUserGroups(UserId=1,GroupId={{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "7. Get All Categories",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "6d7768c6-93ed-454c-a8e4-bae0bcff7baf",
-												"exec": [
-													"const jsonData = pm.response.json();",
-													"",
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"pm.test(\"Verify category values are listed\", function () {",
-													"    ",
-													"    pm.expect(jsonData).to.have.property('value');",
-													"    pm.expect(jsonData.value[0]).to.have.property('Id');",
-													"    pm.expect(jsonData.value[0]).to.have.property('UserId');",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/UserUserGroups",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"UserUserGroups"
-											]
-										},
-										"description": "Verify Get All Categories API works with statuc code 200"
-									},
-									"response": []
-								}
-							],
+							"item": [],
 							"description": "Happy Path",
 							"_postman_isSubFolder": true
 						}
@@ -2121,185 +1705,7 @@
 					"item": [
 						{
 							"name": "Test-Happy Path",
-							"item": [
-								{
-									"name": "User Management",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": ""
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Put User Management",
-									"request": {
-										"method": "PUT",
-										"header": [
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											},
-											{
-												"key": "OData-Version",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json"
-											},
-											{
-												"key": "Accept",
-												"value": "application/json"
-											},
-											{
-												"key": "Prefer",
-												"value": "return=representation"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n\t\"Id\": 1000008,\n\t\"MustChangePwd\": true,\n\t\"PwdNeverExpires\": false,\n\t\"UPwd\": \"ThisIsPwd454#\",\n\t\"SendWelcomeMessage\": false\n}\n"
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/UserManagement(1000008)",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"UserManagement(1000008)"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Patch Users Management",
-									"request": {
-										"method": "PATCH",
-										"header": [
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											},
-											{
-												"key": "OData-Version",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json"
-											},
-											{
-												"key": "Accept",
-												"value": "application/json"
-											},
-											{
-												"key": "Prefer",
-												"value": "return=representation"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n\t\"Id\": 1000012,\n\t\"MustChangePwd\": false,\n\t\"PwdNeverExpires\": false,\n\t\"SendWelcomeMessage\": false,\n\t\"InvalidLoginCount\": 20,\n    \"PwdLastChanged\": \"2047-09-01T00:00:00-04:00\",\n    \"UPwd\": \"ThisIsNewPwd12#\"\n}\n"
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/UserManagement(1000012)",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"UserManagement(1000012)"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "{{SiteURL}}api/DocTypes(501)",
-									"event": [
-										{
-											"listen": "prerequest",
-											"script": {
-												"id": "1e85a5bf-40d8-4fdc-8ece-33f91981efba",
-												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"PUT_\"+Date.now()",
-													"    pm.globals.set(\"DocTypes_put_name\", Name);",
-													"});",
-													""
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "test",
-											"script": {
-												"id": "1d42369e-39ec-40e4-87c2-2a8db84de5b3",
-												"exec": [
-													"pm.test(\"Status code is 204\", function () {",
-													"    pm.response.to.have.status(204);",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "PUT",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json"
-											},
-											{
-												"key": "Accept",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{ \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\" }"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n  \"AutoTitleFlag\": true,\n  \"UseDefaultWmiConfig\": false,\n  \"ContentMode\": 2,\n  \"AllowDeleteAllPages\": false,\n  \"Disabled\": false,\n  \"Id\": 501,\n  \"Name\": \"{{DocTypes_put_name}}\",\n  \"CustomFlags\": \"\",\n  \"DocClassId\": 101,\n  \"AutoTitle\": \"%DT% - %-1000% - %DCD%\",\n  \"AssemblyName\": \"\",\n  \"AssemblyClassName\": \"\",\n  \"AdminAssemblyName\": \"WMI/DefaultWMI/Admin/WMIAdminMenu.aspx\",\n  \"AdminAssemblyClassName\": \"\",\n  \"Url\": \"\",\n  \"PropInterfaceId\": 1,\n  \"WmConfigData\": \"\",\n  \"WmiInterfaceId\": 1000,\n  \"IndexContent\": 0,\n  \"LibraryId\": 0,\n  \"AuditControlType\": 0\n}"
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/DocTypes(501)",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"DocTypes(501)"
-											]
-										}
-									},
-									"response": []
-								}
-							],
+							"item": [],
 							"_postman_isSubFolder": true
 						}
 					],
@@ -4166,18 +3572,14 @@
 													"    pm.response.to.have.status(201);",
 													"});",
 													"",
-													"pm.test('Response has Name values', function() {",
-													"  ",
-													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('ConditionalMacros_post_name'));",
+													"pm.test('Verify name value in response.', function() {",
+													"    pm.expect(jsonData).to.have.property('Name');",
+													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('ConditionalMacros_post_name'));",
 													"});",
 													"",
-													"",
-													"pm.test('Response has other fields present', function () {",
-													"  pm.expect(jsonData).to.have.property('Condition');",
-													"  pm.expect(jsonData).to.have.property('Description');",
-													"  pm.expect(jsonData).to.have.property('Name');",
-													" ",
-													" ",
+													"pm.test('Verify other fields are present in response.', function () {",
+													"    pm.expect(jsonData).to.have.property('Condition');",
+													"    pm.expect(jsonData).to.have.property('Description');",
 													"});"
 												],
 												"type": "text/javascript"
@@ -4210,7 +3612,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n     \"Name\": \"{{ConditionalMacros_post_name}}\",\n            \"Description\": \"\",\n            \"Condition\": \"<?xml version=\\\"1.0\\\" encoding=\\\"utf-8\\\" ?>  <macifelse>    <if seq=\\\"0\\\">      <!-->Var 1 as static or another macro-->      <var1>@DOCFLD|AI_Release_Data@</var1>      <!-->operator depends on the dtype       Available dtypes:(opr)       STRING:(=,!=,Begins With,Ends With,Contains,IN)       NUMBER:(=,!=,<,>,<=,>=,IN)       DECIMAL:(=,!=,<,>,<=,>=,IN)       DATETIME:(=,!=,<,>,<=,>=,IN,Year,Month,Day,Minute,Second,MilliSecond)       LENGTH:(=,!=,<,>,<=,>=,IN)       BOOLEAN:(AND,OR)          -->      <opr>!=</opr>      <!--Compare with var1-->      <var2></var2>      <!-- Return value-->      <then>True</then>      <!-->Avaliable dtypes       STRING       NUMBER       DECIMAL       DATETIME       LENGTH       BOOLEAN              -->      <dtype></dtype>    </if>      <else>      <then>False</then>    </else>  </macifelse>\",\n            \"CreatedById\": 1,\n            \"CreatedDate\": \"2015-11-18T13:13:20.03-05:00\",\n            \"ModifiedById\": 1,\n            \"ModifiedDate\": \"2015-11-18T13:13:20.03-05:00\"\n}"
+											"raw": "{\n    \"Name\": \"{{ConditionalMacros_post_name}}\",\n    \"Description\": \"\",\n    \"Condition\": \"<?xml version=\\\"1.0\\\" encoding=\\\"utf-8\\\" ?>  <macifelse>    <if seq=\\\"0\\\">      <!-->Var 1 as static or another macro-->      <var1>@DOCFLD|AI_Release_Data@</var1>      <!-->operator depends on the dtype       Available dtypes:(opr)       STRING:(=,!=,Begins With,Ends With,Contains,IN)       NUMBER:(=,!=,<,>,<=,>=,IN)       DECIMAL:(=,!=,<,>,<=,>=,IN)       DATETIME:(=,!=,<,>,<=,>=,IN,Year,Month,Day,Minute,Second,MilliSecond)       LENGTH:(=,!=,<,>,<=,>=,IN)       BOOLEAN:(AND,OR)          -->      <opr>!=</opr>      <!--Compare with var1-->      <var2></var2>      <!-- Return value-->      <then>True</then>      <!-->Avaliable dtypes       STRING       NUMBER       DECIMAL       DATETIME       LENGTH       BOOLEAN              -->      <dtype></dtype>    </if>      <else>      <then>False</then>    </else>  </macifelse>\"\n}"
 										},
 										"url": {
 											"raw": "{{SiteURL}}api/ConditionalMacros",
@@ -4232,19 +3634,21 @@
 											"script": {
 												"id": "dc545993-36d9-4660-be85-338aec435ec4",
 												"exec": [
-													"var jsonData = pm.response.json();",
+													"const jsonData = pm.response.json();",
+													"",
 													"pm.test(\"Status code is 200\", function () {",
 													"    pm.response.to.have.status(200);",
 													"});",
 													"",
-													"pm.test(\"Verify UserGroupName and UserGroupID of the UserGroup after patch operation\", function () {",
-													"   ",
+													"pm.test('Verify name value in response.', function() {",
+													"    pm.expect(jsonData).to.have.property('Name');",
 													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('ConditionalMacros_post_name'));",
-													"",
 													"});",
 													"",
-													"",
-													"",
+													"pm.test('Verify other fields are present in response.', function () {",
+													"    pm.expect(jsonData).to.have.property('Condition');",
+													"    pm.expect(jsonData).to.have.property('Description');",
+													"});",
 													""
 												],
 												"type": "text/javascript"
@@ -4396,7 +3800,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n \n    \"Name\": \"{{ConditionalMacros_post_name}}\",\n    \"Description\": \"\",\n      \"Condition\": \"<?xml version=\\\"1.0\\\" encoding=\\\"utf-8\\\" ?>\\r\\n<macifelse>\\r\\n\\t<if seq=\\\"0\\\">\\r\\n\\t\\t<!-->Var 1 as static or another macro-->\\r\\n\\t\\t<var1>@DOCTYPEID</var1>\\r\\n\\t\\t<!-->operator depends on the dtype\\r\\n     Available dtypes:(opr)\\r\\n     STRING:(=,!=,Begins With,Ends With,Contains,IN)\\r\\n     NUMBER:(=,!=,<,>,<=,>=,IN)\\r\\n     DECIMAL:(=,!=,<,>,<=,>=,IN)\\r\\n     DATETIME:(=,!=,<,>,<=,>=,IN,Year,Month,Day,Minute,Second,MilliSecond)\\r\\n     LENGTH:(=,!=,<,>,<=,>=,IN)\\r\\n     BOOLEAN:(AND,OR)    \\r\\n    -->\\r\\n\\t\\t<opr>=</opr>\\r\\n\\t\\t<!--Compare with var1-->\\r\\n\\t\\t<var2>100018</var2>\\r\\n\\t\\t<!-- Return value-->\\r\\n\\t\\t<then>TRUE</then>\\r\\n\\t\\t<!-->Avaliable dtypes\\r\\n     STRING\\r\\n     NUMBER\\r\\n     DECIMAL\\r\\n     DATETIME\\r\\n     LENGTH\\r\\n     BOOLEAN        \\r\\n    -->\\r\\n\\t\\t<dtype>STRING</dtype>\\r\\n\\t</if>\\r\\n\\t<else>\\r\\n\\t\\t<then>FALSE</then>\\r\\n\\t</else>\\r\\n</macifelse>\",\n    \"CreatedById\": 1,\n    \"CreatedDate\": \"2019-04-12T07:23:05.4586591-04:00\",\n    \"ModifiedById\": 1,\n    \"ModifiedDate\": \"2019-04-12T07:23:05.4586591-04:00\"\n}\n\n"
+											"raw": "{\n    \"Name\": \"{{ConditionalMacros_post_name}}\",\n    \"Description\": \"Postman put - Conditional Macros\",\n    \"Condition\": \"<?xml version=\\\"1.0\\\" encoding=\\\"utf-8\\\" ?>\\r\\n<macifelse>\\r\\n\\t<if seq=\\\"0\\\">\\r\\n\\t\\t<!-->Var 1 as static or another macro-->\\r\\n\\t\\t<var1>@DOCTYPEID</var1>\\r\\n\\t\\t<!-->operator depends on the dtype\\r\\n     Available dtypes:(opr)\\r\\n     STRING:(=,!=,Begins With,Ends With,Contains,IN)\\r\\n     NUMBER:(=,!=,<,>,<=,>=,IN)\\r\\n     DECIMAL:(=,!=,<,>,<=,>=,IN)\\r\\n     DATETIME:(=,!=,<,>,<=,>=,IN,Year,Month,Day,Minute,Second,MilliSecond)\\r\\n     LENGTH:(=,!=,<,>,<=,>=,IN)\\r\\n     BOOLEAN:(AND,OR)    \\r\\n    -->\\r\\n\\t\\t<opr>=</opr>\\r\\n\\t\\t<!--Compare with var1-->\\r\\n\\t\\t<var2>100018</var2>\\r\\n\\t\\t<!-- Return value-->\\r\\n\\t\\t<then>TRUE</then>\\r\\n\\t\\t<!-->Avaliable dtypes\\r\\n     STRING\\r\\n     NUMBER\\r\\n     DECIMAL\\r\\n     DATETIME\\r\\n     LENGTH\\r\\n     BOOLEAN        \\r\\n    -->\\r\\n\\t\\t<dtype>STRING</dtype>\\r\\n\\t</if>\\r\\n\\t<else>\\r\\n\\t\\t<then>FALSE</then>\\r\\n\\t</else>\\r\\n</macifelse>\"\n}\n\n"
 										},
 										"url": {
 											"raw": "{{SiteURL}}api/ConditionalMacros('{{ConditionalMacros_post_name}}')",
@@ -4423,11 +3827,12 @@
 													"pm.test(\"Status code is 200\", function () {",
 													"    pm.response.to.have.status(200);",
 													"});",
+													"",
 													"pm.test(\"Verify category values are listed\", function () {",
-													"    ",
 													"    pm.expect(jsonData).to.have.property('value');",
-													"    pm.expect(jsonData.value[0]).to.have.property('Id');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Name');",
 													"    pm.expect(jsonData.value[0]).to.have.property('Description');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Condition');",
 													"});"
 												],
 												"type": "text/javascript"
@@ -5757,10 +5162,8 @@
 												"id": "0d9c1d21-731f-41fa-b8dd-6e5dddb3d921",
 												"exec": [
 													"pm.test(\"Set dynamic value for Globalvariables\", function () {\r",
-													"\r",
 													"  var Name = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 9);\r",
-													"  pm.globals.set(\"Globalvariable_name_post\", Name);\r",
-													"    \r",
+													"  pm.globals.set(\"Globalvariable_post_name\", Name);\r",
 													"});\r",
 													"\r",
 													""
@@ -5779,24 +5182,23 @@
 													"    pm.response.to.have.status(201);",
 													"});",
 													"",
-													"pm.test('Response has Name values', function() {",
-													"",
-													"  pm.expect(jsonData).to.have.property('Name');",
-													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('Globalvariable_name_post'));",
-													" ",
+													"pm.test('Verify Id and Name value in response.', function() {",
+													"    pm.expect(jsonData).to.have.property('Id');",
+													"    pm.expect(jsonData).to.have.property('Name');",
+													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('Globalvariable_post_name'));",
 													"});",
 													"",
-													"pm.test(\"Store USerGroupId\", function () {",
-													"    var Id = jsonData.Id;",
-													"    pm.globals.set(\"Globalvariable_id\", Id);",
-													"});",
-													"",
-													"pm.test('Response has other fields present', function () {",
+													"pm.test('Verify other fields are present in response.', function () {",
 													"  pm.expect(jsonData).to.have.property('Accessibility');",
 													"  pm.expect(jsonData).to.have.property('Value');",
+													"});",
 													"",
-													" ",
-													"});"
+													"pm.test(\"Store Global varibale Id\", function () {",
+													"    var Id = jsonData.Id;",
+													"    pm.globals.set(\"Globalvariable_get_id\", Id);",
+													"});",
+													"",
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -5828,7 +5230,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n\t   \"Id\": 0,\n      \"Name\": \"{{Globalvariable_name_post}}\",\n      \"Description\": \"string\",\n      \"Value\": \"string\",\n      \"Type\": 0,\n      \"Accessibility\": \"Public\",\n      \"CreatedById\": 0,\n      \"CreatedDate\": \"2019-04-15T09:03:41.749Z\",\n      \"ModifiedById\": 0,\n      \"ModifiedDate\": \"2019-04-15T09:03:41.749Z\"\n}"
+											"raw": "{\r\n\t\"Name\": \"{{Globalvariable_post_name}}\",\r\n\t\"Description\": \"string\",\r\n\t\"Value\": \"string\",\r\n\t\"Type\": 0,\r\n\t\"Accessibility\": \"Public\"\r\n}"
 										},
 										"url": {
 											"raw": "{{SiteURL}}api/GlobalVariables",
@@ -5850,9 +5252,21 @@
 											"script": {
 												"id": "49b7f4ed-3b12-46b8-adc3-d8f6ff28a6a7",
 												"exec": [
-													"var jsonData = pm.response.json();",
+													"const jsonData = pm.response.json();",
+													"",
 													"pm.test(\"Status code is 200\", function () {",
 													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test('Verify Id and Name value in response.', function() {",
+													"    pm.expect(jsonData).to.have.property('Id');",
+													"    pm.expect(jsonData).to.have.property('Name');",
+													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('Globalvariable_post_name'));",
+													"});",
+													"",
+													"pm.test('Verify other fields are present in response.', function () {",
+													"  pm.expect(jsonData).to.have.property('Accessibility');",
+													"  pm.expect(jsonData).to.have.property('Value');",
 													"});"
 												],
 												"type": "text/javascript"
@@ -5884,12 +5298,12 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/GlobalVariables({{Globalvariable_id}})",
+											"raw": "{{SiteURL}}api/GlobalVariables({{Globalvariable_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"GlobalVariables({{Globalvariable_id}})"
+												"GlobalVariables({{Globalvariable_get_id}})"
 											]
 										}
 									},
@@ -5940,12 +5354,12 @@
 											"raw": "{\n  \"Description\": \"Postman Post Patch Test\"\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/GlobalVariables({{Globalvariable_id}})",
+											"raw": "{{SiteURL}}api/GlobalVariables({{Globalvariable_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"GlobalVariables({{Globalvariable_id}})"
+												"GlobalVariables({{Globalvariable_get_id}})"
 											]
 										}
 									},
@@ -5993,15 +5407,15 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n\t   \"Id\":{{Globalvariable_id}},\n      \"Name\": \"Hybridfield\",\n      \"Description\": \"string\",\n      \"Value\": \"string\",\n      \"Type\": 0,\n      \"Accessibility\": \"Public\",\n      \"CreatedById\": 0,\n      \"CreatedDate\": \"2019-04-15T09:03:41.749Z\",\n      \"ModifiedById\": 0,\n      \"ModifiedDate\": \"2019-04-15T09:03:41.749Z\"\n}"
+											"raw": "{\n\t\"Id\":{{Globalvariable_get_id}},\n\t\"Name\": \"{{Globalvariable_post_name}}\",\n\t\"Description\": \"string\",\n\t\"Value\": \"string\",\n\t\"Type\": 0,\n\t\"Accessibility\": \"Public\"\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/GlobalVariables('{{Globalvariable_id}}')",
+											"raw": "{{SiteURL}}api/GlobalVariables({{Globalvariable_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"GlobalVariables('{{Globalvariable_id}}')"
+												"GlobalVariables({{Globalvariable_get_id}})"
 											]
 										}
 									},
@@ -6025,6 +5439,8 @@
 													"    pm.expect(jsonData).to.have.property('value');",
 													"    pm.expect(jsonData.value[0]).to.have.property('Id');",
 													"    pm.expect(jsonData.value[0]).to.have.property('Name');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Accessibility');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Value');",
 													"});"
 												],
 												"type": "text/javascript"
@@ -7921,8 +7337,8 @@
 												"id": "2c26c42c-890a-48fc-8c1b-2bdfba10b322",
 												"exec": [
 													"pm.test(\"Set dynamic value for Name\", function () {",
-													"   var name = \"POST_\"+Date.now()",
-													"   pm.globals.set(\"ViewerConfigurationKey\", name);",
+													"   var key = \"VC\"+Date.now()",
+													"   pm.globals.set(\"ViewerConfigurationKey_post_key\", key);",
 													"});"
 												],
 												"type": "text/javascript"
@@ -7939,17 +7355,14 @@
 													"   pm.response.to.have.status(201);",
 													"});",
 													"",
-													"pm.test('Response has User Master Configurations Names', function() {",
-													"   pm.expect(jsonData).to.have.property('Name');",
-													"   pm.expect(jsonData.Name).to.eql(pm.variables.get('ViewerConfigurationKey'));",
+													"pm.test('Verify Key value in response.', function() {",
+													"   pm.expect(jsonData).to.have.property('Key');",
+													"   pm.expect(jsonData.Key).to.eql(pm.variables.get('ViewerConfigurationKey_post_key'));",
 													"});",
 													"",
-													"",
-													"pm.test('Response has other fields present', function () {",
+													"pm.test('Verify other fiels are present in response.', function () {",
 													"   pm.expect(jsonData).to.have.property('Value');",
 													"   pm.expect(jsonData).to.have.property('Description');",
-													"   pm.expect(jsonData).to.have.property('CreatedById');",
-													"  ",
 													"});"
 												],
 												"type": "text/javascript"
@@ -7982,7 +7395,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"Key\": \"{{ViewerConfigurationKey}}\",\n  \"Value\": \"<?xml version=\\\"1.0\\\" encoding=\\\"utf-8\\\" ?>  <!-- Root Node for Configuration -->  <EPMViewer>    <DefaultResolution>96</DefaultResolution></EPMViewer>  \",\n  \"Description\": \"Postman Post Configuration\"\n}"
+											"raw": "{\n  \"Key\": \"{{ViewerConfigurationKey_post_key}}\",\n  \"Value\": \"<?xml version=\\\"1.0\\\" encoding=\\\"utf-8\\\" ?>  <!-- Root Node for Configuration -->  <EPMViewer>    <DefaultResolution>96</DefaultResolution></EPMViewer>  \",\n  \"Description\": \"Postman Post Configuration\"\n}"
 										},
 										"url": {
 											"raw": "{{SiteURL}}api/ViewerConfigurations",
@@ -8004,17 +7417,21 @@
 											"script": {
 												"id": "31ba2ff7-8152-44db-8890-1517d2c041aa",
 												"exec": [
-													"var jsonData = pm.response.json();",
+													"const jsonData = pm.response.json();",
+													"",
 													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
+													"   pm.response.to.have.status(200);",
 													"});",
 													"",
-													"pm.test(\"Verify ViewerConfigurations with childern after PUT\", function () {",
-													"   ",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('ViewerConfigurationKey'));",
-													"",
+													"pm.test('Verify Key value in response.', function() {",
+													"   pm.expect(jsonData).to.have.property('Key');",
+													"   pm.expect(jsonData.Key).to.eql(pm.variables.get('ViewerConfigurationKey_post_key'));",
 													"});",
-													""
+													"",
+													"pm.test('Verify other fiels are present in response.', function () {",
+													"   pm.expect(jsonData).to.have.property('Value');",
+													"   pm.expect(jsonData).to.have.property('Description');",
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -8045,12 +7462,12 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/ViewerConfigurations('{{ViewerConfigurationKey}}')",
+											"raw": "{{SiteURL}}api/ViewerConfigurations('{{ViewerConfigurationKey_post_key}}')",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"ViewerConfigurations('{{ViewerConfigurationKey}}')"
+												"ViewerConfigurations('{{ViewerConfigurationKey_post_key}}')"
 											]
 										}
 									},
@@ -8098,15 +7515,15 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"Description\":  \"Postman Post Patch Test\"\n}"
+											"raw": "{\n  \"Description\":  \"Postman Patch - Viewer configruation\"\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/ViewerConfigurations('{{ViewerConfigurationKey}}')",
+											"raw": "{{SiteURL}}api/ViewerConfigurations('{{ViewerConfigurationKey_post_key}}')",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"ViewerConfigurations('{{ViewerConfigurationKey}}')"
+												"ViewerConfigurations('{{ViewerConfigurationKey_post_key}}')"
 											]
 										}
 									},
@@ -8154,15 +7571,15 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"Key\": \"{{ViewerConfigurationKey}}\",\n  \"Value\": \"<?xml version=\\\"1.0\\\" encoding=\\\"utf-8\\\" ?>  <!-- Root Node for Configuration -->  <EPMViewer>    <DefaultResolution>96</DefaultResolution></EPMViewer>  \",\n  \"Description\": \"Postman Post Patch Put Test\"\n}"
+											"raw": "{\n  \"Key\": \"{{ViewerConfigurationKey_post_key}}\",\n  \"Value\": \"<?xml version=\\\"1.0\\\" encoding=\\\"utf-8\\\" ?>  <!-- Root Node for Configuration -->  <EPMViewer>    <DefaultResolution>96</DefaultResolution></EPMViewer>  \",\n  \"Description\": \"Postman put - Viewer configruation\"\n}\n"
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/ViewerConfigurations('{{ViewerConfigurationKey}}')",
+											"raw": "{{SiteURL}}api/ViewerConfigurations('{{ViewerConfigurationKey_post_key}}')",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"ViewerConfigurations('{{ViewerConfigurationKey}}')"
+												"ViewerConfigurations('{{ViewerConfigurationKey_post_key}}')"
 											]
 										}
 									},
@@ -8181,11 +7598,13 @@
 													"pm.test(\"Status code is 200\", function () {",
 													"    pm.response.to.have.status(200);",
 													"});",
-													"pm.test(\"Verify category values are listed\", function () {",
+													"",
+													"pm.test(\"Verify all fields are present in response.\", function () {",
 													"    ",
-													"    pm.expect(jsonData).to.have.property('Value');",
+													"    pm.expect(jsonData).to.have.property('value');",
 													"    pm.expect(jsonData.value[0]).to.have.property('Key');",
 													"    pm.expect(jsonData.value[0]).to.have.property('Description');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Value');",
 													"});"
 												],
 												"type": "text/javascript"
@@ -8270,12 +7689,12 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/ViewerConfigurations('{{ViewerConfigurationKey}}')",
+											"raw": "{{SiteURL}}api/ViewerConfigurations('{{ViewerConfigurationKey_post_key}}')",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"ViewerConfigurations('{{ViewerConfigurationKey}}')"
+												"ViewerConfigurations('{{ViewerConfigurationKey_post_key}}')"
 											]
 										}
 									},
@@ -12672,361 +12091,7 @@
 					"item": [
 						{
 							"name": "Test-Happy path",
-							"item": [
-								{
-									"name": "Create new WfActions",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "5afbdc04-199e-4580-a104-d5a227375144",
-												"exec": [
-													"const jsonData = pm.response.json();",
-													"",
-													"pm.test(\"Status code is 201\", function () {",
-													"    pm.response.to.have.status(201);",
-													"});",
-													"",
-													"pm.test('Response has Id and Name values', function() {",
-													"  pm.expect(jsonData).to.have.property('Id');",
-													"  pm.expect(jsonData).to.have.property('Name');",
-													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
-													"});",
-													"",
-													"",
-													"pm.test(\"Store category Id\", function () {",
-													"    var id = jsonData.Id;",
-													"    pm.globals.set(\"categories_get_id\", id);",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"id": "d2550643-333d-465a-bec2-9c7e68f819dd",
-												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"POST_\"+Date.now()",
-													"    pm.globals.set(\"categories_post_name\", Name);",
-													"});",
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "\r\n{\r\n   \"Name\": \"{{categories_post_name}}\",\r\n   \"Description\": \"PostMan Duration Type Test Engine Calculation Object\",\r\n   \"InterfaceClass\":\"{{categories_post_name}}\",\r\n   \"InterfaceAdminClass\":\"{{categories_post_name}}\",\r\n   \"InterfaceAssembly\":\"{{categories_post_name}}\",\r\n    \"ImageId\": 0,\r\n  \"IsManual\": false\r\n}\r\n\r\n\r\n\r\n\r\n"
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/WFActions",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"WFActions"
-											]
-										},
-										"description": "Verify POST Request for categories work with status code 201"
-									},
-									"response": []
-								},
-								{
-									"name": "Get WfActions with key",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/LoadBalanceInterfaces({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"LoadBalanceInterfaces({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Patch WfActions",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "5fa86f5f-87de-4186-b047-0bc4e162a445",
-												"exec": [
-													"pm.test(\"Status code is 204\", function () {",
-													"    pm.response.to.have.status(204);",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"id": "23066b1a-1d3c-433c-b214-36722c297f57",
-												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"PATCH_\"+Date.now()",
-													"    pm.globals.set(\"categories_patch_name\", Name);",
-													"});",
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "PATCH",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n  \"Name\": \"{{categories_patch_name}}\"\r\n}"
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/LoadBalanceInterfaces({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"LoadBalanceInterfaces({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Put WfActions",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "5fa86f5f-87de-4186-b047-0bc4e162a445",
-												"exec": [
-													"pm.test(\"Status code is 204\", function () {",
-													"    pm.response.to.have.status(204);",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"id": "23066b1a-1d3c-433c-b214-36722c297f57",
-												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"PUT_\"+Date.now()",
-													"    pm.globals.set(\"categories_put_name\", Name);",
-													"});",
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "PUT",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "\r\n{\r\n  \t\"Id\": {{categories_get_id}},\r\n\t\"Name\": \"{{categories_put_name}}\",\r\n   \"Description\": \"PostMan Duration Type Test Engine Calculation Object\",\r\n   \"InterfaceClass\":\"{{categories_post_name}}\",\r\n   \"InterfaceAdminClass\":\"{{categories_post_name}}\",\r\n   \"InterfaceAssembly\":\"{{categories_post_name}}\",\r\n     \"ImageId\": 0,\r\n  \"IsManual\": false\r\n}\r\n"
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/LoadBalanceInterfaces({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"LoadBalanceInterfaces({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Get All WfActions",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "6d7768c6-93ed-454c-a8e4-bae0bcff7baf",
-												"exec": [
-													"const jsonData = pm.response.json();",
-													"",
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"pm.test(\"Verify category values are listed\", function () {",
-													"    ",
-													"    pm.expect(jsonData).to.have.property('value');",
-													"    pm.expect(jsonData.value[0]).to.have.property('Id');",
-													"    pm.expect(jsonData.value[0]).to.have.property('Name');",
-													"});",
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/LoadBalanceInterfaces",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"LoadBalanceInterfaces"
-											]
-										},
-										"description": "Verify Get All Categories API works with statuc code 200"
-									},
-									"response": []
-								}
-							],
+							"item": [],
 							"description": "Happy Path",
 							"_postman_isSubFolder": true
 						}
@@ -14019,7 +13084,7 @@
 							"name": "Test-AWS Happy path",
 							"item": [
 								{
-									"name": "1. Create new category",
+									"name": "Create new AWS Storage Server",
 									"event": [
 										{
 											"listen": "test",
@@ -14032,15 +13097,34 @@
 													"    pm.response.to.have.status(201);",
 													"});",
 													"",
-													"pm.test('Response has Id and Name values', function() {",
+													"pm.test('Verify Id and ServerName values in response.', function() {",
 													"  pm.expect(jsonData).to.have.property('Id');",
 													"  pm.expect(jsonData).to.have.property('ServerName');",
-													"  pm.expect(jsonData.ServerName).to.eql(pm.variables.get('categories_post_name'));",
+													"  pm.expect(jsonData.ServerName).to.eql(pm.variables.get('AWSStorageServer_post_name'));",
 													"});",
 													"",
-													"pm.test(\"Store category Id\", function () {",
+													"pm.test('Verify other fields are present in response.', function() {",
+													"    pm.expect(jsonData).to.have.property('PhysicalServer');",
+													"    pm.expect(jsonData).to.have.property('Port');",
+													"    pm.expect(jsonData).to.have.property('Protocol');",
+													"    pm.expect(jsonData).to.have.property('ServiceAddress');",
+													"    pm.expect(jsonData).to.have.property('Type');",
+													"    pm.expect(jsonData).to.have.property('Status');",
+													"    pm.expect(jsonData).to.have.property('ReplicationLastPurge');",
+													"    pm.expect(jsonData).to.have.property('ReplicationPollingInterval');",
+													"    pm.expect(jsonData).to.have.property('LocalDBConn');",
+													"    pm.expect(jsonData).to.have.property('License');",
+													"    pm.expect(jsonData).to.have.property('ActiveCachePathId');",
+													"    pm.expect(jsonData).to.have.property('ActiveReplicationEngineId');",
+													"    pm.expect(jsonData).to.have.property('ReplicationLastActivity');",
+													"    pm.expect(jsonData).to.have.property('IsEncrypted');",
+													"    pm.expect(jsonData).to.have.property('SecurityCertificateId');",
+													"    pm.expect(jsonData).to.have.property('ExtendedProperties');",
+													"});",
+													"",
+													"pm.test(\"Store AWS storage server Id\", function () {",
 													"    var id = jsonData.Id;",
-													"    pm.globals.set(\"categories_get_id\", id);",
+													"    pm.globals.set(\"AWSStorageServer_get_id\", id);",
 													"});"
 												],
 												"type": "text/javascript"
@@ -14052,8 +13136,8 @@
 												"id": "d2550643-333d-465a-bec2-9c7e68f819dd",
 												"exec": [
 													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"POST_\"+Date.now()",
-													"    pm.globals.set(\"categories_post_name\", Name);",
+													"    var Name = \"AWS_SS_NAME_\"+Date.now()",
+													"    pm.globals.set(\"AWSStorageServer_post_name\", Name);",
 													"});",
 													""
 												],
@@ -14087,7 +13171,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "\r\n\r\n{\r\n          \"ServerName\": \"{{categories_post_name}}\",\r\n            \"PhysicalServer\": \"101\",\r\n            \"Port\": null,\r\n            \"Protocol\": \"SMTP\",\r\n            \"ServiceAddress\": null,\r\n            \"Type\": 1,\r\n            \"Status\": null,\r\n            \"ReplicationLastPurge\": null,\r\n            \"ReplicationPollingInterval\": null,\r\n            \"LocalDBConn\": \"111\",\r\n            \"License\": null,\r\n            \"ActiveCachePathId\": null,\r\n            \"ActiveReplicationEngineId\": null,\r\n            \"ReplicationLastActivity\": null,\r\n            \"IsEncrypted\": true,\r\n            \"SecurityCertificateId\": 1000000,\r\n   \"ExtendedProperties\": null,\r\n            \"CreatedById\": 101,\r\n            \"CreatedDate\": \"2019-03-07T05:04:26.84-05:00\",\r\n            \"ModifiedById\": 11,\r\n            \"ModifiedDate\": \"2019-03-07T05:04:26.84-05:00\"\r\n        }\r\n"
+											"raw": "{\r\n\t\"ServerName\": \"{{AWSStorageServer_post_name}}\",\r\n    \"PhysicalServer\": \"Postman_Post\",\r\n    \"Port\": null,\r\n    \"Protocol\": \"\",\r\n    \"ServiceAddress\": \"\",\r\n    \"Type\": 2,\r\n    \"Status\": null,\r\n    \"ReplicationLastPurge\": null,\r\n    \"ReplicationPollingInterval\": null,\r\n    \"LocalDBConn\": \"\",\r\n    \"License\": \"\",\r\n    \"ActiveCachePathId\": null,\r\n    \"ActiveReplicationEngineId\": null,\r\n    \"ReplicationLastActivity\": null,\r\n    \"IsEncrypted\": false,\r\n    \"SecurityCertificateId\": null,\r\n    \"ExtendedProperties\": \"{\\\"bucket\\\":\\\"lobstates3\\\",\\\"region\\\":\\\"us-east-1\\\",\\\"accessKey\\\":\\\"AKIAI5TF3SEPFVQ2WNVQ\\\",\\\"secretKey\\\":\\\"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\\\",\\\"signedUrlExpireSeconds\\\":\\\"600\\\"}\"\r\n}"
 										},
 										"url": {
 											"raw": "{{SiteURL}}api/StorageServers",
@@ -14103,21 +13187,42 @@
 									"response": []
 								},
 								{
-									"name": "2. Get Category (Key)",
+									"name": "Get AWS Storager Server with Key",
 									"event": [
 										{
 											"listen": "test",
 											"script": {
 												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
 												"exec": [
+													"const jsonData = pm.response.json();",
+													"",
 													"pm.test(\"Status code is 200\", function () {",
 													"    pm.response.to.have.status(200);",
 													"});",
 													"",
-													"pm.test(\"Verify Name and ID of the category\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.ServerName).to.eql(pm.variables.get('categories_post_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
+													"pm.test('Verify Id and ServerName values in response.', function() {",
+													"  pm.expect(jsonData).to.have.property('Id');",
+													"  pm.expect(jsonData).to.have.property('ServerName');",
+													"  pm.expect(jsonData.ServerName).to.eql(pm.variables.get('AWSStorageServer_post_name'));",
+													"});",
+													"",
+													"pm.test('Verify other fields are present in response.', function() {",
+													"    pm.expect(jsonData).to.have.property('PhysicalServer');",
+													"    pm.expect(jsonData).to.have.property('Port');",
+													"    pm.expect(jsonData).to.have.property('Protocol');",
+													"    pm.expect(jsonData).to.have.property('ServiceAddress');",
+													"    pm.expect(jsonData).to.have.property('Type');",
+													"    pm.expect(jsonData).to.have.property('Status');",
+													"    pm.expect(jsonData).to.have.property('ReplicationLastPurge');",
+													"    pm.expect(jsonData).to.have.property('ReplicationPollingInterval');",
+													"    pm.expect(jsonData).to.have.property('LocalDBConn');",
+													"    pm.expect(jsonData).to.have.property('License');",
+													"    pm.expect(jsonData).to.have.property('ActiveCachePathId');",
+													"    pm.expect(jsonData).to.have.property('ActiveReplicationEngineId');",
+													"    pm.expect(jsonData).to.have.property('ReplicationLastActivity');",
+													"    pm.expect(jsonData).to.have.property('IsEncrypted');",
+													"    pm.expect(jsonData).to.have.property('SecurityCertificateId');",
+													"    pm.expect(jsonData).to.have.property('ExtendedProperties');",
 													"});"
 												],
 												"type": "text/javascript"
@@ -14153,19 +13258,19 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/StorageServers({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/StorageServers({{AWSStorageServer_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"StorageServers({{categories_get_id}})"
+												"StorageServers({{AWSStorageServer_get_id}})"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "3. Patch Category",
+									"name": "Patch AWS Storage Server",
 									"event": [
 										{
 											"listen": "test",
@@ -14220,84 +13325,22 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n  \"ServerName\": \"{{categories_patch_name}}\"\r\n}"
+											"raw": "{\r\n  \"PhysicalServer\": \"Postman put - AWS Storager Server\"\r\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/StorageServers({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/StorageServers({{AWSStorageServer_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"StorageServers({{categories_get_id}})"
+												"StorageServers({{AWSStorageServer_get_id}})"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "4. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after patch operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.ServerName).to.eql(pm.variables.get('categories_patch_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/StorageServers({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"StorageServers({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "5. Put Category",
+									"name": "Put AWS Storager Server",
 									"event": [
 										{
 											"listen": "test",
@@ -14352,84 +13395,22 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "\r\n\r\n\r\n{\r\n   \t\"Id\": {{categories_get_id}},\r\n\t\"ServerName\": \"{{categories_put_name}}\",\r\n      \"PhysicalServer\": \"101\",\r\n            \"Port\": null,\r\n            \"Protocol\": \"SMTP\",\r\n            \"ServiceAddress\": null,\r\n            \"Type\": 1,\r\n            \"Status\": null,\r\n            \"ReplicationLastPurge\": null,\r\n            \"ReplicationPollingInterval\": null,\r\n            \"LocalDBConn\": \"111\",\r\n            \"License\": null,\r\n            \"ActiveCachePathId\": null,\r\n            \"ActiveReplicationEngineId\": null,\r\n            \"ReplicationLastActivity\": null,\r\n            \"IsEncrypted\": true,\r\n            \"SecurityCertificateId\": 1000000,\r\n   \"ExtendedProperties\": null,\r\n            \"CreatedById\": 101,\r\n            \"CreatedDate\": \"2019-03-07T05:04:26.84-05:00\",\r\n            \"ModifiedById\": 11,\r\n            \"ModifiedDate\": \"2019-03-07T05:04:26.84-05:00\"\r\n           \r\n}"
+											"raw": "{\r\n\t\"Id\":{{AWSStorageServer_get_id}},\r\n\t\"ServerName\": \"{{AWSStorageServer_post_name}}\",\r\n    \"PhysicalServer\": \"Postman Put - AWS Storager server\",\r\n    \"Port\": null,\r\n    \"Protocol\": \"\",\r\n    \"ServiceAddress\": \"\",\r\n    \"Type\": 2,\r\n    \"Status\": null,\r\n    \"ReplicationLastPurge\": null,\r\n    \"ReplicationPollingInterval\": null,\r\n    \"LocalDBConn\": \"\",\r\n    \"License\": \"\",\r\n    \"ActiveCachePathId\": null,\r\n    \"ActiveReplicationEngineId\": null,\r\n    \"ReplicationLastActivity\": null,\r\n    \"IsEncrypted\": false,\r\n    \"SecurityCertificateId\": null,\r\n    \"ExtendedProperties\": \"{\\\"bucket\\\":\\\"lobstates3\\\",\\\"region\\\":\\\"us-east-1\\\",\\\"accessKey\\\":\\\"AKIAI5TF3SEPFVQ2WNVQ\\\",\\\"secretKey\\\":\\\"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\\\",\\\"signedUrlExpireSeconds\\\":\\\"600\\\"}\"\r\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/StorageServers({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/StorageServers({{AWSStorageServer_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"StorageServers({{categories_get_id}})"
+												"StorageServers({{AWSStorageServer_get_id}})"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "6. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after put operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.ServerName).to.eql(pm.variables.get('categories_put_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/StorageServers({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"StorageServers({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "7. Get All Categories",
+									"name": "Get All AWS Storage Server",
 									"event": [
 										{
 											"listen": "test",
@@ -14441,11 +13422,27 @@
 													"pm.test(\"Status code is 200\", function () {",
 													"    pm.response.to.have.status(200);",
 													"});",
-													"pm.test(\"Verify category values are listed\", function () {",
+													"pm.test(\"Verify all fields are present in response.\", function () {",
 													"    ",
 													"    pm.expect(jsonData).to.have.property('value');",
 													"    pm.expect(jsonData.value[0]).to.have.property('Id');",
 													"    pm.expect(jsonData.value[0]).to.have.property('ServerName');",
+													"    pm.expect(jsonData.value[0]).to.have.property('PhysicalServer');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Port');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Protocol');",
+													"    pm.expect(jsonData.value[0]).to.have.property('ServiceAddress');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Type');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Status');",
+													"    pm.expect(jsonData.value[0]).to.have.property('ReplicationLastPurge');",
+													"    pm.expect(jsonData.value[0]).to.have.property('ReplicationPollingInterval');",
+													"    pm.expect(jsonData.value[0]).to.have.property('LocalDBConn');",
+													"    pm.expect(jsonData.value[0]).to.have.property('License');",
+													"    pm.expect(jsonData.value[0]).to.have.property('ActiveCachePathId');",
+													"    pm.expect(jsonData.value[0]).to.have.property('ActiveReplicationEngineId');",
+													"    pm.expect(jsonData.value[0]).to.have.property('ReplicationLastActivity');",
+													"    pm.expect(jsonData.value[0]).to.have.property('IsEncrypted');",
+													"    pm.expect(jsonData.value[0]).to.have.property('SecurityCertificateId');",
+													"    pm.expect(jsonData.value[0]).to.have.property('ExtendedProperties');",
 													"});",
 													""
 												],
@@ -15837,485 +14834,7 @@
 					"item": [
 						{
 							"name": "Test-Happy Path",
-							"item": [
-								{
-									"name": "1. Create new category",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "5afbdc04-199e-4580-a104-d5a227375144",
-												"exec": [
-													"const jsonData = pm.response.json();",
-													"",
-													"pm.test(\"Status code is 201\", function () {",
-													"    pm.response.to.have.status(201);",
-													"});",
-													"",
-													"pm.test('Response has Id and Name values', function() {",
-													"  pm.expect(jsonData).to.have.property('Id');",
-													"  pm.expect(jsonData).to.have.property('Name');",
-													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
-													"});",
-													"",
-													"",
-													"pm.test(\"Store category Id\", function () {",
-													"    var id = jsonData.Id;",
-													"    pm.globals.set(\"categories_get_id\", id);",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"id": "d2550643-333d-465a-bec2-9c7e68f819dd",
-												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"POST_\"+Date.now()",
-													"    pm.globals.set(\"categories_post_name\", Name);",
-													"});",
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "\r\n\r\n\r\n{\r\n  \"IsOnline\": false,\r\n  \"IsDisabled\": true,\r\n   \"Name\": \"{{categories_post_name}}\",\r\n  \"Description\": \"{{categories_post_name}}\",\r\n  \"PhysicalServer\": \"savphlpetest64\",\r\n  \"ThreadPool\": 1,\r\n  \"CycleTime\": 5,\r\n  \"ExpirationCycle\": 10,\r\n  \"LastActivityDate\": \"2016-08-30T00:00:30.533-04:00\",\r\n  \"ServiceName\": \"Savana RPT Engine IPM_EPM50MASTER_502_QA\",\r\n  \"WorkerCycles\": 100,\r\n  \"CurrentWorkerCycle\": 3,\r\n  \"WorkerProcessId\": 166664,\r\n  \"CreatedById\": 1,\r\n  \"CreatedDate\": \"2016-08-02T16:41:16.4-04:00\",\r\n  \"ModifiedById\": 1,\r\n  \"ModifiedDate\": \"2016-08-02T16:42:52.52-04:00\" \r\n}"
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/ReportEngines",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"ReportEngines"
-											]
-										},
-										"description": "Verify POST Request for categories work with status code 201"
-									},
-									"response": []
-								},
-								{
-									"name": "2. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/ReportEngines({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"ReportEngines({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "3. Patch Category",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "5fa86f5f-87de-4186-b047-0bc4e162a445",
-												"exec": [
-													"pm.test(\"Status code is 204\", function () {",
-													"    pm.response.to.have.status(204);",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"id": "23066b1a-1d3c-433c-b214-36722c297f57",
-												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"PATCH_\"+Date.now()",
-													"    pm.globals.set(\"categories_patch_name\", Name);",
-													"});",
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "PATCH",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n  \"Name\": \"{{categories_patch_name}}\"\r\n}"
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/ReportEngines({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"ReportEngines({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "4. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after patch operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_patch_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/ReportEngines({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"ReportEngines({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "5. Put Category",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "5fa86f5f-87de-4186-b047-0bc4e162a445",
-												"exec": [
-													"pm.test(\"Status code is 204\", function () {",
-													"    pm.response.to.have.status(204);",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"id": "23066b1a-1d3c-433c-b214-36722c297f57",
-												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"PUT_\"+Date.now()",
-													"    pm.globals.set(\"categories_put_name\", Name);",
-													"});",
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "PUT",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "\r\n\r\n{\r\n  \"IsOnline\": false,\r\n  \"IsDisabled\": true,\r\n  \"Id\": {{categories_get_id}},\r\n\t\"Name\": \"{{categories_put_name}}\",\r\n  \"Description\": \"Postman test Post\",\r\n  \"PhysicalServer\": \"savphlpetest64\",\r\n  \"ThreadPool\": 1,\r\n  \"CycleTime\": 5,\r\n  \"ExpirationCycle\": 10,\r\n  \"LastActivityDate\": \"2016-08-30T00:00:30.533-04:00\",\r\n  \"ServiceName\": \"Savana RPT Engine IPM_EPM50MASTER_502_QA\",\r\n  \"WorkerCycles\": 100,\r\n  \"CurrentWorkerCycle\": 3,\r\n  \"WorkerProcessId\": 166664,\r\n  \"CreatedById\": 1,\r\n  \"CreatedDate\": \"2016-08-02T16:41:16.4-04:00\",\r\n  \"ModifiedById\": 1,\r\n  \"ModifiedDate\": \"2016-08-02T16:42:52.52-04:00\" \r\n}"
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/ReportEngines({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"ReportEngines({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "6. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after put operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_put_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/ReportEngines({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"ReportEngines({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "7. Get All Categories",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "6d7768c6-93ed-454c-a8e4-bae0bcff7baf",
-												"exec": [
-													"const jsonData = pm.response.json();",
-													"",
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"pm.test(\"Verify category values are listed\", function () {",
-													"    ",
-													"    pm.expect(jsonData).to.have.property('value');",
-													"    pm.expect(jsonData.value[0]).to.have.property('Id');",
-													"    pm.expect(jsonData.value[0]).to.have.property('Name');",
-													"});",
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/ReportEngines",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"ReportEngines"
-											]
-										},
-										"description": "Verify Get All Categories API works with statuc code 200"
-									},
-									"response": []
-								}
-							],
+							"item": [],
 							"description": "Happy Path",
 							"_postman_isSubFolder": true
 						}
@@ -16327,485 +14846,7 @@
 					"item": [
 						{
 							"name": "Testing-Happy Path",
-							"item": [
-								{
-									"name": "1. Create new category",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "5afbdc04-199e-4580-a104-d5a227375144",
-												"exec": [
-													"const jsonData = pm.response.json();",
-													"",
-													"pm.test(\"Status code is 201\", function () {",
-													"    pm.response.to.have.status(201);",
-													"});",
-													"",
-													"pm.test('Response has Id and Name values', function() {",
-													"  pm.expect(jsonData).to.have.property('Id');",
-													"  pm.expect(jsonData).to.have.property('Name');",
-													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
-													"});",
-													"",
-													"",
-													"pm.test(\"Store category Id\", function () {",
-													"    var id = jsonData.Id;",
-													"    pm.globals.set(\"categories_get_id\", id);",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"id": "d2550643-333d-465a-bec2-9c7e68f819dd",
-												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"POST_\"+Date.now()",
-													"    pm.globals.set(\"categories_post_name\", Name);",
-													"});",
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n   \"Name\": \"{{categories_post_name}}\",\r\n  \"Description\": \"{{categories_post_name}}\",\r\n   \"CreatedById\": 1,\r\n   \"CreatedDate\": \"2016-08-15T08:55:37.813-04:00\",\r\n   \"ModifiedById\": 1,\r\n   \"ModifiedDate\": \"2016-08-15T08:55:37.813-04:00\"\r\n}\r\n\r\n"
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/ReportGroups",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"ReportGroups"
-											]
-										},
-										"description": "Verify POST Request for categories work with status code 201"
-									},
-									"response": []
-								},
-								{
-									"name": "2. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/ReportGroups({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"ReportGroups({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "3. Patch Category",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "5fa86f5f-87de-4186-b047-0bc4e162a445",
-												"exec": [
-													"pm.test(\"Status code is 204\", function () {",
-													"    pm.response.to.have.status(204);",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"id": "23066b1a-1d3c-433c-b214-36722c297f57",
-												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"PATCH_\"+Date.now()",
-													"    pm.globals.set(\"categories_patch_name\", Name);",
-													"});",
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "PATCH",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n  \"Name\": \"{{categories_patch_name}}\"\r\n}"
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/ReportGroups({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"ReportGroups({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "4. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after patch operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_patch_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/ReportGroups({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"ReportGroups({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "5. Put Category",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "5fa86f5f-87de-4186-b047-0bc4e162a445",
-												"exec": [
-													"pm.test(\"Status code is 204\", function () {",
-													"    pm.response.to.have.status(204);",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"id": "23066b1a-1d3c-433c-b214-36722c297f57",
-												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"PUT_\"+Date.now()",
-													"    pm.globals.set(\"categories_put_name\", Name);",
-													"});",
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "PUT",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n   \"Id\": {{categories_get_id}},\r\n\t\"Name\": \"{{categories_put_name}}\",\r\n  \"Description\": \"Postman test Post\",\r\n   \"CreatedById\": 1,\r\n   \"CreatedDate\": \"2016-08-15T08:55:37.813-04:00\",\r\n   \"ModifiedById\": 1,\r\n   \"ModifiedDate\": \"2016-08-15T08:55:37.813-04:00\"\r\n}\r\n\r\n\r\n\r\n"
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/ReportGroups({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"ReportGroups({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "6. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after put operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_put_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/ReportGroups({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"ReportGroups({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "7. Get All Categories",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "6d7768c6-93ed-454c-a8e4-bae0bcff7baf",
-												"exec": [
-													"const jsonData = pm.response.json();",
-													"",
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"pm.test(\"Verify category values are listed\", function () {",
-													"    ",
-													"    pm.expect(jsonData).to.have.property('value');",
-													"    pm.expect(jsonData.value[0]).to.have.property('Id');",
-													"    pm.expect(jsonData.value[0]).to.have.property('Name');",
-													"});",
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/ReportGroups",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"ReportGroups"
-											]
-										},
-										"description": "Verify Get All Categories API works with statuc code 200"
-									},
-									"response": []
-								}
-							],
+							"item": [],
 							"description": "Happy Path",
 							"_postman_isSubFolder": true
 						}
@@ -16822,485 +14863,7 @@
 					"item": [
 						{
 							"name": "Testing-Happy Path",
-							"item": [
-								{
-									"name": "1. Create new category",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "5afbdc04-199e-4580-a104-d5a227375144",
-												"exec": [
-													"const jsonData = pm.response.json();",
-													"",
-													"pm.test(\"Status code is 201\", function () {",
-													"    pm.response.to.have.status(201);",
-													"});",
-													"",
-													"pm.test('Response has Id and Name values', function() {",
-													"  pm.expect(jsonData).to.have.property('Id');",
-													"  pm.expect(jsonData).to.have.property('Name');",
-													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
-													"});",
-													"",
-													"",
-													"pm.test(\"Store category Id\", function () {",
-													"    var id = jsonData.Id;",
-													"    pm.globals.set(\"categories_get_id\", id);",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"id": "d2550643-333d-465a-bec2-9c7e68f819dd",
-												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"POST_\"+Date.now()",
-													"    pm.globals.set(\"categories_post_name\", Name);",
-													"});",
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "\r\n{\r\n\"IsDisabled\": false,\r\n   \"Name\": \"{{categories_post_name}}\",\r\n  \"Description\": \"{{categories_post_name}}\",\r\n  \"Report\": \"<ReportSet Title=\\\"User Listing\\\" Description=\\\"User Listing Details\\\" Header=\\\"\\\" ReadOnly=\\\"False\\\" LandscapePrinting=\\\"False\\\" FieldValueColumnPairs=\\\"2\\\" ItemsPerPage=\\\"10000\\\" AddBookmarkForVisualGroup=\\\"False\\\" Footer=\\\"\\\" ShowVisualGroupLabels=\\\"False\\\" Schedule=\\\"1/1/0001 12:00:00 AM\\\" Recipients=\\\"\\\" RepeatType=\\\"None\\\" SendEmailAs=\\\"\\\" UserName=\\\"DefaultAdministrator\\\" Public=\\\"True\\\" Designer=\\\"AdHocReportDesigner\\\">\\r\\n\\t<JoinedTables>\\r\\n\\t\\t<JoinedTable Name=\\\"[eidmadm].[V_ADM_USERS_DETAILS]\\\" Alias=\\\"\\\" RightAlias=\\\"\\\" JoinType=\\\"INNER\\\" LeftConditionColumn=\\\"\\\" RightConditionTable=\\\"\\\" RightConditionColumn=\\\"\\\" />\\r\\n\\t</JoinedTables>\\r\\n\\t<Criterias>\\r\\n\\t\\t<Criteria Column=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[User Name]\\\" Not=\\\"False\\\" FieldFilter=\\\"False\\\" Operator=\\\"Equals\\\" OrIsBlank=\\\"False\\\" Description=\\\"\\\" AliasTable=\\\"\\\" Parameter=\\\"True\\\" Value=\\\"\\\" />\\r\\n\\t\\t<Criteria Column=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Account Disabled]\\\" Not=\\\"False\\\" FieldFilter=\\\"False\\\" Operator=\\\"Equals_Select\\\" OrIsBlank=\\\"False\\\" Description=\\\"\\\" AliasTable=\\\"\\\" Parameter=\\\"True\\\" Value=\\\"...\\\" />\\r\\n\\t</Criterias>\\r\\n\\t<Report Title=\\\"\\\" Code=\\\"\\\" Name=\\\"Detail\\\">\\r\\n\\t\\t<Options Top=\\\"-2147483648\\\" Distinct=\\\"True\\\" StoreResults=\\\"False\\\" SelectVisibleColumns=\\\"True\\\" ChartTypeName=\\\"\\\" AddGrandTotals=\\\"False\\\" TotalsFunction=\\\"None\\\" Invert=\\\"False\\\" FieldValue=\\\"False\\\" AddDeltas=\\\"False\\\" LinesPerItem=\\\"1\\\" ColumnsLimit=\\\"-1\\\" ReportType=\\\"Detail\\\" />\\r\\n\\t\\t<Position X=\\\"0\\\" Y=\\\"3\\\" ColSpan=\\\"1\\\" RowSpan=\\\"1\\\" />\\r\\n\\t\\t<Selections>\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[User ID]\\\" ColumnSql=\\\"\\\" Description=\\\"User ID\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[User Name]\\\" ColumnSql=\\\"\\\" Description=\\\"User Name\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"ASC\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[User Full Name]\\\" ColumnSql=\\\"\\\" Description=\\\"User Full Name\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Email Address]\\\" ColumnSql=\\\"\\\" Description=\\\"Email Address\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Domain]\\\" ColumnSql=\\\"\\\" Description=\\\"Domain\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Organization]\\\" ColumnSql=\\\"\\\" Description=\\\"Organization\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Category]\\\" ColumnSql=\\\"\\\" Description=\\\"Category\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Start Date]\\\" ColumnSql=\\\"\\\" Description=\\\"Start Date\\\" Definition=\\\"\\\" FormatString=\\\"{0:d}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Term Date]\\\" ColumnSql=\\\"\\\" Description=\\\"Term Date\\\" Definition=\\\"\\\" FormatString=\\\"{0:d}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[User ACL]\\\" ColumnSql=\\\"\\\" Description=\\\"User ACL\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[PNE]\\\" ColumnSql=\\\"\\\" Description=\\\"Password Never Expires\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Account Disabled]\\\" ColumnSql=\\\"\\\" Description=\\\"Account Disabled\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Enable System Administration]\\\" ColumnSql=\\\"\\\" Description=\\\"Enable System Administration\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[External User]\\\" ColumnSql=\\\"\\\" Description=\\\"External User\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Created By]\\\" ColumnSql=\\\"\\\" Description=\\\"Created By\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Created Date]\\\" ColumnSql=\\\"\\\" Description=\\\"Created Date\\\" Definition=\\\"\\\" FormatString=\\\"{0:d}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Last Modified By]\\\" ColumnSql=\\\"\\\" Description=\\\"Last Modified By\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Last Modified Date]\\\" ColumnSql=\\\"\\\" Description=\\\"Last Modified Date\\\" Definition=\\\"\\\" FormatString=\\\"{0:d}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t</Selections>\\r\\n\\t</Report>\\r\\n\\t<Report Title=\\\"\\\" Code=\\\"\\\" Name=\\\"Summary\\\">\\r\\n\\t\\t<Options Top=\\\"-2147483648\\\" Distinct=\\\"True\\\" StoreResults=\\\"False\\\" SelectVisibleColumns=\\\"True\\\" ChartTypeName=\\\"\\\" AddGrandTotals=\\\"False\\\" TotalsFunction=\\\"None\\\" Invert=\\\"False\\\" FieldValue=\\\"False\\\" AddDeltas=\\\"False\\\" LinesPerItem=\\\"1\\\" ColumnsLimit=\\\"-1\\\" ReportType=\\\"Summary\\\" />\\r\\n\\t\\t<Position X=\\\"0\\\" Y=\\\"2\\\" ColSpan=\\\"1\\\" RowSpan=\\\"1\\\" />\\r\\n\\t\\t<Selections />\\r\\n\\t</Report>\\r\\n\\t<Report Title=\\\"\\\" Code=\\\"\\\" Name=\\\"Chart\\\">\\r\\n\\t\\t<Options Top=\\\"-2147483648\\\" Distinct=\\\"True\\\" StoreResults=\\\"False\\\" SelectVisibleColumns=\\\"True\\\" ChartTypeName=\\\"\\\" AddGrandTotals=\\\"False\\\" TotalsFunction=\\\"None\\\" Invert=\\\"False\\\" FieldValue=\\\"False\\\" AddDeltas=\\\"False\\\" LinesPerItem=\\\"1\\\" ColumnsLimit=\\\"-1\\\" ReportType=\\\"Chart\\\" />\\r\\n\\t\\t<Position X=\\\"0\\\" Y=\\\"0\\\" ColSpan=\\\"1\\\" RowSpan=\\\"1\\\" />\\r\\n\\t\\t<Selections />\\r\\n\\t</Report>\\r\\n\\t<Report Title=\\\"\\\" Code=\\\"\\\" Name=\\\"Gauges\\\" BorderColor=\\\"-1\\\" HeaderColor=\\\"16777215\\\" ItemColor=\\\"16777215\\\" AlternatingItemColor=\\\"16777215\\\" HeaderForegroundColor=\\\"-16777216\\\" ItemForegroundColor=\\\"-16777216\\\">\\r\\n\\t\\t<Options Top=\\\"4\\\" Distinct=\\\"True\\\" StoreResults=\\\"False\\\" SelectVisibleColumns=\\\"True\\\" ChartTypeName=\\\"\\\" AddGrandTotals=\\\"False\\\" TotalsFunction=\\\"None\\\" Invert=\\\"True\\\" FieldValue=\\\"False\\\" AddDeltas=\\\"False\\\" LinesPerItem=\\\"1\\\" ColumnsLimit=\\\"4\\\" ReportType=\\\"Gauge\\\" />\\r\\n\\t\\t<Position X=\\\"0\\\" Y=\\\"1\\\" ColSpan=\\\"1\\\" RowSpan=\\\"1\\\" />\\r\\n\\t\\t<Selections />\\r\\n\\t</Report>\\r\\n</ReportSet>\",\r\n  \"CategoryId\": 1,\r\n  \"Sequence\": 1,\r\n  \"Type\": 0,\r\n  \"ReportOwner\": 0,\r\n  \"Xml\": null,\r\n  \"ReportModifiedDate\": null,\r\n  \"TenantId\": null,\r\n  \"IzendaadhocReportsId\": null,\r\n  \"Form\": null,\r\n  \"ReportSourceId\": null,\r\n  \"Thumbnail\": null,\r\n  \"CreatedById\": 1,\r\n  \"CreatedDate\": \"2008-02-14T11:35:04.073-05:00\",\r\n  \"ModifiedById\": 1,\r\n  \"ModifiedDate\": \"2008-02-20T15:06:43.417-05:00\"\r\n}\r\n\r\n"
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/Reports",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"Reports"
-											]
-										},
-										"description": "Verify POST Request for categories work with status code 201"
-									},
-									"response": []
-								},
-								{
-									"name": "2. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/Reports({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"Reports({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "3. Patch Category",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "5fa86f5f-87de-4186-b047-0bc4e162a445",
-												"exec": [
-													"pm.test(\"Status code is 204\", function () {",
-													"    pm.response.to.have.status(204);",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"id": "23066b1a-1d3c-433c-b214-36722c297f57",
-												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"PATCH_\"+Date.now()",
-													"    pm.globals.set(\"categories_patch_name\", Name);",
-													"});",
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "PATCH",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n  \"Name\": \"{{categories_patch_name}}\"\r\n}"
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/Reports({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"Reports({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "4. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after patch operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_patch_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/Reports({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"Reports({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "5. Put Category",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "5fa86f5f-87de-4186-b047-0bc4e162a445",
-												"exec": [
-													"pm.test(\"Status code is 204\", function () {",
-													"    pm.response.to.have.status(204);",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"id": "23066b1a-1d3c-433c-b214-36722c297f57",
-												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"PUT_\"+Date.now()",
-													"    pm.globals.set(\"categories_put_name\", Name);",
-													"});",
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "PUT",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "\r\n{\r\n\"IsDisabled\": false,\r\n \"Id\": {{categories_get_id}},\r\n\t\"Name\": \"{{categories_put_name}}\",\r\n  \"Description\": \"Postman test Post\",\r\n  \"Report\": \"<ReportSet Title=\\\"User Listing\\\" Description=\\\"User Listing Details\\\" Header=\\\"\\\" ReadOnly=\\\"False\\\" LandscapePrinting=\\\"False\\\" FieldValueColumnPairs=\\\"2\\\" ItemsPerPage=\\\"10000\\\" AddBookmarkForVisualGroup=\\\"False\\\" Footer=\\\"\\\" ShowVisualGroupLabels=\\\"False\\\" Schedule=\\\"1/1/0001 12:00:00 AM\\\" Recipients=\\\"\\\" RepeatType=\\\"None\\\" SendEmailAs=\\\"\\\" UserName=\\\"DefaultAdministrator\\\" Public=\\\"True\\\" Designer=\\\"AdHocReportDesigner\\\">\\r\\n\\t<JoinedTables>\\r\\n\\t\\t<JoinedTable Name=\\\"[eidmadm].[V_ADM_USERS_DETAILS]\\\" Alias=\\\"\\\" RightAlias=\\\"\\\" JoinType=\\\"INNER\\\" LeftConditionColumn=\\\"\\\" RightConditionTable=\\\"\\\" RightConditionColumn=\\\"\\\" />\\r\\n\\t</JoinedTables>\\r\\n\\t<Criterias>\\r\\n\\t\\t<Criteria Column=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[User Name]\\\" Not=\\\"False\\\" FieldFilter=\\\"False\\\" Operator=\\\"Equals\\\" OrIsBlank=\\\"False\\\" Description=\\\"\\\" AliasTable=\\\"\\\" Parameter=\\\"True\\\" Value=\\\"\\\" />\\r\\n\\t\\t<Criteria Column=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Account Disabled]\\\" Not=\\\"False\\\" FieldFilter=\\\"False\\\" Operator=\\\"Equals_Select\\\" OrIsBlank=\\\"False\\\" Description=\\\"\\\" AliasTable=\\\"\\\" Parameter=\\\"True\\\" Value=\\\"...\\\" />\\r\\n\\t</Criterias>\\r\\n\\t<Report Title=\\\"\\\" Code=\\\"\\\" Name=\\\"Detail\\\">\\r\\n\\t\\t<Options Top=\\\"-2147483648\\\" Distinct=\\\"True\\\" StoreResults=\\\"False\\\" SelectVisibleColumns=\\\"True\\\" ChartTypeName=\\\"\\\" AddGrandTotals=\\\"False\\\" TotalsFunction=\\\"None\\\" Invert=\\\"False\\\" FieldValue=\\\"False\\\" AddDeltas=\\\"False\\\" LinesPerItem=\\\"1\\\" ColumnsLimit=\\\"-1\\\" ReportType=\\\"Detail\\\" />\\r\\n\\t\\t<Position X=\\\"0\\\" Y=\\\"3\\\" ColSpan=\\\"1\\\" RowSpan=\\\"1\\\" />\\r\\n\\t\\t<Selections>\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[User ID]\\\" ColumnSql=\\\"\\\" Description=\\\"User ID\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[User Name]\\\" ColumnSql=\\\"\\\" Description=\\\"User Name\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"ASC\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[User Full Name]\\\" ColumnSql=\\\"\\\" Description=\\\"User Full Name\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Email Address]\\\" ColumnSql=\\\"\\\" Description=\\\"Email Address\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Domain]\\\" ColumnSql=\\\"\\\" Description=\\\"Domain\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Organization]\\\" ColumnSql=\\\"\\\" Description=\\\"Organization\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Category]\\\" ColumnSql=\\\"\\\" Description=\\\"Category\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Start Date]\\\" ColumnSql=\\\"\\\" Description=\\\"Start Date\\\" Definition=\\\"\\\" FormatString=\\\"{0:d}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Term Date]\\\" ColumnSql=\\\"\\\" Description=\\\"Term Date\\\" Definition=\\\"\\\" FormatString=\\\"{0:d}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[User ACL]\\\" ColumnSql=\\\"\\\" Description=\\\"User ACL\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[PNE]\\\" ColumnSql=\\\"\\\" Description=\\\"Password Never Expires\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Account Disabled]\\\" ColumnSql=\\\"\\\" Description=\\\"Account Disabled\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Enable System Administration]\\\" ColumnSql=\\\"\\\" Description=\\\"Enable System Administration\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[External User]\\\" ColumnSql=\\\"\\\" Description=\\\"External User\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Created By]\\\" ColumnSql=\\\"\\\" Description=\\\"Created By\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Created Date]\\\" ColumnSql=\\\"\\\" Description=\\\"Created Date\\\" Definition=\\\"\\\" FormatString=\\\"{0:d}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Last Modified By]\\\" ColumnSql=\\\"\\\" Description=\\\"Last Modified By\\\" Definition=\\\"\\\" FormatString=\\\"{0}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t\\t<Selection ColumnName=\\\"[eidmadm].[V_ADM_USERS_DETAILS].[Last Modified Date]\\\" ColumnSql=\\\"\\\" Description=\\\"Last Modified Date\\\" Definition=\\\"\\\" FormatString=\\\"{0:d}\\\" GroupBy=\\\"False\\\" OrderType=\\\"NONE\\\" WidthSettedManually=\\\"True\\\" Width=\\\"\\\" Visible=\\\"True\\\" AggregateFunction=\\\"None\\\" Justification=\\\"NotSet\\\" Master=\\\"False\\\" Operator=\\\"None\\\" AliasTable=\\\"\\\" SubtotalTitle=\\\"\\\" />\\r\\n\\t\\t</Selections>\\r\\n\\t</Report>\\r\\n\\t<Report Title=\\\"\\\" Code=\\\"\\\" Name=\\\"Summary\\\">\\r\\n\\t\\t<Options Top=\\\"-2147483648\\\" Distinct=\\\"True\\\" StoreResults=\\\"False\\\" SelectVisibleColumns=\\\"True\\\" ChartTypeName=\\\"\\\" AddGrandTotals=\\\"False\\\" TotalsFunction=\\\"None\\\" Invert=\\\"False\\\" FieldValue=\\\"False\\\" AddDeltas=\\\"False\\\" LinesPerItem=\\\"1\\\" ColumnsLimit=\\\"-1\\\" ReportType=\\\"Summary\\\" />\\r\\n\\t\\t<Position X=\\\"0\\\" Y=\\\"2\\\" ColSpan=\\\"1\\\" RowSpan=\\\"1\\\" />\\r\\n\\t\\t<Selections />\\r\\n\\t</Report>\\r\\n\\t<Report Title=\\\"\\\" Code=\\\"\\\" Name=\\\"Chart\\\">\\r\\n\\t\\t<Options Top=\\\"-2147483648\\\" Distinct=\\\"True\\\" StoreResults=\\\"False\\\" SelectVisibleColumns=\\\"True\\\" ChartTypeName=\\\"\\\" AddGrandTotals=\\\"False\\\" TotalsFunction=\\\"None\\\" Invert=\\\"False\\\" FieldValue=\\\"False\\\" AddDeltas=\\\"False\\\" LinesPerItem=\\\"1\\\" ColumnsLimit=\\\"-1\\\" ReportType=\\\"Chart\\\" />\\r\\n\\t\\t<Position X=\\\"0\\\" Y=\\\"0\\\" ColSpan=\\\"1\\\" RowSpan=\\\"1\\\" />\\r\\n\\t\\t<Selections />\\r\\n\\t</Report>\\r\\n\\t<Report Title=\\\"\\\" Code=\\\"\\\" Name=\\\"Gauges\\\" BorderColor=\\\"-1\\\" HeaderColor=\\\"16777215\\\" ItemColor=\\\"16777215\\\" AlternatingItemColor=\\\"16777215\\\" HeaderForegroundColor=\\\"-16777216\\\" ItemForegroundColor=\\\"-16777216\\\">\\r\\n\\t\\t<Options Top=\\\"4\\\" Distinct=\\\"True\\\" StoreResults=\\\"False\\\" SelectVisibleColumns=\\\"True\\\" ChartTypeName=\\\"\\\" AddGrandTotals=\\\"False\\\" TotalsFunction=\\\"None\\\" Invert=\\\"True\\\" FieldValue=\\\"False\\\" AddDeltas=\\\"False\\\" LinesPerItem=\\\"1\\\" ColumnsLimit=\\\"4\\\" ReportType=\\\"Gauge\\\" />\\r\\n\\t\\t<Position X=\\\"0\\\" Y=\\\"1\\\" ColSpan=\\\"1\\\" RowSpan=\\\"1\\\" />\\r\\n\\t\\t<Selections />\\r\\n\\t</Report>\\r\\n</ReportSet>\",\r\n  \"CategoryId\": 1,\r\n  \"Sequence\": 1,\r\n  \"Type\": 0,\r\n  \"ReportOwner\": 0,\r\n  \"Xml\": null,\r\n  \"ReportModifiedDate\": null,\r\n  \"TenantId\": null,\r\n  \"IzendaadhocReportsId\": null,\r\n  \"Form\": null,\r\n  \"ReportSourceId\": null,\r\n  \"Thumbnail\": null,\r\n  \"CreatedById\": 1,\r\n  \"CreatedDate\": \"2008-02-14T11:35:04.073-05:00\",\r\n  \"ModifiedById\": 1,\r\n  \"ModifiedDate\": \"2008-02-20T15:06:43.417-05:00\"\r\n}\r\n"
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/Reports({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"Reports({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "6. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after put operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_put_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/Reports({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"Reports({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "7. Get All Categories",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "6d7768c6-93ed-454c-a8e4-bae0bcff7baf",
-												"exec": [
-													"const jsonData = pm.response.json();",
-													"",
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"pm.test(\"Verify category values are listed\", function () {",
-													"    ",
-													"    pm.expect(jsonData).to.have.property('value');",
-													"    pm.expect(jsonData.value[0]).to.have.property('Id');",
-													"    pm.expect(jsonData.value[0]).to.have.property('Name');",
-													"});",
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
-											},
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											},
-											{
-												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/Reports",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"Reports"
-											]
-										},
-										"description": "Verify Get All Categories API works with statuc code 200"
-									},
-									"response": []
-								}
-							],
+							"item": [],
 							"description": "Happy Path",
 							"_postman_isSubFolder": true
 						}
