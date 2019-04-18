@@ -11899,7 +11899,7 @@
 							"name": "Test-Happy Path",
 							"item": [
 								{
-									"name": "1. Create new category",
+									"name": "Create new Duration Type Interfaces",
 									"event": [
 										{
 											"listen": "test",
@@ -11912,16 +11912,23 @@
 													"    pm.response.to.have.status(201);",
 													"});",
 													"",
-													"pm.test('Response has Id and Name values', function() {",
+													"pm.test('Verify Id and Name values in response.', function() {",
 													"  pm.expect(jsonData).to.have.property('Id');",
 													"  pm.expect(jsonData).to.have.property('Name');",
-													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
+													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('DurationTypeInterface_post_name'));",
+													"});",
+													"",
+													"pm.test('Verify other fields are present in response.', function() {",
+													"  pm.expect(jsonData).to.have.property('Description');",
+													"  pm.expect(jsonData).to.have.property('InterfaceClass');",
+													"  pm.expect(jsonData).to.have.property('InterfaceAdminClass');",
+													"  pm.expect(jsonData).to.have.property('InterfaceAssembly');",
 													"});",
 													"",
 													"",
-													"pm.test(\"Store category Id\", function () {",
+													"pm.test(\"Store Duration Type Interface Id\", function () {",
 													"    var id = jsonData.Id;",
-													"    pm.globals.set(\"categories_get_id\", id);",
+													"    pm.globals.set(\"DurationTypeInterface_get_id\", id);",
 													"});"
 												],
 												"type": "text/javascript"
@@ -11933,8 +11940,8 @@
 												"id": "d2550643-333d-465a-bec2-9c7e68f819dd",
 												"exec": [
 													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"POST_\"+Date.now()",
-													"    pm.globals.set(\"categories_post_name\", Name);",
+													"    var Name = \"DurationTypeInterface_\"+Date.now()",
+													"    pm.globals.set(\"DurationTypeInterface_post_name\", Name);",
 													"});",
 													""
 												],
@@ -11968,7 +11975,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "\r\n{\r\n   \"Name\": \"{{categories_post_name}}\",\r\n   \"Description\": \"PostMan Duration Type Test Engine Calculation Object\",\r\n   \"InterfaceClass\":\"{{categories_post_name}}\",\r\n   \"InterfaceAdminClass\":\"{{categories_post_name}}\",\r\n   \"InterfaceAssembly\":\"{{categories_post_name}}\"\r\n}"
+											"raw": "{\r\n   \"Name\": \"{{DurationTypeInterface_post_name}}\",\r\n   \"Description\": \"PostMan Duration Type Test Engine Calculation Object\",\r\n   \"InterfaceClass\":\"{{DurationTypeInterface_post_name}}\",\r\n   \"InterfaceAdminClass\":\"B\",\r\n   \"InterfaceAssembly\":\"{{DurationTypeInterface_post_name}}\"\r\n}"
 										},
 										"url": {
 											"raw": "{{SiteURL}}api/DurationTypeInterfaces",
@@ -11984,21 +11991,30 @@
 									"response": []
 								},
 								{
-									"name": "2. Get Category (Key)",
+									"name": "Get Duration Type Interface with Key",
 									"event": [
 										{
 											"listen": "test",
 											"script": {
 												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
 												"exec": [
+													"const jsonData = pm.response.json();",
+													"",
 													"pm.test(\"Status code is 200\", function () {",
 													"    pm.response.to.have.status(200);",
 													"});",
 													"",
-													"pm.test(\"Verify Name and ID of the category\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
+													"pm.test('Verify Id and Name values in response.', function() {",
+													"  pm.expect(jsonData).to.have.property('Id');",
+													"  pm.expect(jsonData).to.have.property('Name');",
+													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('DurationTypeInterface_post_name'));",
+													"});",
+													"",
+													"pm.test('Verify other fields are present in response.', function() {",
+													"  pm.expect(jsonData).to.have.property('Description');",
+													"  pm.expect(jsonData).to.have.property('InterfaceClass');",
+													"  pm.expect(jsonData).to.have.property('InterfaceAdminClass');",
+													"  pm.expect(jsonData).to.have.property('InterfaceAssembly');",
 													"});"
 												],
 												"type": "text/javascript"
@@ -12034,19 +12050,19 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/DurationTypeInterfaces({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/DurationTypeInterfaces({{DurationTypeInterface_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"DurationTypeInterfaces({{categories_get_id}})"
+												"DurationTypeInterfaces({{DurationTypeInterface_get_id}})"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "3. Patch Category",
+									"name": "Patch Duration Type Interface",
 									"event": [
 										{
 											"listen": "test",
@@ -12065,10 +12081,6 @@
 											"script": {
 												"id": "23066b1a-1d3c-433c-b214-36722c297f57",
 												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"PATCH_\"+Date.now()",
-													"    pm.globals.set(\"categories_patch_name\", Name);",
-													"});",
 													""
 												],
 												"type": "text/javascript"
@@ -12101,84 +12113,22 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n  \"Name\": \"{{categories_patch_name}}\"\r\n}"
+											"raw": "{\r\n  \"Description\": \"Postman patch - Duration Type Inteface\"\r\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/DurationTypeInterfaces({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/DurationTypeInterfaces({{DurationTypeInterface_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"DurationTypeInterfaces({{categories_get_id}})"
+												"DurationTypeInterfaces({{DurationTypeInterface_get_id}})"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "4. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after patch operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_patch_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/DurationTypeInterfaces({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"DurationTypeInterfaces({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "5. Put Category",
+									"name": "Put Duration Type Interface",
 									"event": [
 										{
 											"listen": "test",
@@ -12197,10 +12147,6 @@
 											"script": {
 												"id": "23066b1a-1d3c-433c-b214-36722c297f57",
 												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"PUT_\"+Date.now()",
-													"    pm.globals.set(\"categories_put_name\", Name);",
-													"});",
 													""
 												],
 												"type": "text/javascript"
@@ -12233,84 +12179,22 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "\r\n{\r\n  \t\"Id\": {{categories_get_id}},\r\n\t\"Name\": \"{{categories_put_name}}\",\r\n   \"Description\": \"PostMan Duration Type Test Engine Calculation Object\",\r\n   \"InterfaceClass\":\"{{categories_post_name}}\",\r\n   \"InterfaceAdminClass\":\"{{categories_post_name}}\",\r\n   \"InterfaceAssembly\":\"{{categories_post_name}}\"\r\n}"
+											"raw": "{\r\n   \"Id\": {{DurationTypeInterface_get_id}},\r\n   \"Name\": \"{{DurationTypeInterface_post_name}}\",\r\n   \"Description\": \"Postman put - Duration type interface\",\r\n   \"InterfaceClass\":\"{{DurationTypeInterface_post_name}}\",\r\n   \"InterfaceAdminClass\":\"B\",\r\n   \"InterfaceAssembly\":\"{{DurationTypeInterface_post_name}}\"\r\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/DurationTypeInterfaces({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/DurationTypeInterfaces({{DurationTypeInterface_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"DurationTypeInterfaces({{categories_get_id}})"
+												"DurationTypeInterfaces({{DurationTypeInterface_get_id}})"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "6. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after put operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_put_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/DurationTypeInterfaces({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"DurationTypeInterfaces({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "7. Get All Categories",
+									"name": "Get All Duration Type Interfaces",
 									"event": [
 										{
 											"listen": "test",
@@ -12322,13 +12206,17 @@
 													"pm.test(\"Status code is 200\", function () {",
 													"    pm.response.to.have.status(200);",
 													"});",
-													"pm.test(\"Verify category values are listed\", function () {",
+													"",
+													"pm.test(\"Verify all fields are present in response.\", function () {",
 													"    ",
 													"    pm.expect(jsonData).to.have.property('value');",
 													"    pm.expect(jsonData.value[0]).to.have.property('Id');",
 													"    pm.expect(jsonData.value[0]).to.have.property('Name');",
-													"});",
-													""
+													"    pm.expect(jsonData.value[0]).to.have.property('Description');",
+													"    pm.expect(jsonData.value[0]).to.have.property('InterfaceClass');",
+													"    pm.expect(jsonData.value[0]).to.have.property('InterfaceAdminClass');",
+													"    pm.expect(jsonData.value[0]).to.have.property('InterfaceAssembly');",
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -12389,7 +12277,7 @@
 							"name": "Test - Happy path",
 							"item": [
 								{
-									"name": "1. Create new category",
+									"name": "Create new Load Balancer Interface",
 									"event": [
 										{
 											"listen": "test",
@@ -12402,16 +12290,24 @@
 													"    pm.response.to.have.status(201);",
 													"});",
 													"",
-													"pm.test('Response has Id and Name values', function() {",
+													"pm.test('Verify Id and Name values in response.', function() {",
 													"  pm.expect(jsonData).to.have.property('Id');",
 													"  pm.expect(jsonData).to.have.property('Name');",
-													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
+													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('LoadBalancerInterface_post_name'));",
 													"});",
 													"",
+													"pm.test('Verify other fields are present in response.', function() {",
+													"  pm.expect(jsonData).to.have.property('IsManual');",
+													"  pm.expect(jsonData).to.have.property('Description');",
+													"  pm.expect(jsonData).to.have.property('InterfaceClass');",
+													"  pm.expect(jsonData).to.have.property('InterfaceAdminClass');",
+													"  pm.expect(jsonData).to.have.property('InterfaceAssembly');",
+													"  pm.expect(jsonData).to.have.property('ImageId');",
+													"});",
 													"",
-													"pm.test(\"Store category Id\", function () {",
+													"pm.test(\"Store Load balancer interface Id\", function () {",
 													"    var id = jsonData.Id;",
-													"    pm.globals.set(\"categories_get_id\", id);",
+													"    pm.globals.set(\"LoadBalancerInterface_get_id\", id);",
 													"});"
 												],
 												"type": "text/javascript"
@@ -12423,8 +12319,8 @@
 												"id": "d2550643-333d-465a-bec2-9c7e68f819dd",
 												"exec": [
 													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"POST_\"+Date.now()",
-													"    pm.globals.set(\"categories_post_name\", Name);",
+													"    var Name = \"LoadBalancerInterface_\"+Date.now()",
+													"    pm.globals.set(\"LoadBalancerInterface_post_name\", Name);",
 													"});",
 													""
 												],
@@ -12458,7 +12354,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "\r\n{\r\n   \"Name\": \"{{categories_post_name}}\",\r\n   \"Description\": \"PostMan Duration Type Test Engine Calculation Object\",\r\n   \"InterfaceClass\":\"{{categories_post_name}}\",\r\n   \"InterfaceAdminClass\":\"{{categories_post_name}}\",\r\n   \"InterfaceAssembly\":\"{{categories_post_name}}\",\r\n    \"ImageId\": 0,\r\n  \"IsManual\": false\r\n}\r\n\r\n\r\n\r\n\r\n"
+											"raw": "{\r\n\t\"Name\": \"{{LoadBalancerInterface_post_name}}\",\r\n\t\"Description\": \"PostMan Duration Type Test Engine Calculation Object\",\r\n\t\"InterfaceClass\": \"{{LoadBalancerInterface_post_name}}\",\r\n\t\"InterfaceAdminClass\": \"A\",\r\n\t\"InterfaceAssembly\": \"{{LoadBalancerInterface_post_name}}\",\r\n\t\"ImageId\": 0,\r\n\t\"IsManual\": false\r\n}"
 										},
 										"url": {
 											"raw": "{{SiteURL}}api/LoadBalanceInterfaces",
@@ -12474,21 +12370,32 @@
 									"response": []
 								},
 								{
-									"name": "2. Get Category (Key)",
+									"name": "Get Load Balancer Interface with Key",
 									"event": [
 										{
 											"listen": "test",
 											"script": {
 												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
 												"exec": [
+													"const jsonData = pm.response.json();",
+													"",
 													"pm.test(\"Status code is 200\", function () {",
 													"    pm.response.to.have.status(200);",
 													"});",
 													"",
-													"pm.test(\"Verify Name and ID of the category\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
+													"pm.test('Verify Id and Name values in response.', function() {",
+													"  pm.expect(jsonData).to.have.property('Id');",
+													"  pm.expect(jsonData).to.have.property('Name');",
+													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('LoadBalancerInterface_post_name'));",
+													"});",
+													"",
+													"pm.test('Verify other fields are present in response.', function() {",
+													"  pm.expect(jsonData).to.have.property('IsManual');",
+													"  pm.expect(jsonData).to.have.property('Description');",
+													"  pm.expect(jsonData).to.have.property('InterfaceClass');",
+													"  pm.expect(jsonData).to.have.property('InterfaceAdminClass');",
+													"  pm.expect(jsonData).to.have.property('InterfaceAssembly');",
+													"  pm.expect(jsonData).to.have.property('ImageId');",
 													"});"
 												],
 												"type": "text/javascript"
@@ -12524,19 +12431,19 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/LoadBalanceInterfaces({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/LoadBalanceInterfaces({{LoadBalancerInterface_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"LoadBalanceInterfaces({{categories_get_id}})"
+												"LoadBalanceInterfaces({{LoadBalancerInterface_get_id}})"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "3. Patch Category",
+									"name": "Patch Load Balancer Interface",
 									"event": [
 										{
 											"listen": "test",
@@ -12555,10 +12462,6 @@
 											"script": {
 												"id": "23066b1a-1d3c-433c-b214-36722c297f57",
 												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"PATCH_\"+Date.now()",
-													"    pm.globals.set(\"categories_patch_name\", Name);",
-													"});",
 													""
 												],
 												"type": "text/javascript"
@@ -12591,84 +12494,22 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n  \"Name\": \"{{categories_patch_name}}\"\r\n}"
+											"raw": "{\r\n  \"Description\": \"Postman patch - Load balancer interface\"\r\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/LoadBalanceInterfaces({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/LoadBalanceInterfaces({{LoadBalancerInterface_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"LoadBalanceInterfaces({{categories_get_id}})"
+												"LoadBalanceInterfaces({{LoadBalancerInterface_get_id}})"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "4. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after patch operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_patch_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/LoadBalanceInterfaces({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"LoadBalanceInterfaces({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "5. Put Category",
+									"name": "Put Load Balancer Interface",
 									"event": [
 										{
 											"listen": "test",
@@ -12723,84 +12564,22 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "\r\n{\r\n  \t\"Id\": {{categories_get_id}},\r\n\t\"Name\": \"{{categories_put_name}}\",\r\n   \"Description\": \"PostMan Duration Type Test Engine Calculation Object\",\r\n   \"InterfaceClass\":\"{{categories_post_name}}\",\r\n   \"InterfaceAdminClass\":\"{{categories_post_name}}\",\r\n   \"InterfaceAssembly\":\"{{categories_post_name}}\",\r\n     \"ImageId\": 0,\r\n  \"IsManual\": false\r\n}\r\n"
+											"raw": "\r\n{\r\n\t\"Id\": {{LoadBalancerInterface_get_id}},\r\n\t\"Name\": \"{{LoadBalancerInterface_post_name}}\",\r\n\t\"Description\": \"Postman put - Load balancer interface\",\r\n\t\"InterfaceClass\": \"{{LoadBalancerInterface_post_name}}\",\r\n\t\"InterfaceAdminClass\": \"A\",\r\n\t\"InterfaceAssembly\": \"{{LoadBalancerInterface_post_name}}\",\r\n\t\"ImageId\": 0,\r\n\t\"IsManual\": false\r\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/LoadBalanceInterfaces({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/LoadBalanceInterfaces({{LoadBalancerInterface_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"LoadBalanceInterfaces({{categories_get_id}})"
+												"LoadBalanceInterfaces({{LoadBalancerInterface_get_id}})"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "6. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after put operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_put_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/LoadBalanceInterfaces({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"LoadBalanceInterfaces({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "7. Get All Categories",
+									"name": "Get All Load Balancer Interface",
 									"event": [
 										{
 											"listen": "test",
@@ -12812,11 +12591,17 @@
 													"pm.test(\"Status code is 200\", function () {",
 													"    pm.response.to.have.status(200);",
 													"});",
-													"pm.test(\"Verify category values are listed\", function () {",
-													"    ",
+													"",
+													"pm.test(\"Verify all fields are listed in response.\", function () {",
 													"    pm.expect(jsonData).to.have.property('value');",
 													"    pm.expect(jsonData.value[0]).to.have.property('Id');",
 													"    pm.expect(jsonData.value[0]).to.have.property('Name');",
+													"    pm.expect(jsonData.value[0]).to.have.property('IsManual');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Description');",
+													"    pm.expect(jsonData.value[0]).to.have.property('InterfaceClass');",
+													"    pm.expect(jsonData.value[0]).to.have.property('InterfaceAdminClass');",
+													"    pm.expect(jsonData.value[0]).to.have.property('InterfaceAssembly');",
+													"    pm.expect(jsonData.value[0]).to.have.property('ImageId');",
 													"});",
 													""
 												],
@@ -12889,7 +12674,7 @@
 							"name": "Test-Happy path",
 							"item": [
 								{
-									"name": "1. Create new category",
+									"name": "Create new WfActions",
 									"event": [
 										{
 											"listen": "test",
@@ -12961,12 +12746,12 @@
 											"raw": "\r\n{\r\n   \"Name\": \"{{categories_post_name}}\",\r\n   \"Description\": \"PostMan Duration Type Test Engine Calculation Object\",\r\n   \"InterfaceClass\":\"{{categories_post_name}}\",\r\n   \"InterfaceAdminClass\":\"{{categories_post_name}}\",\r\n   \"InterfaceAssembly\":\"{{categories_post_name}}\",\r\n    \"ImageId\": 0,\r\n  \"IsManual\": false\r\n}\r\n\r\n\r\n\r\n\r\n"
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/LoadBalanceInterfaces",
+											"raw": "{{SiteURL}}api/WFActions",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"LoadBalanceInterfaces"
+												"WFActions"
 											]
 										},
 										"description": "Verify POST Request for categories work with status code 201"
@@ -12974,7 +12759,7 @@
 									"response": []
 								},
 								{
-									"name": "2. Get Category (Key)",
+									"name": "Get WfActions with key",
 									"event": [
 										{
 											"listen": "test",
@@ -13036,7 +12821,7 @@
 									"response": []
 								},
 								{
-									"name": "3. Patch Category",
+									"name": "Patch WfActions",
 									"event": [
 										{
 											"listen": "test",
@@ -13106,69 +12891,7 @@
 									"response": []
 								},
 								{
-									"name": "4. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after patch operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_patch_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/LoadBalanceInterfaces({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"LoadBalanceInterfaces({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "5. Put Category",
+									"name": "Put WfActions",
 									"event": [
 										{
 											"listen": "test",
@@ -13238,69 +12961,7 @@
 									"response": []
 								},
 								{
-									"name": "6. Get Category (Key)",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
-												"exec": [
-													"pm.test(\"Status code is 200\", function () {",
-													"    pm.response.to.have.status(200);",
-													"});",
-													"",
-													"pm.test(\"Verify Name and ID of the category after put operation\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_put_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"});"
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "OData-Version",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "OData-MaxVersion",
-												"type": "text",
-												"value": "4.0"
-											},
-											{
-												"key": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Authorization-Token",
-												"type": "text",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{SiteURL}}api/LoadBalanceInterfaces({{categories_get_id}})",
-											"host": [
-												"{{SiteURL}}api"
-											],
-											"path": [
-												"LoadBalanceInterfaces({{categories_get_id}})"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "7. Get All Categories",
+									"name": "Get All WfActions",
 									"event": [
 										{
 											"listen": "test",
@@ -13476,7 +13137,7 @@
 							"name": "Test-Happy Path",
 							"item": [
 								{
-									"name": "1. Create new ObjectTypes",
+									"name": "Create new ObjectTypes",
 									"event": [
 										{
 											"listen": "test",
@@ -13489,18 +13150,14 @@
 													"    pm.response.to.have.status(201);",
 													"});",
 													"",
-													"pm.test('Response has Id and Name values', function() {",
+													"pm.test('Verify Id value in response.', function() {",
 													"  pm.expect(jsonData).to.have.property('Id');",
-													"  pm.expect(jsonData).to.have.property('Description');",
-													"  pm.expect(jsonData).to.have.property('MimeType');",
-													"  pm.expect(jsonData).to.have.property('CreatedById');",
-													"  ",
-													"  parseInt(pm.expect(jsonData.Id), 10)==(parseInt(pm.variables.get('categories_post_name'), 10));",
+													"  pm.expect(jsonData.Id).to.eql(pm.variables.get('ObjectTypes_post_id').toString());",
 													"});",
 													"",
-													"pm.test(\"Store category Id\", function () {",
-													"    var id = jsonData.Id;",
-													"    pm.globals.set(\"categories_get_id\", id);",
+													"pm.test('Verify other fields are present in response.', function() {",
+													"  pm.expect(jsonData).to.have.property('Description');",
+													"  pm.expect(jsonData).to.have.property('MimeType');",
 													"});"
 												],
 												"type": "text/javascript"
@@ -13512,8 +13169,8 @@
 												"id": "d2550643-333d-465a-bec2-9c7e68f819dd",
 												"exec": [
 													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = Math.floor(Math.random() * (+7 - +99))+99;",
-													"    pm.globals.set(\"categories_post_name\", Name);",
+													"    var id = Math.floor(10000 + Math.random() * 90000)",
+													"    pm.globals.set(\"ObjectTypes_post_id\", id);",
 													"});",
 													""
 												],
@@ -13547,7 +13204,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "\r\n{\r\n   \"Id\": \"{{categories_post_name}}{{categories_post_name}}\",\r\n  \"Description\": \"Postman Test\",\r\n  \"MimeType\": \"application/msexcel\",\r\n  \"CreatedById\": 1,\r\n  \"CreatedDate\": \"2003-06-30T00:00:00-04:00\",\r\n  \"ModifiedById\": 1,\r\n  \"ModifiedDate\": \"2003-06-30T00:00:00-04:00\"\r\n}"
+											"raw": "{\r\n  \"Id\": \"{{ObjectTypes_post_id}}\",\r\n  \"Description\": \"Create new object type\",\r\n  \"MimeType\": \"application/msexcel\"\r\n}"
 										},
 										"url": {
 											"raw": "{{SiteURL}}api/ObjectTypes",
@@ -13563,20 +13220,27 @@
 									"response": []
 								},
 								{
-									"name": "2. Get ObjectTypes(Key)",
+									"name": "Get ObjectTypes(Key)",
 									"event": [
 										{
 											"listen": "test",
 											"script": {
 												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
 												"exec": [
+													"const jsonData = pm.response.json();",
+													"",
 													"pm.test(\"Status code is 200\", function () {",
 													"    pm.response.to.have.status(200);",
 													"});",
 													"",
-													"pm.test(\"verify ID of the category\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
+													"pm.test('Verify Id value in response.', function() {",
+													"  pm.expect(jsonData).to.have.property('Id');",
+													"  pm.expect(jsonData.Id).to.eql(pm.variables.get('ObjectTypes_post_id').toString());",
+													"});",
+													"",
+													"pm.test('Verify other fields are present in response.', function() {",
+													"  pm.expect(jsonData).to.have.property('Description');",
+													"  pm.expect(jsonData).to.have.property('MimeType');",
 													"});"
 												],
 												"type": "text/javascript"
@@ -13612,19 +13276,19 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/ObjectTypes('{{categories_post_name}}{{categories_post_name}}')",
+											"raw": "{{SiteURL}}api/ObjectTypes('{{ObjectTypes_post_id}}')",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"ObjectTypes('{{categories_post_name}}{{categories_post_name}}')"
+												"ObjectTypes('{{ObjectTypes_post_id}}')"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "3. Patch ObjectTypes",
+									"name": "Patch ObjectTypes",
 									"event": [
 										{
 											"listen": "test",
@@ -13643,10 +13307,6 @@
 											"script": {
 												"id": "23066b1a-1d3c-433c-b214-36722c297f57",
 												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"PATCH_\"+Date.now()",
-													"    pm.globals.set(\"categories_patch_name\", Name);",
-													"});",
 													""
 												],
 												"type": "text/javascript"
@@ -13679,22 +13339,22 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n  \"Description\": \"{{categories_patch_name}}\"\r\n}"
+											"raw": "{\r\n  \"Description\": \"Postman patch - Object types\"\r\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/ObjectTypes('{{categories_get_id}}')",
+											"raw": "{{SiteURL}}api/ObjectTypes('{{ObjectTypes_post_id}}')",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"ObjectTypes('{{categories_get_id}}')"
+												"ObjectTypes('{{ObjectTypes_post_id}}')"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "5. Put ObjectTypes",
+									"name": "Put ObjectTypes",
 									"event": [
 										{
 											"listen": "test",
@@ -13713,10 +13373,6 @@
 											"script": {
 												"id": "23066b1a-1d3c-433c-b214-36722c297f57",
 												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"PUT_\"+Date.now()",
-													"    pm.globals.set(\"categories_put_name\", Name);",
-													"});",
 													""
 												],
 												"type": "text/javascript"
@@ -13749,22 +13405,22 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"Id\": \"{{categories_post_name}}{{categories_post_name}}\",\r\n    \"Description\": \"{{categories_put_name}}\",\r\n    \"MimeType\": \"application/msexcel\",\r\n    \"CreatedById\": 1,\r\n    \"CreatedDate\": \"2019-03-26T07:33:30.12-04:00\",\r\n    \"ModifiedById\": 1,\r\n    \"ModifiedDate\": \"2019-03-26T07:46:29.52-04:00\"\r\n}"
+											"raw": "{\r\n  \"Id\": \"{{ObjectTypes_post_id}}\",\r\n  \"Description\": \"Postman put - Object types\",\r\n  \"MimeType\": \"application/msexcel\"\r\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/ObjectTypes('{{categories_post_name}}{{categories_post_name}}')",
+											"raw": "{{SiteURL}}api/ObjectTypes('{{ObjectTypes_post_id}}')",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"ObjectTypes('{{categories_post_name}}{{categories_post_name}}')"
+												"ObjectTypes('{{ObjectTypes_post_id}}')"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "7. Get All ObjectTypes",
+									"name": "Get All ObjectTypes",
 									"event": [
 										{
 											"listen": "test",
@@ -13776,11 +13432,12 @@
 													"pm.test(\"Status code is 200\", function () {",
 													"    pm.response.to.have.status(200);",
 													"});",
-													"pm.test(\"Verify category values are listed\", function () {",
+													"pm.test(\"Verify all fields are present in response.\", function () {",
 													"    ",
 													"    pm.expect(jsonData).to.have.property('value');",
 													"    pm.expect(jsonData.value[0]).to.have.property('Id');",
 													"    pm.expect(jsonData.value[0]).to.have.property('Description');",
+													"    pm.expect(jsonData.value[0]).to.have.property('MimeType');",
 													"});"
 												],
 												"type": "text/javascript"
@@ -13825,6 +13482,62 @@
 											]
 										},
 										"description": "Verify Get All Categories API works with statuc code 200"
+									},
+									"response": []
+								},
+								{
+									"name": "Delete ObjectTypes",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "b2a729a8-d385-4490-b9c5-caada51bc0de",
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0",
+												"type": "text"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/ObjectTypes('{{ObjectTypes_post_id}}')",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"ObjectTypes('{{ObjectTypes_post_id}}')"
+											]
+										}
 									},
 									"response": []
 								}
@@ -13842,7 +13555,7 @@
 							"name": "Test-Happt Path",
 							"item": [
 								{
-									"name": "1. Create new StorageServers",
+									"name": "Create new StorageServers",
 									"event": [
 										{
 											"listen": "test",
@@ -13855,24 +13568,34 @@
 													"    pm.response.to.have.status(201);",
 													"});",
 													"",
-													"pm.test('Response has Id and Name values', function() {",
+													"pm.test('Verify Id and ServerName value in response.', function() {",
 													"  pm.expect(jsonData).to.have.property('Id');",
-													"  pm.expect(jsonData).to.have.property('ReplicationPollingInterval');",
-													"  pm.expect(jsonData).to.have.property('ReplicationLastPurge');",
-													"  pm.expect(jsonData).to.have.property('Status');",
-													"  pm.expect(jsonData).to.have.property('Type');",
-													"  pm.expect(jsonData).to.have.property('ServiceAddress');",
-													"  pm.expect(jsonData).to.have.property('Protocol');",
-													"  pm.expect(jsonData).to.have.property('Port');",
-													"  pm.expect(jsonData).to.have.property('PhysicalServer');",
 													"  pm.expect(jsonData).to.have.property('ServerName');",
-													"  ",
-													"  pm.expect(jsonData.ServerName).to.eql(pm.variables.get('categories_post_name'));",
+													"  pm.expect(jsonData.ServerName).to.eql(pm.variables.get('StorageServer_post_name'));",
 													"});",
 													"",
-													"pm.test(\"Store category Id\", function () {",
+													"pm.test('Verify other fields are present in response.', function() {",
+													"  pm.expect(jsonData).to.have.property('PhysicalServer');",
+													"  pm.expect(jsonData).to.have.property('Port');",
+													"  pm.expect(jsonData).to.have.property('Protocol');",
+													"  pm.expect(jsonData).to.have.property('ServiceAddress');",
+													"  pm.expect(jsonData).to.have.property('Type');",
+													"  pm.expect(jsonData).to.have.property('Status');",
+													"  pm.expect(jsonData).to.have.property('ReplicationLastPurge');",
+													"  pm.expect(jsonData).to.have.property('ReplicationPollingInterval');",
+													"  pm.expect(jsonData).to.have.property('LocalDBConn');",
+													"  pm.expect(jsonData).to.have.property('License');",
+													"  pm.expect(jsonData).to.have.property('ActiveCachePathId');",
+													"  pm.expect(jsonData).to.have.property('ActiveReplicationEngineId');",
+													"  pm.expect(jsonData).to.have.property('ReplicationLastActivity');",
+													"  pm.expect(jsonData).to.have.property('IsEncrypted');",
+													"  pm.expect(jsonData).to.have.property('SecurityCertificateId');",
+													"  pm.expect(jsonData).to.have.property('ExtendedProperties');",
+													"});",
+													"",
+													"pm.test(\"Store Storage Server Id\", function () {",
 													"    var id = jsonData.Id;",
-													"    pm.globals.set(\"categories_get_id\", id);",
+													"    pm.globals.set(\"StorageServer_get_id\", id);",
 													"});"
 												],
 												"type": "text/javascript"
@@ -13884,8 +13607,8 @@
 												"id": "d2550643-333d-465a-bec2-9c7e68f819dd",
 												"exec": [
 													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"POST_\"+Date.now()",
-													"    pm.globals.set(\"categories_post_name\", Name);",
+													"    var Name = \"Storage_Server_\"+Date.now()",
+													"    pm.globals.set(\"StorageServer_post_name\", Name);",
 													"});",
 													""
 												],
@@ -13898,28 +13621,28 @@
 										"header": [
 											{
 												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
+												"type": "text",
+												"value": "4.0"
 											},
 											{
 												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
+												"type": "text",
+												"value": "4.0"
 											},
 											{
 												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
+												"type": "text",
+												"value": "application/json"
 											},
 											{
 												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
+												"type": "text",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "\r\n{\r\n    \"ServerName\": \"{{categories_post_name}}\",\r\n    \"PhysicalServer\": \"101\",\r\n    \"Port\": null,\r\n    \"Protocol\": \"SMTP\",\r\n    \"ServiceAddress\": null,\r\n    \"Type\": 1,\r\n    \"Status\": null,\r\n    \"ReplicationLastPurge\": null,\r\n    \"ReplicationPollingInterval\": null,\r\n    \"LocalDBConn\": \"111\",\r\n    \"License\": null,\r\n    \"ActiveCachePathId\": null,\r\n    \"ActiveReplicationEngineId\": null,\r\n    \"ReplicationLastActivity\": null,\r\n    \"IsEncrypted\": true,\r\n    \"SecurityCertificateId\": 1000000,\r\n    \"ExtendedProperties\": null,\r\n    \"CreatedById\": 101,\r\n    \"CreatedDate\": \"2019-03-07T05:04:26.84-05:00\",\r\n    \"ModifiedById\": 11,\r\n    \"ModifiedDate\": \"2019-03-07T05:04:26.84-05:00\"\r\n    \r\n}\r\n"
+											"raw": "{\r\n    \"ServerName\": \"{{StorageServer_post_name}}\",\r\n    \"PhysicalServer\": \"101\",\r\n    \"Port\": null,\r\n    \"Protocol\": \"SMTP\",\r\n    \"ServiceAddress\": null,\r\n    \"Type\": 1,\r\n    \"Status\": null,\r\n    \"ReplicationLastPurge\": null,\r\n    \"ReplicationPollingInterval\": null,\r\n    \"LocalDBConn\": \"111\",\r\n    \"License\": null,\r\n    \"ActiveCachePathId\": null,\r\n    \"ActiveReplicationEngineId\": null,\r\n    \"ReplicationLastActivity\": null,\r\n    \"IsEncrypted\": true,\r\n    \"SecurityCertificateId\": 1000000,\r\n    \"ExtendedProperties\": null\r\n}\r\n"
 										},
 										"url": {
 											"raw": "{{SiteURL}}api/StorageServers",
@@ -13935,34 +13658,42 @@
 									"response": []
 								},
 								{
-									"name": "2. Get StorageServers(Key)",
+									"name": "Get StorageServers(Key)",
 									"event": [
 										{
 											"listen": "test",
 											"script": {
 												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
 												"exec": [
+													"const jsonData = pm.response.json();",
+													"",
 													"pm.test(\"Status code is 200\", function () {",
 													"    pm.response.to.have.status(200);",
 													"});",
 													"",
-													"pm.test(\"Verify Name and ID of the category\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.ServerName).to.eql(pm.variables.get('categories_post_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"    ",
-													"    ",
+													"pm.test('Verify Id and ServerName value in response.', function() {",
 													"  pm.expect(jsonData).to.have.property('Id');",
-													"  pm.expect(jsonData).to.have.property('ReplicationPollingInterval');",
-													"  pm.expect(jsonData).to.have.property('ReplicationLastPurge');",
-													"  pm.expect(jsonData).to.have.property('Status');",
-													"  pm.expect(jsonData).to.have.property('Type');",
-													"  pm.expect(jsonData).to.have.property('ServiceAddress');",
-													"  pm.expect(jsonData).to.have.property('Protocol');",
-													"  pm.expect(jsonData).to.have.property('Port');",
-													"  pm.expect(jsonData).to.have.property('PhysicalServer');",
 													"  pm.expect(jsonData).to.have.property('ServerName');",
-													"  ",
+													"  pm.expect(jsonData.ServerName).to.eql(pm.variables.get('StorageServer_post_name'));",
+													"});",
+													"",
+													"pm.test('Verify other fields are present in response.', function() {",
+													"  pm.expect(jsonData).to.have.property('PhysicalServer');",
+													"  pm.expect(jsonData).to.have.property('Port');",
+													"  pm.expect(jsonData).to.have.property('Protocol');",
+													"  pm.expect(jsonData).to.have.property('ServiceAddress');",
+													"  pm.expect(jsonData).to.have.property('Type');",
+													"  pm.expect(jsonData).to.have.property('Status');",
+													"  pm.expect(jsonData).to.have.property('ReplicationLastPurge');",
+													"  pm.expect(jsonData).to.have.property('ReplicationPollingInterval');",
+													"  pm.expect(jsonData).to.have.property('LocalDBConn');",
+													"  pm.expect(jsonData).to.have.property('License');",
+													"  pm.expect(jsonData).to.have.property('ActiveCachePathId');",
+													"  pm.expect(jsonData).to.have.property('ActiveReplicationEngineId');",
+													"  pm.expect(jsonData).to.have.property('ReplicationLastActivity');",
+													"  pm.expect(jsonData).to.have.property('IsEncrypted');",
+													"  pm.expect(jsonData).to.have.property('SecurityCertificateId');",
+													"  pm.expect(jsonData).to.have.property('ExtendedProperties');",
 													"});"
 												],
 												"type": "text/javascript"
@@ -13974,23 +13705,23 @@
 										"header": [
 											{
 												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
+												"type": "text",
+												"value": "4.0"
 											},
 											{
 												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
+												"type": "text",
+												"value": "4.0"
 											},
 											{
 												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
+												"type": "text",
+												"value": "application/json"
 											},
 											{
 												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
+												"type": "text",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
 											}
 										],
 										"body": {
@@ -13998,19 +13729,19 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/StorageServers({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/StorageServers({{StorageServer_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"StorageServers({{categories_get_id}})"
+												"StorageServers({{StorageServer_get_id}})"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "3. Patch StorageServers",
+									"name": "Patch StorageServers",
 									"event": [
 										{
 											"listen": "test",
@@ -14029,10 +13760,6 @@
 											"script": {
 												"id": "23066b1a-1d3c-433c-b214-36722c297f57",
 												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"PATCH_\"+Date.now()",
-													"    pm.globals.set(\"categories_patch_name\", Name);",
-													"});",
 													""
 												],
 												"type": "text/javascript"
@@ -14044,43 +13771,43 @@
 										"header": [
 											{
 												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
+												"type": "text",
+												"value": "4.0"
 											},
 											{
 												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
+												"type": "text",
+												"value": "4.0"
 											},
 											{
 												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
+												"type": "text",
+												"value": "application/json"
 											},
 											{
 												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
+												"type": "text",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n  \"ServerName\": \"{{categories_patch_name}}\"\r\n}"
+											"raw": "{\r\n  \"PhysicalServer\": \"Postman patch - storage server\"\r\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/StorageServers({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/StorageServers({{StorageServer_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"StorageServers({{categories_get_id}})"
+												"StorageServers({{StorageServer_get_id}})"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "5. Put StorageServers",
+									"name": "Put StorageServers",
 									"event": [
 										{
 											"listen": "test",
@@ -14099,10 +13826,7 @@
 											"script": {
 												"id": "23066b1a-1d3c-433c-b214-36722c297f57",
 												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"PUT_\"+Date.now()",
-													"    pm.globals.set(\"categories_put_name\", Name);",
-													"});",
+													"",
 													""
 												],
 												"type": "text/javascript"
@@ -14135,22 +13859,22 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "\r\n\r\n\r\n{\r\n   \t\"Id\": {{categories_get_id}},\r\n\t\"ServerName\": \"{{categories_put_name}}\",\r\n    \"PhysicalServer\": \"101\",\r\n    \"Port\": null,\r\n    \"Protocol\": \"SMTP\",\r\n    \"ServiceAddress\": null,\r\n    \"Type\": 1,\r\n    \"Status\": null,\r\n    \"ReplicationLastPurge\": null,\r\n    \"ReplicationPollingInterval\": null,\r\n    \"LocalDBConn\": \"111\",\r\n    \"License\": null,\r\n    \"ActiveCachePathId\": null,\r\n    \"ActiveReplicationEngineId\": null,\r\n    \"ReplicationLastActivity\": null,\r\n    \"IsEncrypted\": true,\r\n    \"SecurityCertificateId\": 1000000,\r\n    \"ExtendedProperties\": null,\r\n    \"CreatedById\": 101,\r\n    \"CreatedDate\": \"2019-03-07T05:04:26.84-05:00\",\r\n    \"ModifiedById\": 11,\r\n    \"ModifiedDate\": \"2019-03-07T05:04:26.84-05:00\"\r\n    \r\n}"
+											"raw": "{\r\n\t\"Id\": {{StorageServer_get_id}},\r\n    \"ServerName\": \"{{StorageServer_post_name}}\",\r\n    \"PhysicalServer\": \"Postman put - storage server\",\r\n    \"Port\": null,\r\n    \"Protocol\": \"SMTP\",\r\n    \"ServiceAddress\": null,\r\n    \"Type\": 1,\r\n    \"Status\": null,\r\n    \"ReplicationLastPurge\": null,\r\n    \"ReplicationPollingInterval\": null,\r\n    \"LocalDBConn\": \"111\",\r\n    \"License\": null,\r\n    \"ActiveCachePathId\": null,\r\n    \"ActiveReplicationEngineId\": null,\r\n    \"ReplicationLastActivity\": null,\r\n    \"IsEncrypted\": true,\r\n    \"SecurityCertificateId\": 1000000,\r\n    \"ExtendedProperties\": null\r\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/StorageServers({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/StorageServers({{StorageServer_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"StorageServers({{categories_get_id}})"
+												"StorageServers({{StorageServer_get_id}})"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "7. Get All StorageServers",
+									"name": "Get All StorageServers",
 									"event": [
 										{
 											"listen": "test",
@@ -14162,11 +13886,27 @@
 													"pm.test(\"Status code is 200\", function () {",
 													"    pm.response.to.have.status(200);",
 													"});",
-													"pm.test(\"Verify category values are listed\", function () {",
+													"pm.test(\"Verify all fields are listed in response.\", function () {",
 													"    ",
 													"    pm.expect(jsonData).to.have.property('value');",
 													"    pm.expect(jsonData.value[0]).to.have.property('Id');",
 													"    pm.expect(jsonData.value[0]).to.have.property('ServerName');",
+													"    pm.expect(jsonData.value[0]).to.have.property('PhysicalServer');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Port');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Protocol');",
+													"    pm.expect(jsonData.value[0]).to.have.property('ServiceAddress');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Type');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Status');",
+													"    pm.expect(jsonData.value[0]).to.have.property('ReplicationLastPurge');",
+													"    pm.expect(jsonData.value[0]).to.have.property('ReplicationPollingInterval');",
+													"    pm.expect(jsonData.value[0]).to.have.property('LocalDBConn');",
+													"    pm.expect(jsonData.value[0]).to.have.property('License');",
+													"    pm.expect(jsonData.value[0]).to.have.property('ActiveCachePathId');",
+													"    pm.expect(jsonData.value[0]).to.have.property('ActiveReplicationEngineId');",
+													"    pm.expect(jsonData.value[0]).to.have.property('ReplicationLastActivity');",
+													"    pm.expect(jsonData.value[0]).to.have.property('IsEncrypted');",
+													"    pm.expect(jsonData.value[0]).to.have.property('SecurityCertificateId');",
+													"    pm.expect(jsonData.value[0]).to.have.property('ExtendedProperties');",
 													"});",
 													""
 												],
@@ -14212,6 +13952,62 @@
 											]
 										},
 										"description": "Verify Get All Categories API works with statuc code 200"
+									},
+									"response": []
+								},
+								{
+									"name": "Delete StorageServers",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "60ae0af2-3a4b-4322-b81a-f74f8d469b98",
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0",
+												"type": "text"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/StorageServers({{StorageServer_get_id}})",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"StorageServers({{StorageServer_get_id}})"
+											]
+										}
 									},
 									"response": []
 								}
@@ -14739,7 +14535,7 @@
 							"name": "Test-Happy path",
 							"item": [
 								{
-									"name": "1. Create new EmailSynchCategorizations",
+									"name": "Create new EmailSynchCategorizations",
 									"event": [
 										{
 											"listen": "test",
@@ -14752,18 +14548,20 @@
 													"    pm.response.to.have.status(201);",
 													"});",
 													"",
-													"pm.test('Response has Id and Name values', function() {",
+													"pm.test('Verify Id and Name value in response.', function() {",
 													"  pm.expect(jsonData).to.have.property('Id');",
 													"  pm.expect(jsonData).to.have.property('Name');",
-													"  pm.expect(jsonData).to.have.property('Description');",
-													"  pm.expect(jsonData).to.have.property('Configuration');",
-													"  ",
-													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
+													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('EmailSynchCategorizations_post_name'));",
 													"});",
 													"",
-													"pm.test(\"Store Response Id\", function () {",
+													"pm.test('Verify other fields are present in response.', function() {",
+													"  pm.expect(jsonData).to.have.property('Description');",
+													"  pm.expect(jsonData).to.have.property('Configuration');",
+													"})",
+													"",
+													"pm.test(\"Store EmailSynchCategorization Id\", function () {",
 													"    var id = jsonData.Id;",
-													"    pm.globals.set(\"categories_get_id\", id);",
+													"    pm.globals.set(\"EmailSynchCategorizations_get_id\", id);",
 													"});"
 												],
 												"type": "text/javascript"
@@ -14775,8 +14573,8 @@
 												"id": "d2550643-333d-465a-bec2-9c7e68f819dd",
 												"exec": [
 													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"POST_\"+Date.now()",
-													"    pm.globals.set(\"categories_post_name\", Name);",
+													"    var Name = \"EmailSynchCategorizations_\"+Date.now()",
+													"    pm.globals.set(\"EmailSynchCategorizations_post_name\", Name);",
 													"});",
 													""
 												],
@@ -14789,28 +14587,28 @@
 										"header": [
 											{
 												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
+												"type": "text",
+												"value": "4.0"
 											},
 											{
 												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
+												"type": "text",
+												"value": "4.0"
 											},
 											{
 												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
+												"type": "text",
+												"value": "application/json"
 											},
 											{
 												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
+												"type": "text",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "\r\n{\r\n    \"Name\": \"{{categories_post_name}}\",\r\n      \"Description\": \"Postman test Description\",\r\n      \"Configuration\": \"<Email_Synch_Config><DocClassID>100005</DocClassID><Classification Default=\\\"True\\\" EmailStorage=\\\"3\\\"><DocTypeID>100020</DocTypeID><Match_Requirements /><Field_Mappings><Field_Mapping Copy_All_Values=\\\"True\\\"><Field_Name>BM String</Field_Name><Field_Value>test</Field_Value><RegExp>@</RegExp></Field_Mapping></Field_Mappings><Email_Attachments Attach=\\\"True\\\"><AttachAsRelated>False</AttachAsRelated><Attachment_DocClassID>100005</Attachment_DocClassID><Attachment_DocTypeID>100020</Attachment_DocTypeID><Copy_Fields>False</Copy_Fields></Email_Attachments><ProcessedEmail><ProcessedEmailAction>0</ProcessedEmailAction></ProcessedEmail></Classification><Classification Default=\\\"False\\\" EmailStorage=\\\"4\\\"><DocTypeID>100018</DocTypeID><Match_Requirements><Match><Email_Field>@SUBJECT</Email_Field><RegExp>$</RegExp></Match></Match_Requirements><Field_Mappings><Field_Mapping Copy_All_Values=\\\"False\\\"><Field_Name>BM String</Field_Name><Field_Value>12</Field_Value><RegExp>@</RegExp></Field_Mapping></Field_Mappings><Email_Attachments Attach=\\\"True\\\"><AttachAsRelated>False</AttachAsRelated><Attachment_DocClassID>100</Attachment_DocClassID><Attachment_DocTypeID>100018</Attachment_DocTypeID><Copy_Fields>False</Copy_Fields></Email_Attachments><ProcessedEmail><ProcessedEmailAction>2</ProcessedEmailAction><ProcessedEmailMailBox></ProcessedEmailMailBox><ProcessedEmailFolder></ProcessedEmailFolder></ProcessedEmail></Classification></Email_Synch_Config>\",\r\n      \"CreatedById\": 100006,\r\n      \"CreatedDate\": \"2017-05-04T04:04:10.077-04:00\",\r\n      \"ModifiedById\": 100006,\r\n      \"ModifiedDate\": \"2017-05-04T07:21:16.52-04:00\"\r\n}\r\n\r\n"
+											"raw": "{\r\n\t\"Name\": \"{{EmailSynchCategorizations_post_name}}\",\r\n\t\"Description\": \"Postman create new EmailSynchCategorization\",\r\n    \"Configuration\": \"<Email_Synch_Config><DocClassID>100005</DocClassID><Classification Default=\\\"True\\\" EmailStorage=\\\"3\\\"><DocTypeID>100020</DocTypeID><Match_Requirements /><Field_Mappings><Field_Mapping Copy_All_Values=\\\"True\\\"><Field_Name>BM String</Field_Name><Field_Value>test</Field_Value><RegExp>@</RegExp></Field_Mapping></Field_Mappings><Email_Attachments Attach=\\\"True\\\"><AttachAsRelated>False</AttachAsRelated><Attachment_DocClassID>100005</Attachment_DocClassID><Attachment_DocTypeID>100020</Attachment_DocTypeID><Copy_Fields>False</Copy_Fields></Email_Attachments><ProcessedEmail><ProcessedEmailAction>0</ProcessedEmailAction></ProcessedEmail></Classification><Classification Default=\\\"False\\\" EmailStorage=\\\"4\\\"><DocTypeID>100018</DocTypeID><Match_Requirements><Match><Email_Field>@SUBJECT</Email_Field><RegExp>$</RegExp></Match></Match_Requirements><Field_Mappings><Field_Mapping Copy_All_Values=\\\"False\\\"><Field_Name>BM String</Field_Name><Field_Value>12</Field_Value><RegExp>@</RegExp></Field_Mapping></Field_Mappings><Email_Attachments Attach=\\\"True\\\"><AttachAsRelated>False</AttachAsRelated><Attachment_DocClassID>100</Attachment_DocClassID><Attachment_DocTypeID>100018</Attachment_DocTypeID><Copy_Fields>False</Copy_Fields></Email_Attachments><ProcessedEmail><ProcessedEmailAction>2</ProcessedEmailAction><ProcessedEmailMailBox></ProcessedEmailMailBox><ProcessedEmailFolder></ProcessedEmailFolder></ProcessedEmail></Classification></Email_Synch_Config>\"\r\n}"
 										},
 										"url": {
 											"raw": "{{SiteURL}}api/EmailSynchCategorizations",
@@ -14826,28 +14624,29 @@
 									"response": []
 								},
 								{
-									"name": "2. Get EmailSynchCategorizations(Key)",
+									"name": "Get EmailSynchCategorizations(Key)",
 									"event": [
 										{
 											"listen": "test",
 											"script": {
 												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
 												"exec": [
+													"const jsonData = pm.response.json();",
+													"",
 													"pm.test(\"Status code is 200\", function () {",
 													"    pm.response.to.have.status(200);",
 													"});",
 													"",
-													"pm.test(\"Verify Name and ID of the category\", function () {",
-													"    var jsonData = pm.response.json();",
-													"    pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
-													"    pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"    ",
+													"pm.test('Verify Id and Name value in response.', function() {",
 													"  pm.expect(jsonData).to.have.property('Id');",
 													"  pm.expect(jsonData).to.have.property('Name');",
+													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('EmailSynchCategorizations_post_name'));",
+													"});",
+													"",
+													"pm.test('Verify other fields are present in response.', function() {",
 													"  pm.expect(jsonData).to.have.property('Description');",
 													"  pm.expect(jsonData).to.have.property('Configuration');",
-													"  ",
-													"});"
+													"})"
 												],
 												"type": "text/javascript"
 											}
@@ -14858,23 +14657,23 @@
 										"header": [
 											{
 												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
+												"type": "text",
+												"value": "4.0"
 											},
 											{
 												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
+												"type": "text",
+												"value": "4.0"
 											},
 											{
 												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
+												"type": "text",
+												"value": "application/json"
 											},
 											{
 												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
+												"type": "text",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
 											}
 										],
 										"body": {
@@ -14882,19 +14681,19 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/EmailSynchCategorizations({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/EmailSynchCategorizations({{EmailSynchCategorizations_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"EmailSynchCategorizations({{categories_get_id}})"
+												"EmailSynchCategorizations({{EmailSynchCategorizations_get_id}})"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "3. Patch EmailSynchCategorizations",
+									"name": "Patch EmailSynchCategorizations",
 									"event": [
 										{
 											"listen": "test",
@@ -14913,10 +14712,6 @@
 											"script": {
 												"id": "23066b1a-1d3c-433c-b214-36722c297f57",
 												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"PATCH_\"+Date.now()",
-													"    pm.globals.set(\"categories_patch_name\", Name);",
-													"});",
 													""
 												],
 												"type": "text/javascript"
@@ -14928,43 +14723,43 @@
 										"header": [
 											{
 												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
+												"type": "text",
+												"value": "4.0"
 											},
 											{
 												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
+												"type": "text",
+												"value": "4.0"
 											},
 											{
 												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
+												"type": "text",
+												"value": "application/json"
 											},
 											{
 												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
+												"type": "text",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n  \"Name\": \"{{categories_patch_name}}\"\r\n}"
+											"raw": "{\r\n  \"Description\": \"Postman patch - EmailSynchCategorization\"\r\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/EmailSynchCategorizations({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/EmailSynchCategorizations({{EmailSynchCategorizations_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"EmailSynchCategorizations({{categories_get_id}})"
+												"EmailSynchCategorizations({{EmailSynchCategorizations_get_id}})"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "5. Put EmailSynchCategorizations",
+									"name": "Put EmailSynchCategorizations",
 									"event": [
 										{
 											"listen": "test",
@@ -14983,10 +14778,6 @@
 											"script": {
 												"id": "23066b1a-1d3c-433c-b214-36722c297f57",
 												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"PUT_\"+Date.now()",
-													"    pm.globals.set(\"categories_put_name\", Name);",
-													"});",
 													""
 												],
 												"type": "text/javascript"
@@ -15019,22 +14810,22 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\t\"Id\": {{categories_get_id}},\r\n\t\"Name\": \"{{categories_put_name}}\",\r\n\t    \"Description\": \"Postman test Description\",\r\n    \"Configuration\": \"<Email_Synch_Config><DocClassID>100005</DocClassID><Classification Default=\\\"True\\\" EmailStorage=\\\"3\\\"><DocTypeID>100020</DocTypeID><Match_Requirements /><Field_Mappings><Field_Mapping Copy_All_Values=\\\"True\\\"><Field_Name>BM String</Field_Name><Field_Value>test</Field_Value><RegExp>@</RegExp></Field_Mapping></Field_Mappings><Email_Attachments Attach=\\\"True\\\"><AttachAsRelated>False</AttachAsRelated><Attachment_DocClassID>100005</Attachment_DocClassID><Attachment_DocTypeID>100020</Attachment_DocTypeID><Copy_Fields>False</Copy_Fields></Email_Attachments><ProcessedEmail><ProcessedEmailAction>0</ProcessedEmailAction></ProcessedEmail></Classification><Classification Default=\\\"False\\\" EmailStorage=\\\"4\\\"><DocTypeID>100018</DocTypeID><Match_Requirements><Match><Email_Field>@SUBJECT</Email_Field><RegExp>$</RegExp></Match></Match_Requirements><Field_Mappings><Field_Mapping Copy_All_Values=\\\"False\\\"><Field_Name>BM String</Field_Name><Field_Value>12</Field_Value><RegExp>@</RegExp></Field_Mapping></Field_Mappings><Email_Attachments Attach=\\\"True\\\"><AttachAsRelated>False</AttachAsRelated><Attachment_DocClassID>100</Attachment_DocClassID><Attachment_DocTypeID>100018</Attachment_DocTypeID><Copy_Fields>False</Copy_Fields></Email_Attachments><ProcessedEmail><ProcessedEmailAction>2</ProcessedEmailAction><ProcessedEmailMailBox></ProcessedEmailMailBox><ProcessedEmailFolder></ProcessedEmailFolder></ProcessedEmail></Classification></Email_Synch_Config>\",\r\n    \"CreatedById\": 1,\r\n    \"CreatedDate\": \"2019-03-20T11:09:06.493-04:00\",\r\n    \"ModifiedById\": 1,\r\n    \"ModifiedDate\": \"2019-03-20T11:09:45.547-04:00\"\r\n}\r\n\r\n"
+											"raw": "{\r\n\t\"Id\": {{EmailSynchCategorizations_get_id}},\r\n\t\"Name\": \"{{EmailSynchCategorizations_post_name}}\",\r\n\t\"Description\": \"Postman put - EmailSynchCategorization\",\r\n    \"Configuration\": \"<Email_Synch_Config><DocClassID>100005</DocClassID><Classification Default=\\\"True\\\" EmailStorage=\\\"3\\\"><DocTypeID>100020</DocTypeID><Match_Requirements /><Field_Mappings><Field_Mapping Copy_All_Values=\\\"True\\\"><Field_Name>BM String</Field_Name><Field_Value>test</Field_Value><RegExp>@</RegExp></Field_Mapping></Field_Mappings><Email_Attachments Attach=\\\"True\\\"><AttachAsRelated>False</AttachAsRelated><Attachment_DocClassID>100005</Attachment_DocClassID><Attachment_DocTypeID>100020</Attachment_DocTypeID><Copy_Fields>False</Copy_Fields></Email_Attachments><ProcessedEmail><ProcessedEmailAction>0</ProcessedEmailAction></ProcessedEmail></Classification><Classification Default=\\\"False\\\" EmailStorage=\\\"4\\\"><DocTypeID>100018</DocTypeID><Match_Requirements><Match><Email_Field>@SUBJECT</Email_Field><RegExp>$</RegExp></Match></Match_Requirements><Field_Mappings><Field_Mapping Copy_All_Values=\\\"False\\\"><Field_Name>BM String</Field_Name><Field_Value>12</Field_Value><RegExp>@</RegExp></Field_Mapping></Field_Mappings><Email_Attachments Attach=\\\"True\\\"><AttachAsRelated>False</AttachAsRelated><Attachment_DocClassID>100</Attachment_DocClassID><Attachment_DocTypeID>100018</Attachment_DocTypeID><Copy_Fields>False</Copy_Fields></Email_Attachments><ProcessedEmail><ProcessedEmailAction>2</ProcessedEmailAction><ProcessedEmailMailBox></ProcessedEmailMailBox><ProcessedEmailFolder></ProcessedEmailFolder></ProcessedEmail></Classification></Email_Synch_Config>\"\r\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/EmailSynchCategorizations({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/EmailSynchCategorizations({{EmailSynchCategorizations_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"EmailSynchCategorizations({{categories_get_id}})"
+												"EmailSynchCategorizations({{EmailSynchCategorizations_get_id}})"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "7. Get All EmailSynchCategorizations",
+									"name": "Get All EmailSynchCategorizations",
 									"event": [
 										{
 											"listen": "test",
@@ -15046,11 +14837,13 @@
 													"pm.test(\"Status code is 200\", function () {",
 													"    pm.response.to.have.status(200);",
 													"});",
-													"pm.test(\"Verify category values are listed\", function () {",
+													"pm.test(\"Verify all fields are present in response.\", function () {",
 													"    ",
 													"    pm.expect(jsonData).to.have.property('value');",
 													"    pm.expect(jsonData.value[0]).to.have.property('Id');",
 													"    pm.expect(jsonData.value[0]).to.have.property('Name');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Description');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Configuration');",
 													"});",
 													""
 												],
@@ -15063,23 +14856,23 @@
 										"header": [
 											{
 												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
+												"type": "text",
+												"value": "4.0"
 											},
 											{
 												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
+												"type": "text",
+												"value": "4.0"
 											},
 											{
 												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
+												"type": "text",
+												"value": "application/json"
 											},
 											{
 												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
+												"type": "text",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
 											}
 										],
 										"body": {
@@ -15098,6 +14891,62 @@
 										"description": "Verify Get All Categories API works with statuc code 200"
 									},
 									"response": []
+								},
+								{
+									"name": "Delete EmailSynchCategorizations",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "6bfeb160-3e11-4946-bd31-bfc327ef8bd6",
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "OData-Version",
+												"value": "4.0",
+												"type": "text"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"value": "4.0",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization-Token",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/EmailSynchCategorizations({{EmailSynchCategorizations_get_id}})",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"EmailSynchCategorizations({{EmailSynchCategorizations_get_id}})"
+											]
+										}
+									},
+									"response": []
 								}
 							],
 							"description": "Happy Path",
@@ -15113,7 +14962,7 @@
 							"name": "Test-Happy Path",
 							"item": [
 								{
-									"name": "1. Create new EmailSynchEngines",
+									"name": "Create new EmailSynchEngines",
 									"event": [
 										{
 											"listen": "test",
@@ -15129,6 +14978,10 @@
 													"pm.test('Response has Id and Name values', function() {",
 													"  pm.expect(jsonData).to.have.property('Id');",
 													"  pm.expect(jsonData).to.have.property('Name');",
+													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('EmailSynchEngines_post_name'));",
+													"});",
+													"",
+													"pm.test('Verify other fields are present in response.', function() {",
 													"  pm.expect(jsonData).to.have.property('Description');",
 													"  pm.expect(jsonData).to.have.property('PhysicalServer');",
 													"  pm.expect(jsonData).to.have.property('ThreadPool');",
@@ -15136,13 +14989,11 @@
 													"  pm.expect(jsonData).to.have.property('TempFolderPath');",
 													"  pm.expect(jsonData).to.have.property('Lastactivitydate');",
 													"  pm.expect(jsonData).to.have.property('ServiceName');",
-													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
-													"});",
-													"",
+													"})",
 													"",
 													"pm.test(\"Store response Id\", function () {",
 													"    var id = jsonData.Id;",
-													"    pm.globals.set(\"categories_get_id\", id);",
+													"    pm.globals.set(\"EmailSynchEngines_get_id\", id);",
 													"});"
 												],
 												"type": "text/javascript"
@@ -15154,8 +15005,8 @@
 												"id": "d2550643-333d-465a-bec2-9c7e68f819dd",
 												"exec": [
 													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"POST_\"+Date.now()",
-													"    pm.globals.set(\"categories_post_name\", Name);",
+													"    var Name = \"EmailSynchEngines\"+Date.now()",
+													"    pm.globals.set(\"EmailSynchEngines_post_name\", Name);",
 													"});",
 													""
 												],
@@ -15189,7 +15040,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n  \"Name\": \"{{categories_post_name}}\",\r\n  \"Description\": \"Postman Test Engine\",\r\n  \"PhysicalServer\": \"sa-pravan-vm\",\r\n  \"ThreadPool\": 1,\r\n  \"CycleTime\": 30,\r\n  \"TempFolderPath\": \"C:\\\\\\\\Temp\",\r\n  \"IsOnline\": false,\r\n  \"IsDisabled\": true,\r\n  \"Lastactivitydate\": null,\r\n  \"ServiceName\": null,\r\n  \"CreatedById\": 100006,\r\n  \"CreatedDate\": \"2017-05-04T03:49:33.063-04:00\",\r\n  \"ModifiedById\": 100006,\r\n  \"ModifiedDate\": \"2017-05-04T03:49:33.063-04:00\"\r\n}\r\n\r\n\r\n\r\n\r\n"
+											"raw": "{\r\n  \"Name\": \"{{EmailSynchEngines_post_name}}\",\r\n  \"Description\": \"Create new Email Synch Engines\",\r\n  \"PhysicalServer\": \"sa-pravan-vm\",\r\n  \"ThreadPool\": 1,\r\n  \"CycleTime\": 30,\r\n  \"TempFolderPath\": \"C:\\\\\\\\Temp\",\r\n  \"IsOnline\": false,\r\n  \"IsDisabled\": true,\r\n  \"Lastactivitydate\": null,\r\n  \"ServiceName\": null\r\n}\r\n\r\n\r\n\r\n\r\n"
 										},
 										"url": {
 											"raw": "{{SiteURL}}api/EmailSynchEngines",
@@ -15205,24 +15056,26 @@
 									"response": []
 								},
 								{
-									"name": "2. Get EmailSynchEngines(Key)",
+									"name": "Get EmailSynchEngines(Key)",
 									"event": [
 										{
 											"listen": "test",
 											"script": {
 												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
 												"exec": [
+													"const jsonData = pm.response.json();",
+													"",
 													"pm.test(\"Status code is 200\", function () {",
 													"    pm.response.to.have.status(200);",
 													"});",
 													"",
-													"pm.test(\"Verify Name and ID of the category\", function () {",
-													"  var jsonData = pm.response.json();",
-													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
-													"  pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
-													"    ",
+													"pm.test('Response has Id and Name values', function() {",
 													"  pm.expect(jsonData).to.have.property('Id');",
 													"  pm.expect(jsonData).to.have.property('Name');",
+													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('EmailSynchEngines_post_name'));",
+													"});",
+													"",
+													"pm.test('Verify other fields are present in response.', function() {",
 													"  pm.expect(jsonData).to.have.property('Description');",
 													"  pm.expect(jsonData).to.have.property('PhysicalServer');",
 													"  pm.expect(jsonData).to.have.property('ThreadPool');",
@@ -15230,7 +15083,7 @@
 													"  pm.expect(jsonData).to.have.property('TempFolderPath');",
 													"  pm.expect(jsonData).to.have.property('Lastactivitydate');",
 													"  pm.expect(jsonData).to.have.property('ServiceName');",
-													"});"
+													"})"
 												],
 												"type": "text/javascript"
 											}
@@ -15265,19 +15118,19 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/EmailSynchEngines({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/EmailSynchEngines({{EmailSynchEngines_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"EmailSynchEngines({{categories_get_id}})"
+												"EmailSynchEngines({{EmailSynchEngines_get_id}})"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "3. Patch EmailSynchEngines",
+									"name": "Patch EmailSynchEngines",
 									"event": [
 										{
 											"listen": "test",
@@ -15296,10 +15149,6 @@
 											"script": {
 												"id": "23066b1a-1d3c-433c-b214-36722c297f57",
 												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"PATCH_\"+Date.now()",
-													"    pm.globals.set(\"categories_patch_name\", Name);",
-													"});",
 													""
 												],
 												"type": "text/javascript"
@@ -15332,22 +15181,22 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n  \"Name\": \"{{categories_patch_name}}\"\r\n}"
+											"raw": "{\r\n  \"Description\": \"Postman patch - Email Synch Engines\"\r\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/EmailSynchEngines({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/EmailSynchEngines({{EmailSynchEngines_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"EmailSynchEngines({{categories_get_id}})"
+												"EmailSynchEngines({{EmailSynchEngines_get_id}})"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "5. Put EmailSynchEngines",
+									"name": "Put EmailSynchEngines",
 									"event": [
 										{
 											"listen": "test",
@@ -15366,10 +15215,6 @@
 											"script": {
 												"id": "23066b1a-1d3c-433c-b214-36722c297f57",
 												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"PUT_\"+Date.now()",
-													"    pm.globals.set(\"categories_put_name\", Name);",
-													"});",
 													""
 												],
 												"type": "text/javascript"
@@ -15402,22 +15247,22 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\t\"Id\": {{categories_get_id}},\r\n\t\"Name\": \"{{categories_put_name}}\",\r\n\t  \"Description\": \"Postman Test Engine\",\r\n  \"PhysicalServer\": \"sa-pravan-vm\",\r\n  \"ThreadPool\": 1,\r\n  \"CycleTime\": 30,\r\n  \"TempFolderPath\": \"C:\\\\\\\\Temp\",\r\n  \"IsOnline\": false,\r\n  \"IsDisabled\": true,\r\n  \"Lastactivitydate\": null,\r\n  \"ServiceName\": null,\r\n  \"CreatedById\": 100006,\r\n  \"CreatedDate\": \"2017-05-04T03:49:33.063-04:00\",\r\n  \"ModifiedById\": 100006,\r\n  \"ModifiedDate\": \"2017-05-04T03:49:33.063-04:00\"\r\n  \r\n}\r\n\r\n"
+											"raw": "{\r\n  \"Id\": {{EmailSynchEngines_get_id}},\r\n  \"Name\": \"{{EmailSynchEngines_post_name}}\",\r\n  \"Description\": \"Postman put - Email Synch Engines\",\r\n  \"PhysicalServer\": \"sa-pravan-vm\",\r\n  \"ThreadPool\": 1,\r\n  \"CycleTime\": 30,\r\n  \"TempFolderPath\": \"C:\\\\\\\\Temp\",\r\n  \"IsOnline\": false,\r\n  \"IsDisabled\": true,\r\n  \"Lastactivitydate\": null,\r\n  \"ServiceName\": null\r\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/EmailSynchEngines({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/EmailSynchEngines({{EmailSynchEngines_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"EmailSynchEngines({{categories_get_id}})"
+												"EmailSynchEngines({{EmailSynchEngines_get_id}})"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "7. Get All EmailSynchEngines",
+									"name": "Get All EmailSynchEngines",
 									"event": [
 										{
 											"listen": "test",
@@ -15434,6 +15279,13 @@
 													"    pm.expect(jsonData).to.have.property('value');",
 													"    pm.expect(jsonData.value[0]).to.have.property('Id');",
 													"    pm.expect(jsonData.value[0]).to.have.property('Name');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Description');",
+													"    pm.expect(jsonData.value[0]).to.have.property('PhysicalServer');",
+													"    pm.expect(jsonData.value[0]).to.have.property('ThreadPool');",
+													"    pm.expect(jsonData.value[0]).to.have.property('CycleTime');",
+													"    pm.expect(jsonData.value[0]).to.have.property('TempFolderPath');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Lastactivitydate');",
+													"    pm.expect(jsonData.value[0]).to.have.property('ServiceName');",
 													"});",
 													""
 												],
@@ -15533,7 +15385,7 @@
 							"name": "Happy Path Testing",
 							"item": [
 								{
-									"name": "1. Create new ReportCategories",
+									"name": "Create new ReportCategories",
 									"event": [
 										{
 											"listen": "test",
@@ -15546,22 +15398,24 @@
 													"    pm.response.to.have.status(201);",
 													"});",
 													"",
-													"pm.test('Response has Id and Name values', function() {",
+													"pm.test('Verify Id and Name value in response.', function() {",
 													"  pm.expect(jsonData).to.have.property('Id');",
 													"  pm.expect(jsonData).to.have.property('Name');",
+													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('ReportCategories_post_name'));",
+													"});",
+													"",
+													"pm.test('Verify other fields are present in response.', function() {",
 													"  pm.expect(jsonData).to.have.property('GroupId');",
 													"  pm.expect(jsonData).to.have.property('ReportView');",
 													"  pm.expect(jsonData).to.have.property('GroupId');",
 													"  pm.expect(jsonData).to.have.property('Sequence');",
 													"  pm.expect(jsonData).to.have.property('Status');",
 													"  pm.expect(jsonData).to.have.property('Description');",
-													"  ",
-													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
 													"});",
 													"",
 													"pm.test(\"Store category Id\", function () {",
 													"    var id = jsonData.Id;",
-													"    pm.globals.set(\"categories_get_id\", id);",
+													"    pm.globals.set(\"ReportCategories_get_id\", id);",
 													"});"
 												],
 												"type": "text/javascript"
@@ -15573,8 +15427,8 @@
 												"id": "d2550643-333d-465a-bec2-9c7e68f819dd",
 												"exec": [
 													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"POST_\"+Date.now()",
-													"    pm.globals.set(\"categories_post_name\", Name);",
+													"    var Name = \"Report_Category_Name_\"+Date.now()",
+													"    pm.globals.set(\"ReportCategories_post_name\", Name);",
 													"});",
 													""
 												],
@@ -15587,28 +15441,28 @@
 										"header": [
 											{
 												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
+												"type": "text",
+												"value": "4.0"
 											},
 											{
 												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
+												"type": "text",
+												"value": "4.0"
 											},
 											{
 												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
+												"type": "text",
+												"value": "application/json"
 											},
 											{
 												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
+												"type": "text",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "\r\n{\r\n  \"Name\": \"{{categories_post_name}}\",\r\n  \"Description\": \"{{categories_post_name}}\",\r\n  \"Status\": 1,\r\n  \"Sequence\": 1,\r\n  \"GroupId\": 1,\r\n  \"ReportView\": 0,\r\n  \"CreatedById\": 1,\r\n  \"CreatedDate\": \"2008-02-05T15:00:34.857-05:00\",\r\n  \"ModifiedById\": 125,\r\n  \"ModifiedDate\": \"2008-04-01T13:40:03.703-04:00\"\r\n}\r\n"
+											"raw": "\r\n{\r\n  \"Name\": \"{{ReportCategories_post_name}}\",\r\n  \"Description\": \"Create new report category\",\r\n  \"Status\": 1,\r\n  \"Sequence\": 1,\r\n  \"GroupId\": 1,\r\n  \"ReportView\": 0\r\n}\r\n"
 										},
 										"url": {
 											"raw": "{{SiteURL}}api/ReportCategories",
@@ -15624,21 +15478,26 @@
 									"response": []
 								},
 								{
-									"name": "2. Get ReportCategories(Key)",
+									"name": "Get ReportCategories(Key)",
 									"event": [
 										{
 											"listen": "test",
 											"script": {
 												"id": "2adca3f1-8578-4212-87ea-9ddf344a099c",
 												"exec": [
+													"const jsonData = pm.response.json();",
+													"",
 													"pm.test(\"Status code is 200\", function () {",
 													"    pm.response.to.have.status(200);",
 													"});",
 													"",
-													"pm.test(\"Verify Name and ID of the Reportcategory\", function () {",
-													"    var jsonData = pm.response.json();",
-													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('categories_post_name'));",
-													"  pm.expect(jsonData.Id).to.eql(pm.variables.get('categories_get_id'));",
+													"pm.test('Verify Id and Name value in response.', function() {",
+													"  pm.expect(jsonData).to.have.property('Id');",
+													"  pm.expect(jsonData).to.have.property('Name');",
+													"  pm.expect(jsonData.Name).to.eql(pm.variables.get('ReportCategories_post_name'));",
+													"});",
+													"",
+													"pm.test('Verify other fields are present in response.', function() {",
 													"  pm.expect(jsonData).to.have.property('GroupId');",
 													"  pm.expect(jsonData).to.have.property('ReportView');",
 													"  pm.expect(jsonData).to.have.property('GroupId');",
@@ -15656,23 +15515,23 @@
 										"header": [
 											{
 												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
+												"type": "text",
+												"value": "4.0"
 											},
 											{
 												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
+												"type": "text",
+												"value": "4.0"
 											},
 											{
 												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
+												"type": "text",
+												"value": "application/json"
 											},
 											{
 												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
+												"type": "text",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
 											}
 										],
 										"body": {
@@ -15680,19 +15539,19 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/ReportCategories({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/ReportCategories({{ReportCategories_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"ReportCategories({{categories_get_id}})"
+												"ReportCategories({{ReportCategories_get_id}})"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "3. Patch ReportCategories",
+									"name": "Patch ReportCategories",
 									"event": [
 										{
 											"listen": "test",
@@ -15711,10 +15570,6 @@
 											"script": {
 												"id": "23066b1a-1d3c-433c-b214-36722c297f57",
 												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"PATCH_\"+Date.now()",
-													"    pm.globals.set(\"categories_patch_name\", Name);",
-													"});",
 													""
 												],
 												"type": "text/javascript"
@@ -15726,43 +15581,43 @@
 										"header": [
 											{
 												"key": "OData-Version",
-												"value": "4.0",
-												"type": "text"
+												"type": "text",
+												"value": "4.0"
 											},
 											{
 												"key": "OData-MaxVersion",
-												"value": "4.0",
-												"type": "text"
+												"type": "text",
+												"value": "4.0"
 											},
 											{
 												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
+												"type": "text",
+												"value": "application/json"
 											},
 											{
 												"key": "Authorization-Token",
-												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}",
-												"type": "text"
+												"type": "text",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
 											}
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n  \"Name\": \"{{categories_patch_name}}\"\r\n}"
+											"raw": "{\r\n  \"Description\": \"Postman patch - Report categories\"\r\n}"
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/ReportCategories({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/ReportCategories({{ReportCategories_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"ReportCategories({{categories_get_id}})"
+												"ReportCategories({{ReportCategories_get_id}})"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "5. Put ReportCategories",
+									"name": "Put ReportCategories",
 									"event": [
 										{
 											"listen": "test",
@@ -15781,10 +15636,6 @@
 											"script": {
 												"id": "23066b1a-1d3c-433c-b214-36722c297f57",
 												"exec": [
-													"pm.test(\"Set dynamic value for Name\", function () {",
-													"    var Name = \"PUT_\"+Date.now()",
-													"    pm.globals.set(\"categories_put_name\", Name);",
-													"});",
 													""
 												],
 												"type": "text/javascript"
@@ -15817,22 +15668,22 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "\r\n{\r\n \"Id\": {{categories_get_id}},\r\n\t\"Name\": \"{{categories_put_name}}\",\r\n  \"Description\": \"Postman Test\",\r\n  \"Status\": 1,\r\n  \"Sequence\": 1,\r\n  \"GroupId\": 1,\r\n  \"ReportView\": 0,\r\n  \"CreatedById\": 1,\r\n  \"CreatedDate\": \"2008-02-05T15:00:34.857-05:00\",\r\n  \"ModifiedById\": 125,\r\n  \"ModifiedDate\": \"2008-04-01T13:40:03.703-04:00\"\r\n}"
+											"raw": "{\r\n  \"Id\": {{ReportCategories_get_id}},\r\n  \"Name\": \"{{ReportCategories_post_name}}\",\r\n  \"Description\": \"Postman put - Report category\",\r\n  \"Status\": 1,\r\n  \"Sequence\": 1,\r\n  \"GroupId\": 1,\r\n  \"ReportView\": 0\r\n}\r\n"
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/ReportCategories({{categories_get_id}})",
+											"raw": "{{SiteURL}}api/ReportCategories({{ReportCategories_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"ReportCategories({{categories_get_id}})"
+												"ReportCategories({{ReportCategories_get_id}})"
 											]
 										}
 									},
 									"response": []
 								},
 								{
-									"name": "7. Get All ReportCategories",
+									"name": "Get All ReportCategories",
 									"event": [
 										{
 											"listen": "test",
@@ -15844,11 +15695,17 @@
 													"pm.test(\"Status code is 200\", function () {",
 													"    pm.response.to.have.status(200);",
 													"});",
-													"pm.test(\"Verify category values are listed\", function () {",
+													"pm.test(\"Verify all fields are present in response.\", function () {",
 													"    ",
 													"    pm.expect(jsonData).to.have.property('value');",
 													"    pm.expect(jsonData.value[0]).to.have.property('Id');",
 													"    pm.expect(jsonData.value[0]).to.have.property('Name');",
+													"    pm.expect(jsonData.value[0]).to.have.property('GroupId');",
+													"    pm.expect(jsonData.value[0]).to.have.property('ReportView');",
+													"    pm.expect(jsonData.value[0]).to.have.property('GroupId');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Sequence');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Status');",
+													"    pm.expect(jsonData.value[0]).to.have.property('Description');",
 													"});",
 													""
 												],
@@ -15858,6 +15715,63 @@
 									],
 									"request": {
 										"method": "GET",
+										"header": [
+											{
+												"key": "OData-Version",
+												"type": "text",
+												"value": "4.0"
+											},
+											{
+												"key": "OData-MaxVersion",
+												"type": "text",
+												"value": "4.0"
+											},
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization-Token",
+												"type": "text",
+												"value": "{     \"userName\": \"{{user}}\", \"password\": \"{{password}}\", \"schema\": \"{{schema}}\"}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{SiteURL}}api/ReportCategories",
+											"host": [
+												"{{SiteURL}}api"
+											],
+											"path": [
+												"ReportCategories"
+											]
+										},
+										"description": "Verify Get All Categories API works with statuc code 200"
+									},
+									"response": []
+								},
+								{
+									"name": "Delete ReportCategories",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "40eb2268-76a2-458f-aade-38564d94b673",
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
 										"header": [
 											{
 												"key": "OData-Version",
@@ -15885,15 +15799,14 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{SiteURL}}api/ReportCategories",
+											"raw": "{{SiteURL}}api/ReportCategories({{ReportCategories_get_id}})",
 											"host": [
 												"{{SiteURL}}api"
 											],
 											"path": [
-												"ReportCategories"
+												"ReportCategories({{ReportCategories_get_id}})"
 											]
-										},
-										"description": "Verify Get All Categories API works with statuc code 200"
+										}
 									},
 									"response": []
 								}
