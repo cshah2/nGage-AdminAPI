@@ -1,0 +1,1 @@
+newman run "nGage Admin API.postman_collection.json" -e "DEV-FEATURE (AdminAPI).postman_environment.json" --insecure -r htmlextra,cli --reporter-htmlextra-export "Result.html" --reporter-htmlextra-darkTheme --reporter-htmlextra-title "SMOKE - nGage Admin API"
